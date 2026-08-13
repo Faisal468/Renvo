@@ -53,7 +53,7 @@ export const NAV_ITEMS = [
     dropdown: SERVICE_LINKS,
   },
   { label: 'Roofing', path: '/services/roofing' },
-  { label: 'Windows', path: '/services/window' },
+  { label: 'Windows', path: '/windows' },
   { label: 'Cabinets', path: 'https://renovvocabinets.com/', external: true },
   { label: 'Partner Vendors', path: '/vendors' },
   { label: 'Financing', path: '/finances' },

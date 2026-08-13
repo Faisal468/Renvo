@@ -1,7 +1,7 @@
 import PageHero from '../../components/PageHero'
 import { IMG } from '../../components/shared'
-import mg from '../../assets/windows/7.jpg';
-import mg1 from '../../assets/windows/8.jpg';
+ import mg from '../../assets/windows/7.jpg';
+ import mg1 from '../../assets/windows/8.jpg';
 
 export default function OurProcess() {
   return (
