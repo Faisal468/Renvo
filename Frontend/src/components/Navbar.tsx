@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router'
 import { NAV_ITEMS } from './shared'
-import Logo from '../assets/logo.png'
+import Logo from '../assets/image-removebg-preview.png'
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
