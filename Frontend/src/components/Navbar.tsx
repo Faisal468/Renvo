@@ -19,21 +19,8 @@ export default function Navbar() {
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="hidden lg:block bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5 text-slate-900" style={{ minHeight: 120 }}>
-          <Link to="/" className="flex items-center gap-4">
-            <div
-              className="flex items-center justify-center flex-shrink-0"
-              style={{ width: 52, height: 52, background: '#dde5ec', borderRadius: 8 }}
-            >
-              <img src={Logo} alt="Renovvo Logo" className="w-full h-full object-contain" />
-            </div>
-            <div>
-              <div className="font-display font-semibold" style={{ fontSize: '1.5rem', lineHeight: 1.05, letterSpacing: '0.14em' }}>
-                RENOVVO
-              </div>
-              <div className="font-display uppercase" style={{ fontSize: '0.72rem', letterSpacing: '0.36em', color: '#55606b', marginTop: 4 }}>
-                DESIGN+SHOP+BUILD
-              </div>
-            </div>
+          <Link to="/" className="flex items-center flex-shrink-0">
+            <img src={Logo} alt="Renovvo Logo" style={{ height: 108, width: 'auto' }} />
           </Link>
 
           <Link
@@ -54,36 +41,38 @@ export default function Navbar() {
           </Link>
 
           <div className="flex flex-col items-end gap-3 text-right">
-            <a href="tel:2812229491" className="inline-flex items-center gap-3 font-medium" style={{ color: '#071830', textDecoration: 'none', fontSize: '1rem' }}>
-              <span style={{ width: 32, height: 32, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', borderRadius: '50%', background: '#ffffff', color: '#ffffff', fontSize: '1.1rem' }}>📞</span>
-              <span style={{ letterSpacing: '0.03em' }}>(281) 222-9491</span>
+            <a href="tel:2812229491" className="inline-flex items-center gap-2 font-semibold" style={{ color: '#071830', textDecoration: 'none', fontSize: '1.5rem' }}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#e91e8c" style={{ flexShrink: 0 }}>
+                <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.4 21 3 13.6 3 4.5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02z" />
+              </svg>
+              <span style={{ letterSpacing: '0.02em' }}>(281) 222-9491</span>
             </a>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5">
               <a
                 href="https://www.facebook.com/share/1Bd3eha5uH/?mibextid=wwXIfr"
                 aria-label="Facebook"
-                style={{ width: 28, height: 28, borderRadius: '50%', background: '#375892', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, textDecoration: 'none' }}
+                style={{ width: 32, height: 32, borderRadius: '50%', background: '#375892', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}
               >
                 f
               </a>
               <a
                 href="https://www.instagram.com/rewisebuilders?igsh=MWEwOGVneHU2N213OA=="
                 aria-label="Instagram"
-                style={{ width: 28, height: 28, borderRadius: '50%', background: '#de4b91', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, textDecoration: 'none' }}
+                style={{ width: 32, height: 32, borderRadius: '50%', background: '#de4b91', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}
               >
                 i
               </a>
               <a
                 href="https://www.tiktok.com/@rewisebuilders"
                 aria-label="TikTok"
-                style={{ width: 28, height: 28, borderRadius: '50%', background: '#000000', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, textDecoration: 'none' }}
+                style={{ width: 32, height: 32, borderRadius: '50%', background: '#000000', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '0.9rem', textDecoration: 'none' }}
               >
                 t
               </a>
               <a
                 href="https://www.google.com"
                 aria-label="Google"
-                style={{ width: 28, height: 28, borderRadius: '50%', background: '#db4437', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '0.75rem', fontWeight: 700, textDecoration: 'none' }}
+                style={{ width: 32, height: 32, borderRadius: '50%', background: '#db4437', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '0.8rem', fontWeight: 700, textDecoration: 'none' }}
               >
                 G
               </a>
@@ -230,21 +219,7 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-3 lg:absolute lg:right-6 lg:top-1/2 lg:transform lg:-translate-y-1/2">
-            <Link
-              to="/contact"
-              className="font-semibold uppercase"
-              style={{
-                background: '#dffe2f',
-                color: '#071830',
-                padding: '0.6rem 1rem',
-                borderRadius: 999,
-                letterSpacing: '0.12em',
-                fontSize: '0.75rem',
-                textDecoration: 'none',
-              }}
-            >
-              Quote
-            </Link>
+           
             <button
               className="text-white p-2"
               onClick={() => setMobileOpen(!mobileOpen)}

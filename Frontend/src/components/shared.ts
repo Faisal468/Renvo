@@ -1,4 +1,10 @@
 // Shared image catalog and constants
+
+import  k1 from '../assets/kitchen/33.jpeg'
+import b1 from '../assets/bathroom/1.jpeg'
+import p1 from '../assets/patio/5.jpg'
+
+
 export const IMG = {
   hero: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&h=900&fit=crop&auto=format',
   hero2: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1800&h=900&fit=crop&auto=format',
@@ -39,11 +45,13 @@ export function sortImagesByFilename(modules: Record<string, string>): string[] 
 }
 
 export const SERVICE_LINKS = [
-  { label: 'Kitchen', path: '/services/kitchen', img: IMG.kitchen1 },
-  { label: 'Flooring', path: '/services/flooring', img: IMG.flooring },
-  { label: 'Bathroom', path: '/services/bathroom', img: IMG.bathroom1 },
-  { label: 'Roofing', path: '/services/roofing', img: IMG.exterior1 },
-  { label: 'Patio', path: '/services/patio', img: IMG.living1 },
+  { label: 'Kitchen Remodel', path: '/services/kitchen', img: k1 },
+  { label: 'Bathroom Remodel', path: '/services/bathroom', img: b1 },
+  { label: 'Room Addition', path: '/services/addition', img: IMG.addition },
+  { label: 'Patio & Outdoors', path: '/services/patio', img: p1 },
+  { label: 'Full House Renovation', path: '/services/flooring', img: IMG.flooring },
+  { label: 'New Construction', path: '/services/roofing', img: IMG.exterior1 },
+  
 ]
 
 export const NAV_ITEMS = [
@@ -57,6 +65,11 @@ export const NAV_ITEMS = [
   { label: 'Cabinets', path: 'https://renovvocabinets.com/', external: true },
   { label: 'Partner Vendors', path: '/vendors' },
   { label: 'Financing', path: '/finances' },
+  { label: 'Gallery', path: '/portfolio' },
+
+
+ 
+  
   {
     label: 'Support',
     path: '/support',
@@ -67,4 +80,7 @@ export const NAV_ITEMS = [
       { label: 'Our Value', path: '/support/our-value' },
     ],
   },
+
+ 
+
 ]

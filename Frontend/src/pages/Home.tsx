@@ -100,39 +100,89 @@ function TrustBar({ items }: { items: Array<{ icon: string; text: string }> }) {
 }
 
 function ServicesPreview({ services }: { services: Array<{ title: string; img: string }> }) {
+  const [index, setIndex] = useState(0)
+  const total = services.length
+  const prev = () => setIndex(i => (i - 1 + total) % total)
+  const next = () => setIndex(i => (i + 1) % total)
+  const at = (offset: number) => services[(index + offset + total) % total]
+
+  const panels = [
+    { item: at(-1), role: 'prev' as const, onClick: prev },
+    { item: at(0), role: 'current' as const, onClick: undefined },
+    { item: at(1), role: 'next' as const, onClick: next },
+  ]
+
   return (
-    <section className="py-24" style={{ background: '#ffffff' }}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <div className="section-label mb-4">What We Do</div>
-          <h2 className="font-display mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#0b2545', fontWeight: 600 }}>
-            Full-Scope Remodeling Services
-          </h2>
-          <div className="gold-line mx-auto mb-6" />
-          <p className="text-gray-500 max-w-xl mx-auto" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>
-            From a single room refresh to a whole-home transformation, we bring precision craftsmanship to every project.
-          </p>
-        </div>
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-0.5" style={{ background: '#e8edf2' }}>
-          {services.map(service => (
-            <Link key={service.title} to="/services" className="service-card group block" style={{ background: '#fff' }}>
-              <div className="overflow-hidden" style={{ height: 240 }}>
-                <img src={service.img} alt={service.title} className="w-full h-full object-cover" />
+    <section className="py-20" style={{ background: '#ffffff' }}>
+      <div className="text-center max-w-2xl mx-auto mb-10 px-6">
+        <div className="section-label mb-4">What We Do</div>
+        <h2 className="font-display" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#0b2545', fontWeight: 600 }}>
+          Full-Scope Remodeling Services
+        </h2>
+        <div className="gold-line mx-auto mt-6" />
+      </div>
+
+      <div className="relative">
+        <div className="flex" style={{ height: 620, gap: 4, background: '#e8edf2' }}>
+          {panels.map(({ item, role, onClick }) => (
+            <button
+              key={`${role}-${item.title}`}
+              type="button"
+              onClick={onClick}
+              className={`relative overflow-hidden group ${role === 'current' ? 'w-full md:w-[52%]' : 'hidden md:block md:w-[24%]'}`}
+              style={{ border: 'none', padding: 0, cursor: role === 'current' ? 'default' : 'pointer', background: 'none' }}
+            >
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: role === 'current' ? 'rgba(7,24,48,0.18)' : 'rgba(7,24,48,0.5)' }}
+              />
+              <div
+                className="absolute top-8 left-6 font-display text-white uppercase font-semibold"
+                style={{ writingMode: 'vertical-rl', letterSpacing: '0.15em', fontSize: 'clamp(1.25rem, 2.5vw, 2rem)' }}
+              >
+                {item.title}
               </div>
-              <div className="p-6 flex items-center justify-between">
-                <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.0625rem' }}>
-                  {service.title}
-                </h3>
-                <span style={{ color: '#c9a84c', fontSize: '1.25rem', transition: 'transform 0.2s' }} className="group-hover:translate-x-1">?</span>
-              </div>
-            </Link>
+            </button>
           ))}
         </div>
-        <div className="text-center mt-12">
-          <Link to="/services" className="btn-primary" style={{ background: '#0b2545', color: '#fff' }}>
-            Explore All Services
-          </Link>
-        </div>
+
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous service"
+          className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center"
+          style={{ width: 64, height: 64, background: '#ffffff' }}
+        >
+          <svg width="26" height="16" viewBox="0 0 28 16" fill="none">
+            <path d="M27 8H1M1 8L8 1M1 8L8 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next service"
+          className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center"
+          style={{ width: 64, height: 64, background: '#ffffff' }}
+        >
+          <svg width="26" height="16" viewBox="0 0 28 16" fill="none">
+            <path d="M1 8H27M27 8L20 1M27 8L20 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div className="px-6 mt-6">
+        <Link
+          to="/services"
+          className="inline-block font-semibold uppercase"
+          style={{ color: '#0b2545', letterSpacing: '0.12em', fontSize: '0.85rem', borderBottom: '2px solid #c9a84c', paddingBottom: 4 }}
+        >
+          Explore {panels[1].item.title}
+        </Link>
       </div>
     </section>
   )
@@ -140,37 +190,41 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
 
 function PortfolioPreview({ projects }: { projects: Array<{ title: string; cat: string; img: string; tall: boolean }> }) {
   return (
-    <section className="py-24" style={{ background: '#f8faff' }}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-14">
-          <div className="section-label mb-4">Our Work</div>
-          <h2 className="font-display mb-5" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#0b2545', fontWeight: 600 }}>
-            Featured Projects
-          </h2>
-          <div className="gold-line mx-auto mb-6" />
-          <p className="text-gray-500 max-w-xl mx-auto" style={{ fontSize: '1.0625rem', lineHeight: 1.7 }}>
-            Every project is a testament to our commitment to quality. See the difference craftsmanship makes.
-          </p>
-        </div>
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-3">
-          {projects.map(project => (
-            <Link key={project.title} to="/portfolio" className="portfolio-item block break-inside-avoid mb-3">
-              <div style={{ aspectRatio: project.tall ? '3/4' : '4/3' }}>
-                <img src={project.img} alt={project.title} className="w-full h-full object-cover" />
-              </div>
-              <div className="portfolio-overlay" />
-              <div className="portfolio-label">
-                <p className="text-xs tracking-widest uppercase mb-1" style={{ color: '#c9a84c' }}>{project.cat}</p>
-                <h3 className="font-display text-white text-xl font-semibold">{project.title}</h3>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Link to="/portfolio" className="btn-primary" style={{ background: '#0b2545', color: '#fff' }}>
-            View Full Portfolio
+    <section className="py-20" style={{ background: '#f8faff' }}>
+      <div className="text-center max-w-2xl mx-auto mb-10 px-6">
+        <div className="section-label mb-4">Our Work</div>
+        <h2 className="font-display" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: '#0b2545', fontWeight: 600 }}>
+          Featured Projects
+        </h2>
+        <div className="gold-line mx-auto mt-6" />
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-4 grid-flow-dense auto-rows-[160px] md:auto-rows-[200px]" style={{ gap: 2 }}>
+        {projects.map(project => (
+          <Link
+            key={project.title}
+            to="/portfolio"
+            className={`group relative block overflow-hidden ${project.tall ? 'col-span-2 row-span-2' : ''}`}
+          >
+            <img
+              src={project.img}
+              alt={project.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to top, rgba(7,24,48,0.85) 0%, transparent 55%)' }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-4">
+              <p className="text-xs tracking-widest uppercase mb-1" style={{ color: '#c9a84c' }}>{project.cat}</p>
+              <h3 className="font-display text-white font-semibold" style={{ fontSize: '1rem' }}>{project.title}</h3>
+            </div>
           </Link>
-        </div>
+        ))}
+      </div>
+      <div className="text-center mt-12 px-6">
+        <Link to="/portfolio" className="btn-primary" style={{ background: '#0b2545', color: '#fff' }}>
+          View Full Portfolio
+        </Link>
       </div>
     </section>
   )
