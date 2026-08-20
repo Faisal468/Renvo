@@ -6,12 +6,15 @@ import Logo from '../assets/image-removebg-preview.png'
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null)
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false)
+  const [mobileSubDropdownOpen, setMobileSubDropdownOpen] = useState<string | null>(null)
   const location = useLocation()
 
   useEffect(() => {
     setMobileOpen(false)
     setMobileDropdownOpen(false)
+    setMobileSubDropdownOpen(null)
     window.scrollTo(0, 0)
   }, [location.pathname])
 
@@ -27,7 +30,7 @@ export default function Navbar() {
             to="/contact"
             className="font-semibold uppercase"
             style={{
-              background: '#dcff4b',
+              background: '#c9a84c',
               color: '#071830',
               padding: '1rem 2rem',
               borderRadius: 8,
@@ -132,6 +135,7 @@ export default function Navbar() {
                       }}
                     >
                       {item.dropdown.map((sub, i) => {
+                        const hasSubDropdown = 'dropdown' in sub && !!sub.dropdown && sub.dropdown.length > 0
                         const content = (
                           <>
                             {'img' in sub && sub.img && (
@@ -154,6 +158,72 @@ export default function Navbar() {
                           </>
                         )
 
+                        const rowStyle = {
+                          padding: '0.6rem 1.25rem',
+                          borderBottom: i < item.dropdown.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                        }
+
+                        if (hasSubDropdown) {
+                          return (
+                            <div
+                              key={sub.path}
+                              className="relative"
+                              onMouseEnter={() => setOpenSubDropdown(sub.path)}
+                              onMouseLeave={() => setOpenSubDropdown(null)}
+                            >
+                              <Link
+                                to={sub.path}
+                                className="flex items-center gap-4 transition-colors"
+                                style={{ ...rowStyle, background: openSubDropdown === sub.path ? 'rgba(255,255,255,0.05)' : 'transparent' }}
+                              >
+                                {content}
+                              </Link>
+                              <div
+                                className="absolute transition-all duration-200"
+                                style={{
+                                  left: '100%',
+                                  top: 0,
+                                  paddingLeft: '0.5rem',
+                                  opacity: openSubDropdown === sub.path ? 1 : 0,
+                                  visibility: openSubDropdown === sub.path ? 'visible' : 'hidden',
+                                  transform: openSubDropdown === sub.path ? 'translate(0, 0)' : 'translate(-6px, 0)',
+                                }}
+                              >
+                                <div
+                                  style={{
+                                    background: '#0b2545',
+                                    border: '1px solid rgba(201,168,76,0.25)',
+                                    boxShadow: '0 12px 30px rgba(0,0,0,0.25)',
+                                    minWidth: 220,
+                                    padding: '0.4rem 0',
+                                  }}
+                                >
+                                  {sub.dropdown!.map((leaf, j) => (
+                                    <Link
+                                      key={leaf.path}
+                                      to={leaf.path}
+                                      className="flex items-center gap-4 transition-colors"
+                                      style={{
+                                        padding: '0.6rem 1.25rem',
+                                        borderBottom: j < sub.dropdown!.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
+                                      }}
+                                      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+                                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                                    >
+                                      <span
+                                        className="flex-1 text-sm font-medium uppercase tracking-wide whitespace-nowrap"
+                                        style={{ color: location.pathname === leaf.path ? '#c9a84c' : '#ffffff' }}
+                                      >
+                                        {leaf.label}
+                                      </span>
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          )
+                        }
+
                         if ('external' in sub && sub.external) {
                           return (
                             <a
@@ -162,11 +232,7 @@ export default function Navbar() {
                               target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center gap-4 transition-colors"
-                              style={{
-                                padding: '0.6rem 1.25rem',
-                                borderBottom: i < item.dropdown.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                                color: '#ffffff',
-                              }}
+                              style={{ ...rowStyle, color: '#ffffff' }}
                               onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
                               onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                             >
@@ -180,10 +246,7 @@ export default function Navbar() {
                             key={sub.path}
                             to={sub.path}
                             className="flex items-center gap-4 transition-colors"
-                            style={{
-                              padding: '0.6rem 1.25rem',
-                              borderBottom: i < item.dropdown.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                            }}
+                            style={rowStyle}
                             onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
                             onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                           >
@@ -283,8 +346,57 @@ export default function Navbar() {
                   className="overflow-hidden transition-all duration-300"
                   style={{ maxHeight: mobileDropdownOpen ? 260 : 0, background: 'rgba(255,255,255,0.03)' }}
                 >
-                  {item.dropdown.map(sub =>
-                    'external' in sub && sub.external ? (
+                  {item.dropdown.map(sub => {
+                    const hasSubDropdown = 'dropdown' in sub && !!sub.dropdown && sub.dropdown.length > 0
+
+                    if (hasSubDropdown) {
+                      const isOpen = mobileSubDropdownOpen === sub.path
+                      return (
+                        <div key={sub.path}>
+                          <div className="flex items-center justify-between pr-6">
+                            <Link
+                              to={sub.path}
+                              className="flex-1 px-10 py-3 text-sm font-medium uppercase tracking-widest transition-colors"
+                              style={{ color: location.pathname === sub.path ? '#c9a84c' : 'rgba(255,255,255,0.75)' }}
+                            >
+                              {sub.label}
+                            </Link>
+                            <button
+                              aria-label={`Toggle ${sub.label} submenu`}
+                              className="p-3"
+                              onClick={() => setMobileSubDropdownOpen(isOpen ? null : sub.path)}
+                            >
+                              <svg
+                                width="10"
+                                height="10"
+                                viewBox="0 0 10 10"
+                                fill="none"
+                                style={{ transition: 'transform 0.2s', transform: isOpen ? 'rotate(180deg)' : 'none' }}
+                              >
+                                <path d="M1.5 3.5L5 7L8.5 3.5" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                              </svg>
+                            </button>
+                          </div>
+                          <div
+                            className="overflow-hidden transition-all duration-300"
+                            style={{ maxHeight: isOpen ? 200 : 0, background: 'rgba(255,255,255,0.03)' }}
+                          >
+                            {sub.dropdown!.map(leaf => (
+                              <Link
+                                key={leaf.path}
+                                to={leaf.path}
+                                className="block px-14 py-3 text-sm font-medium uppercase tracking-widest transition-colors"
+                                style={{ color: location.pathname === leaf.path ? '#c9a84c' : 'rgba(255,255,255,0.6)' }}
+                              >
+                                {leaf.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
+                      )
+                    }
+
+                    return 'external' in sub && sub.external ? (
                       <a
                         key={sub.path}
                         href={sub.path}
@@ -305,7 +417,7 @@ export default function Navbar() {
                         {sub.label}
                       </Link>
                     )
-                  )}
+                  })}
                 </div>
               </div>
             ) : item.external ? (

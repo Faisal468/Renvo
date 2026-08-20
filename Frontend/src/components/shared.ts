@@ -3,6 +3,8 @@
 import  k1 from '../assets/kitchen/33.jpeg'
 import b1 from '../assets/bathroom/1.jpeg'
 import p1 from '../assets/patio/5.jpg'
+import nc1 from '../assets/new-construction/1.jpg'
+import ra1 from '../assets/room-addition/1 (1).jpeg'
 
 
 export const IMG = {
@@ -44,14 +46,44 @@ export function sortImagesByFilename(modules: Record<string, string>): string[] 
     .map(([, url]) => url)
 }
 
-export const SERVICE_LINKS = [
+type DropdownLink = { label: string; path: string; img?: string; external?: boolean; dropdown?: DropdownLink[] }
+
+export const SERVICE_LINKS: DropdownLink[] = [
   { label: 'Kitchen Remodel', path: '/services/kitchen', img: k1 },
   { label: 'Bathroom Remodel', path: '/services/bathroom', img: b1 },
-  { label: 'Room Addition', path: '/services/addition', img: IMG.addition },
+  { label: 'Room Addition', path: '/services/addition', img: ra1 },
   { label: 'Patio & Outdoors', path: '/services/patio', img: p1 },
   { label: 'Full House Renovation', path: '/services/flooring', img: IMG.flooring },
-  { label: 'New Construction', path: '/services/roofing', img: IMG.exterior1 },
+  { label: 'New Construction', path: '/services/new-construction', img: nc1 },
   
+]
+
+export const COUNTERTOP_LINKS: DropdownLink[] = [
+  { label: 'Granite', path: '/countertops/granite' },
+  { label: 'Marble', path: '/countertops/marble' },
+  { label: 'Quartz', path: '/countertops/quartz' },
+  { label: 'Quartzite', path: '/countertops/quartzite' },
+]
+
+export const FLOORING_LINKS: DropdownLink[] = [
+  { label: 'Backsplash', path: '/flooring/backsplash' },
+  { label: 'Carpet', path: '/flooring/carpet' },
+  { label: 'Engineered Hardwood', path: '/flooring/engineered-hardwood' },
+  { label: 'Laminate', path: '/flooring/laminate' },
+  { label: 'Luxury Vinyl', path: '/flooring/luxury-vinyl' },
+  { label: 'Tile', path: '/flooring/tile' },
+]
+
+export const DOOR_LINKS: DropdownLink[] = [
+  { label: 'Iron Door', path: '/doors/iron-door' },
+  { label: 'Shaker Interior', path: '/doors/shaker-interior' },
+]
+
+export const VENDOR_LINKS: DropdownLink[] = [
+  { label: 'Counter Tops', path: '/countertops', dropdown: COUNTERTOP_LINKS },
+  { label: 'Flooring', path: '/services/flooring', dropdown: FLOORING_LINKS },
+  { label: 'Doors', path: '/doors', dropdown: DOOR_LINKS },
+  { label: 'Accessories', path: '/vendors' },
 ]
 
 export const NAV_ITEMS = [
@@ -63,7 +95,11 @@ export const NAV_ITEMS = [
   { label: 'Roofing', path: '/services/roofing' },
   { label: 'Windows', path: '/windows' },
   { label: 'Cabinets', path: 'https://renovvocabinets.com/', external: true },
-  { label: 'Partner Vendors', path: '/vendors' },
+  {
+    label: 'Partner Vendors',
+    path: '/vendors',
+    dropdown: VENDOR_LINKS,
+  },
   { label: 'Financing', path: '/finances' },
   { label: 'Gallery', path: '/portfolio' },
 

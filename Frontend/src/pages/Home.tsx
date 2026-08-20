@@ -23,7 +23,7 @@ function Hero({ slides }: { slides: HeroSlide[] }) {
   }
 
   return (
-    <section id="hero" className="relative overflow-hidden" style={{ height: '100vh', minHeight: 640 }}>
+    <section id="hero" className="relative overflow-hidden" style={{ height: 'calc(100vh + 200px)', minHeight: 840 }}>
       {slides.map((slideData, index) => (
         <div
           key={index}
@@ -54,6 +54,7 @@ function Hero({ slides }: { slides: HeroSlide[] }) {
         </div>
       </div>
 
+      {slides.length > 1 && (
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-10">
         {slides.map((_, index) => (
           <button
@@ -71,6 +72,7 @@ function Hero({ slides }: { slides: HeroSlide[] }) {
           />
         ))}
       </div>
+      )}
 
       <div className="absolute bottom-8 right-8 z-10 flex flex-col items-center gap-2">
         <div style={{ writingMode: 'vertical-rl', color: 'rgba(255,255,255,0.5)', fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}>
@@ -321,12 +323,6 @@ function Process() {
 }
 
 function Testimonials() {
-  const reviews = [
-    { name: 'Jennifer M.', location: 'Austin, TX', text: "ReWise completely transformed our kitchen. The attention to detail was extraordinary � they even caught a plumbing issue we didn't know about and fixed it before it became a problem." },
-    { name: 'Marcus & Debra T.', location: 'Orlando, FL', text: "We had three other contractors quote our bathroom renovation. ReWise's proposal was so detailed and professional we knew they were the right choice. Six months later, we couldn't be happier." },
-    { name: 'Robert K.', location: 'Denver, CO', text: "Our home addition came in on time and $4,000 under budget. The team communicated daily, the site was always clean, and the finished space looks like it was always part of the house." },
-  ]
-
   return (
     <section className="py-24" style={{ background: '#f8faff' }}>
       <div className="max-w-7xl mx-auto px-6">
@@ -335,21 +331,7 @@ function Testimonials() {
           <h2 className="font-display mb-5" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)', color: '#0b2545', fontWeight: 600 }}>What Homeowners Say</h2>
           <div className="gold-line mx-auto" />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {reviews.map(review => (
-            <div key={review.name} className="testimonial-card p-8">
-              <div className="flex gap-0.5 mb-5">{[1, 2, 3, 4, 5].map(star => (
-                <span key={star} style={{ color: '#c9a84c' }}>?</span>
-              ))}</div>
-              <blockquote className="font-display italic leading-relaxed mb-7" style={{ color: '#0b2545', fontSize: '1.0625rem' }}>
-                �{review.text}�
-              </blockquote>
-              <div className="gold-line mb-5" />
-              <div className="font-semibold text-sm" style={{ color: '#0b2545' }}>{review.name}</div>
-              <div className="text-xs tracking-wide mt-0.5" style={{ color: '#c9a84c' }}>{review.location}</div>
-            </div>
-          ))}
-        </div>
+        <div className="elfsight-app-c6720390-401e-455e-92fe-9f1b2b623f83" data-elfsight-app-lazy />
       </div>
     </section>
   )

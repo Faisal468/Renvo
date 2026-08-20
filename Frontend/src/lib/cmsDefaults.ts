@@ -1,21 +1,12 @@
 import { IMG } from '../components/shared'
+import homeHero1 from '../assets/home/1.jpg'
 
 export const CMS_DEFAULT_CONTENT = {
   home: {
     hero: {
       slides: [
         {
-          img: IMG.hero,
-          headline: 'Transforming Houses Into Dream Homes',
-          sub: 'Premium remodeling across the United States — kitchens, bathrooms, additions, and beyond.',
-        },
-        {
-          img: IMG.hero2,
-          headline: 'Craftsmanship You Can See. Quality You Can Feel.',
-          sub: 'Over 500 successful remodels completed with precision, care, and unmatched attention to detail.',
-        },
-        {
-          img: IMG.hero3,
+          img: homeHero1,
           headline: 'From Vision to Reality — Every Detail Counts.',
           sub: 'Trusted by homeowners nationwide to deliver beautiful, lasting transformations.',
         },
@@ -23,10 +14,10 @@ export const CMS_DEFAULT_CONTENT = {
     },
     trustBar: [
       { icon: '★', text: '4.9 / 5 Rating' },
-      { icon: '✓', text: '500+ Projects Completed' },
+      { icon: '✓', text: '800+ Projects Completed' },
       { icon: '⌛', text: '15+ Years Experience' },
       { icon: '🏆', text: 'Licensed & Insured' },
-      { icon: '📍', text: 'Serving All 50 States' },
+     
     ],
     services: [
       { title: 'Kitchen Remodeling', img: IMG.kitchen1 },
@@ -45,9 +36,9 @@ export const CMS_DEFAULT_CONTENT = {
       { title: 'Spa Bathroom Suite', cat: 'Bathroom', img: IMG.bathroom3, tall: false },
     ],
     stats: [
-      { value: '500+', label: 'Projects Completed' },
+      { value: '800+', label: 'Projects Completed' },
       { value: '15+', label: 'Years of Experience' },
-      { value: '98%', label: 'Client Satisfaction' },
+      { value: '100%', label: 'Client Satisfaction' },
       { value: '$2M+', label: 'In Projects Delivered' },
     ],
     aboutSnippet: {
@@ -163,7 +154,7 @@ export const CMS_DEFAULT_CONTENT = {
       description: 'Whether you have a clear vision or just a rough idea, our team is ready to listen, advise, and deliver. Reach out below to schedule your free in-home consultation.',
     },
     contacts: [
-      { icon: '📞', label: 'Phone / Text', value: '(800) 555-1234', href: 'tel:+18005551234' },
+      { icon: '📞', label: 'Phone / Text', value: '(281) 222-9491', href: 'tel:+2812229491' },
       { icon: '✉', label: 'Email', value: 'hello@rewisebuilders.com', href: 'mailto:hello@rewisebuilders.com' },
       { icon: '📍', label: 'Service Area', value: 'All 50 US States', href: '#' },
       { icon: '⏰', label: 'Business Hours', value: 'Mon–Sat 8am–6pm EST', href: '#' },
