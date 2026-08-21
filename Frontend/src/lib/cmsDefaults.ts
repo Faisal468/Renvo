@@ -6,6 +6,7 @@ import h1 from '../assets/service/Full House Transformation & Exterior Makeover.
 import p1 from '../assets/service/Modern Poolside Patio & Deck.jpg';
 import f1 from '../assets/service/modern-flooring-renovation-light-oak-hardwood.jpeg';
 import n1 from '../assets/service/The Ultimate Backyard Transformation.jpeg';
+import home from '../assets/service/1.jpg';
 
 import gold from '../assets/feat proj/golden forest.jpg';
 import bayou from '../assets/feat proj/bayou bridge.jpeg';
@@ -13,6 +14,7 @@ import cand from '../assets/feat proj/candlewood.jpeg';
 import holly from '../assets/feat proj/hollyspring.jpeg';
 import misty from '../assets/feat proj/mistyleaf.jpeg';
 import waymouth from '../assets/feat proj/weymouth dr.jpeg';
+
 
 
 export const CMS_DEFAULT_CONTENT = {
@@ -36,10 +38,10 @@ export const CMS_DEFAULT_CONTENT = {
     services: [
       { title: 'Kitchen Remodeling', img: k1 },
       { title: 'Bathroom Remodeling', img: b1 },
-      { title: 'Home Additions', img: f1 },
+      { title: 'Home Additions', img: n1 },
       { title: 'Patio & Outdoors', img: p1 },
       { title: 'Full Home Renovation', img: h1 },
-      { title: 'New Construction', img: n1 },
+      { title: 'New Construction', img: home },
     ],
     portfolioPreview: [
       { title: 'Golden Forest', cat: '', img: gold, tall: true },
