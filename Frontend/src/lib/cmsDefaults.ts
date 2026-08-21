@@ -4,7 +4,6 @@ import k1 from '../assets/service/modern-kitchen-remodeling-white-quartz-island.
 import b1 from '../assets/service/luxury-bathroom-remodel-freestanding-tub-double-vanity.jpeg';
 import h1 from '../assets/service/Full House Transformation & Exterior Makeover.jpeg';
 import p1 from '../assets/service/Modern Poolside Patio & Deck.jpg';
-import f1 from '../assets/service/modern-flooring-renovation-light-oak-hardwood.jpeg';
 import n1 from '../assets/service/The Ultimate Backyard Transformation.jpeg';
 import home from '../assets/service/1.jpg';
 
@@ -38,7 +37,7 @@ export const CMS_DEFAULT_CONTENT = {
     services: [
       { title: 'Kitchen Remodeling', img: k1 },
       { title: 'Bathroom Remodeling', img: b1 },
-      { title: 'Home Additions', img: n1 },
+      { title: 'Room Additions', img: n1 },
       { title: 'Patio & Outdoors', img: p1 },
       { title: 'Full Home Renovation', img: h1 },
       { title: 'New Construction', img: home },
