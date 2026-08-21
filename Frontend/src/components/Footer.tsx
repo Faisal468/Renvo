@@ -109,7 +109,7 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-white mb-5 text-sm tracking-widest uppercase">Company</h4>
             <div className="space-y-3">
               {[
-                { label: 'Portfolio', to: '/portfolio' },
+                { label: 'Gallery', to: '/portfolio' },
                 { label: 'About Us', to: '/about' },
                 { label: 'Partner Vendors', to: '/vendors' },
                 { label: 'Financing', to: '/finances' },

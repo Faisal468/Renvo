@@ -1,5 +1,19 @@
 import { IMG } from '../components/shared'
 import homeHero1 from '../assets/home/1.jpg'
+import k1 from '../assets/service/modern-kitchen-remodeling-white-quartz-island.jpg';
+import b1 from '../assets/service/luxury-bathroom-remodel-freestanding-tub-double-vanity.jpeg';
+import h1 from '../assets/service/Full House Transformation & Exterior Makeover.jpeg';
+import p1 from '../assets/service/Modern Poolside Patio & Deck.jpg';
+import f1 from '../assets/service/modern-flooring-renovation-light-oak-hardwood.jpeg';
+import n1 from '../assets/service/The Ultimate Backyard Transformation.jpeg';
+
+import gold from '../assets/feat proj/golden forest.jpg';
+import bayou from '../assets/feat proj/bayou bridge.jpeg';
+import cand from '../assets/feat proj/candlewood.jpeg';
+import holly from '../assets/feat proj/hollyspring.jpeg';
+import misty from '../assets/feat proj/mistyleaf.jpeg';
+import waymouth from '../assets/feat proj/weymouth dr.jpeg';
+
 
 export const CMS_DEFAULT_CONTENT = {
   home: {
@@ -20,20 +34,20 @@ export const CMS_DEFAULT_CONTENT = {
      
     ],
     services: [
-      { title: 'Kitchen Remodeling', img: IMG.kitchen1 },
-      { title: 'Bathroom Renovation', img: IMG.bathroom1 },
-      { title: 'Home Additions', img: IMG.addition },
-      { title: 'Flooring & Tile', img: IMG.flooring },
-      { title: 'Living Spaces', img: IMG.living1 },
-      { title: 'Exterior Upgrades', img: IMG.exterior2 },
+      { title: 'Kitchen Remodeling', img: k1 },
+      { title: 'Bathroom Remodeling', img: b1 },
+      { title: 'Home Additions', img: f1 },
+      { title: 'Patio & Outdoors', img: p1 },
+      { title: 'Full Home Renovation', img: h1 },
+      { title: 'New Construction', img: n1 },
     ],
     portfolioPreview: [
-      { title: 'Modern White Kitchen', cat: 'Kitchen', img: IMG.kitchen2, tall: true },
-      { title: 'Luxury Master Bath', cat: 'Bathroom', img: IMG.bathroom2, tall: false },
-      { title: 'Open-Concept Living', cat: 'Living Room', img: IMG.living2, tall: false },
-      { title: 'Colonial Exterior', cat: 'Exterior', img: IMG.exterior1, tall: true },
-      { title: 'Chef Kitchen Remodel', cat: 'Kitchen', img: IMG.kitchen3, tall: false },
-      { title: 'Spa Bathroom Suite', cat: 'Bathroom', img: IMG.bathroom3, tall: false },
+      { title: 'Golden Forest', cat: '', img: gold, tall: true },
+      { title: 'Candlewood', cat: '', img: cand, tall: false },
+      { title: 'Hollyspring', cat: '', img: holly, tall: false },
+      { title: 'Bayou Bridge', cat: '', img: bayou, tall: true },
+      { title: 'Misty Leaf', cat: '', img: misty, tall: false },
+      { title: 'Waymouth Drive', cat: '', img: waymouth, tall: false },
     ],
     stats: [
       { value: '800+', label: 'Projects Completed' },

@@ -1,17 +1,26 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import PageHero from '../components/PageHero'
 import useCMSContent from '../hooks/useCMSContent'
 import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults'
+
+const ZOHO_IFRAME_NAME = 'zoho_lead_submit_frame'
 
 export default function Contact() {
   const { content } = useCMSContent('contact', CMS_DEFAULT_CONTENT.contact)
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', budget: '', message: '' })
   const [sent, setSent] = useState(false)
+  const zohoFormRef = useRef<HTMLFormElement>(null)
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault()
+    zohoFormRef.current?.submit()
     setSent(true)
   }
+
+  const description = [
+    form.budget && `Estimated Budget: ${form.budget}`,
+    form.message,
+  ].filter(Boolean).join('\n\n')
 
   const update = (key: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setForm(prev => ({ ...prev, [key]: e.target.value }))
@@ -209,6 +218,31 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Hidden Zoho CRM Web-to-Lead submission — posts in the background via a hidden iframe so the
+          visible form above keeps its own instant success screen instead of navigating away. */}
+      <iframe name={ZOHO_IFRAME_NAME} style={{ display: 'none' }} title="Zoho lead submission" />
+      <form
+        ref={zohoFormRef}
+        action="https://crm.zoho.com/crm/WebToLeadForm"
+        name="WebToLeads7242604000000728004"
+        method="POST"
+        target={ZOHO_IFRAME_NAME}
+        acceptCharset="UTF-8"
+        style={{ display: 'none' }}
+      >
+        <input type="hidden" name="xnQsjsdp" value="b3f1ff9a083311f6036ad395783fb8b0caed987e30e10c899dc318719d4aa6e5" readOnly />
+        <input type="hidden" name="zc_gad" value="" readOnly />
+        <input type="hidden" name="xmIwtLD" value="7848179506004115216962b1bef3f834489f1bd077da142b39ee69a76971af34429bb45fe83a30bcbaa572d8618195df" readOnly />
+        <input type="hidden" name="actionType" value="TGVhZHM=" readOnly />
+        <input type="hidden" name="returnURL" value="null" readOnly />
+        <input type="hidden" name="aG9uZXlwb3Q" value="" readOnly />
+        <input type="hidden" name="Last Name" value={form.name} readOnly />
+        <input type="hidden" name="Phone" value={form.phone} readOnly />
+        <input type="hidden" name="Email" value={form.email} readOnly />
+        <input type="hidden" name="Company" value={form.service} readOnly />
+        <input type="hidden" name="Description" value={description} readOnly />
+      </form>
     </>
   )
 }

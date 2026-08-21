@@ -7,43 +7,44 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
   const [openSubDropdown, setOpenSubDropdown] = useState<string | null>(null)
-  const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false)
+  const [mobileDropdownOpen, setMobileDropdownOpen] = useState<string | null>(null)
   const [mobileSubDropdownOpen, setMobileSubDropdownOpen] = useState<string | null>(null)
   const location = useLocation()
 
   useEffect(() => {
     setMobileOpen(false)
-    setMobileDropdownOpen(false)
+    setMobileDropdownOpen(null)
     setMobileSubDropdownOpen(null)
     window.scrollTo(0, 0)
   }, [location.pathname])
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <div className="hidden lg:block bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-5 text-slate-900" style={{ minHeight: 120 }}>
+      <div className="bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 lg:py-5 text-slate-900" style={{ minHeight: 64 }}>
           <Link to="/" className="flex items-center flex-shrink-0">
-            <img src={Logo} alt="Renovvo Logo" style={{ height: 108, width: 'auto' }} />
+            <img src={Logo} alt="Renovvo Logo" style={{ height: 'clamp(40px, 9vw, 108px)', width: 'auto' }} />
           </Link>
 
           <Link
             to="/contact"
-            className="font-semibold uppercase"
+            className="font-semibold uppercase flex-shrink-0"
             style={{
               background: '#c9a84c',
               color: '#071830',
-              padding: '1rem 2rem',
+              padding: 'clamp(0.5rem, 1.5vw, 1rem) clamp(0.75rem, 3vw, 2rem)',
               borderRadius: 8,
-              letterSpacing: '0.14em',
-              fontSize: '0.95rem',
+              letterSpacing: '0.08em',
+              fontSize: 'clamp(0.625rem, 1.8vw, 0.95rem)',
               textDecoration: 'none',
               boxShadow: '0 16px 28px rgba(0,0,0,0.08)',
+              whiteSpace: 'nowrap',
             }}
           >
             Get A Free Estimate
           </Link>
 
-          <div className="flex flex-col items-end gap-3 text-right">
+          <div className="hidden lg:flex flex-col items-end gap-3 text-right">
             <a href="tel:2812229491" className="inline-flex items-center gap-2 font-semibold" style={{ color: '#071830', textDecoration: 'none', fontSize: '1.5rem' }}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="#e91e8c" style={{ flexShrink: 0 }}>
                 <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.4 21 3 13.6 3 4.5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.24.2 2.45.57 3.57a1 1 0 0 1-.25 1.02z" />
@@ -305,9 +306,11 @@ export default function Navbar() {
         </div>
 
         <div
-          className="lg:hidden overflow-hidden transition-all duration-300"
+          className="lg:hidden transition-all duration-300"
           style={{
-            maxHeight: mobileOpen ? (mobileDropdownOpen ? 760 : 480) : 0,
+            maxHeight: mobileOpen ? 'calc(100vh - 64px)' : 0,
+            overflowY: mobileOpen ? 'auto' : 'hidden',
+            overflowX: 'hidden',
             background: '#0c3b6d',
             borderTop: mobileOpen ? '1px solid rgba(255,255,255,0.08)' : 'none',
           }}
@@ -326,7 +329,7 @@ export default function Navbar() {
                   <button
                     aria-label={`Toggle ${item.label} submenu`}
                     className="p-4 -mr-4"
-                    onClick={() => setMobileDropdownOpen(!mobileDropdownOpen)}
+                    onClick={() => setMobileDropdownOpen(mobileDropdownOpen === item.path ? null : item.path)}
                   >
                     <svg
                       width="12"
@@ -335,7 +338,7 @@ export default function Navbar() {
                       fill="none"
                       style={{
                         transition: 'transform 0.2s',
-                        transform: mobileDropdownOpen ? 'rotate(180deg)' : 'none',
+                        transform: mobileDropdownOpen === item.path ? 'rotate(180deg)' : 'none',
                       }}
                     >
                       <path d="M1.5 3.5L5 7L8.5 3.5" stroke="#ffffff" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
@@ -344,7 +347,7 @@ export default function Navbar() {
                 </div>
                 <div
                   className="overflow-hidden transition-all duration-300"
-                  style={{ maxHeight: mobileDropdownOpen ? 260 : 0, background: 'rgba(255,255,255,0.03)' }}
+                  style={{ maxHeight: mobileDropdownOpen === item.path ? 320 : 0, background: 'rgba(255,255,255,0.03)' }}
                 >
                   {item.dropdown.map(sub => {
                     const hasSubDropdown = 'dropdown' in sub && !!sub.dropdown && sub.dropdown.length > 0
@@ -379,7 +382,7 @@ export default function Navbar() {
                           </div>
                           <div
                             className="overflow-hidden transition-all duration-300"
-                            style={{ maxHeight: isOpen ? 200 : 0, background: 'rgba(255,255,255,0.03)' }}
+                            style={{ maxHeight: isOpen ? 280 : 0, background: 'rgba(255,255,255,0.03)' }}
                           >
                             {sub.dropdown!.map(leaf => (
                               <Link

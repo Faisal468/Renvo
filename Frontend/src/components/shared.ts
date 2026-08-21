@@ -5,6 +5,7 @@ import b1 from '../assets/bathroom/1.jpeg'
 import p1 from '../assets/patio/5.jpg'
 import nc1 from '../assets/new-construction/1.jpg'
 import ra1 from '../assets/room-addition/1 (1).jpeg'
+import fh1 from '../assets/full house/10910-wickersham/img-1.jpeg'
 
 
 export const IMG = {
@@ -53,7 +54,7 @@ export const SERVICE_LINKS: DropdownLink[] = [
   { label: 'Bathroom Remodel', path: '/services/bathroom', img: b1 },
   { label: 'Room Addition', path: '/services/addition', img: ra1 },
   { label: 'Patio & Outdoors', path: '/services/patio', img: p1 },
-  { label: 'Full House Renovation', path: '/services/flooring', img: IMG.flooring },
+  { label: 'Full House Renovation', path: '/services/full-house-renovation', img: fh1 },
   { label: 'New Construction', path: '/services/new-construction', img: nc1 },
   
 ]

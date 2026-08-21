@@ -125,6 +125,30 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
       </div>
 
       <div className="relative">
+        <div className="absolute flex items-center gap-3" style={{ right: 24, bottom: '100%', marginBottom: 16 }}>
+          <button
+            type="button"
+            onClick={prev}
+            aria-label="Previous service"
+            className="flex items-center justify-center"
+            style={{ width: 36, height: 36, background: 'transparent', border: 'none', cursor: 'pointer' }}
+          >
+            <svg width="20" height="12" viewBox="0 0 28 16" fill="none">
+              <path d="M27 8H1M1 8L8 1M1 8L8 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={next}
+            aria-label="Next service"
+            className="flex items-center justify-center"
+            style={{ width: 36, height: 36, background: 'transparent', border: 'none', cursor: 'pointer' }}
+          >
+            <svg width="20" height="12" viewBox="0 0 28 16" fill="none">
+              <path d="M1 8H27M27 8L20 1M27 8L20 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        </div>
         <div className="flex" style={{ height: 620, gap: 4, background: '#e8edf2' }}>
           {panels.map(({ item, role, onClick }) => (
             <button
@@ -144,7 +168,7 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
                 style={{ background: role === 'current' ? 'rgba(7,24,48,0.18)' : 'rgba(7,24,48,0.5)' }}
               />
               <div
-                className="absolute top-8 left-6 font-display text-white uppercase font-semibold"
+                className="absolute top-8 right-6 font-display text-white uppercase font-semibold"
                 style={{ writingMode: 'vertical-rl', letterSpacing: '0.15em', fontSize: 'clamp(1.25rem, 2.5vw, 2rem)' }}
               >
                 {item.title}
@@ -152,29 +176,6 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
             </button>
           ))}
         </div>
-
-        <button
-          type="button"
-          onClick={prev}
-          aria-label="Previous service"
-          className="absolute left-0 top-1/2 -translate-y-1/2 flex items-center justify-center"
-          style={{ width: 64, height: 64, background: '#ffffff' }}
-        >
-          <svg width="26" height="16" viewBox="0 0 28 16" fill="none">
-            <path d="M27 8H1M1 8L8 1M1 8L8 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Next service"
-          className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center justify-center"
-          style={{ width: 64, height: 64, background: '#ffffff' }}
-        >
-          <svg width="26" height="16" viewBox="0 0 28 16" fill="none">
-            <path d="M1 8H27M27 8L20 1M27 8L20 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
       </div>
 
       <div className="px-6 mt-6">
@@ -204,7 +205,7 @@ function PortfolioPreview({ projects }: { projects: Array<{ title: string; cat: 
         {projects.map(project => (
           <Link
             key={project.title}
-            to="/portfolio"
+            to="/services/full-house-renovation"
             className={`group relative block overflow-hidden ${project.tall ? 'col-span-2 row-span-2' : ''}`}
           >
             <img

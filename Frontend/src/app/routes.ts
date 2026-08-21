@@ -9,6 +9,7 @@ import Flooring from "../pages/services/Flooring"
 import Roofing from "../pages/services/Roofing"
 import Patio from "../pages/services/Patio"
 import NewConstruction from "../pages/services/NewConstruction"
+import FullHouseRenovation from "../pages/services/FullHouseRenovation"
 import Addition from "../pages/services/Addition"
 import Portfolio from "../pages/Portfolio"
 import Cabinets from "../pages/Cabinets"
@@ -47,6 +48,7 @@ export const router = createBrowserRouter([
       { path: "services/roofing", Component: Roofing },
       { path: "services/patio", Component: Patio },
       { path: "services/new-construction", Component: NewConstruction },
+      { path: "services/full-house-renovation", Component: FullHouseRenovation },
       { path: "portfolio", Component: Portfolio },
       { path: "shop", Component: Shop },
       { path: "support", Component: Support },
