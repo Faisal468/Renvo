@@ -14,6 +14,8 @@ import holly from '../assets/feat proj/hollyspring.jpeg';
 import misty from '../assets/feat proj/mistyleaf.jpeg';
 import waymouth from '../assets/feat proj/weymouth dr.jpeg';
 
+import about from '../assets/new-construction/4.jpg';
+
 
 
 export const CMS_DEFAULT_CONTENT = {
@@ -57,7 +59,7 @@ export const CMS_DEFAULT_CONTENT = {
       { value: '$2M+', label: 'In Projects Delivered' },
     ],
     aboutSnippet: {
-      image: IMG.team,
+      image: about,
       title: 'Who We Are',
       description: 'Our values define who we are and how we serve. They shape our actions, guide our decisions, and ensure we remain true to our mission no matter the challenges.',
       extra: 'At RENOVVO, we believe your home should perfectly reflect your vision and lifestyle. As a leading home improvement firm, we are dedicated to delivering exceptional results and unparalleled quality craftsmanship across all phases of residential construction and remodeling.',
