@@ -25,7 +25,6 @@ function loadProjectImages(glob: Record<string, string>): string[] {
 
 const overviewDriveImages = loadProjectImages(import.meta.glob('../../assets/full house/10423-overview-drive/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
 const wickershamImages = loadProjectImages(import.meta.glob('../../assets/full house/10910-wickersham/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
-const springLksImages = loadProjectImages(import.meta.glob('../../assets/full house/2803-spring-lks/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
 const pewterKnollsImages = loadProjectImages(import.meta.glob('../../assets/full house/28507-pewter-knolls/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
 const rockrillDriveImages = loadProjectImages(import.meta.glob('../../assets/full house/3303-rockrill-drive/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
 const acornStImages = loadProjectImages(import.meta.glob('../../assets/full house/5715-acorn-st/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
@@ -35,6 +34,8 @@ const weymouthDrImages = loadProjectImages(import.meta.glob('../../assets/full h
 const candlewoodImages = loadProjectImages(import.meta.glob('../../assets/full house/candlewood/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
 const goldenForestImages = loadProjectImages(import.meta.glob('../../assets/full house/golden-forest/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
 const hollyspringImages = loadProjectImages(import.meta.glob('../../assets/full house/hollyspring/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
+const springLksImages = loadProjectImages(import.meta.glob('../../assets/full house/2803-spring-lks/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>)
+
 
 interface RenovationProject {
   id: string
@@ -56,10 +57,11 @@ const renovationProjects: RenovationProject[] = [
 
   { id: 'overview-drive', name: '10423 Overview Drive', coverImage: drive, images: overviewDriveImages },
   { id: 'wickersham', name: '10910 Wickersham', coverImage: wickershamImages[0], images: wickershamImages },
-  { id: 'spring-lks', name: '2803 Spring Lakes', coverImage: springLksImages[0], images: springLksImages },
   { id: 'pewter-knolls', name: '28507 Pewter Knolls', coverImage: pewter, images: pewterKnollsImages },
   { id: 'rockrill-drive', name: '3303 Rockrill Drive', coverImage: rock, images: rockrillDriveImages },
   { id: 'acorn-st', name: '5715 Acorn St', coverImage: acorn, images: acornStImages },
+  { id: 'spring-lks', name: '2803 Spring Lakes', coverImage: springLksImages[0], images: springLksImages },
+
 ].filter(p => p.coverImage)
 
 export default function FullHouseRenovation() {
