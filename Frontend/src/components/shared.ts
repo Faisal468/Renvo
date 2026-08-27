@@ -96,11 +96,7 @@ export const NAV_ITEMS = [
   { label: 'Roofing', path: '/services/roofing' },
   { label: 'Windows', path: '/windows' },
   { label: 'Cabinets', path: 'https://renovvocabinets.com/', external: true },
-  {
-    label: 'Partner Vendors',
-    path: '/vendors',
-    dropdown: VENDOR_LINKS,
-  },
+  { label: 'Partner Vendors', path: '/vendors' },
   { label: 'Financing', path: '/finances' },
   { label: 'Gallery', path: '/portfolio' },
 

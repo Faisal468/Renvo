@@ -1,24 +1,60 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
 import { IMG } from '../components/shared'
+import renflo from '../assets/vendor/flooring/FLOORING.png';
+import arizonaTileLogo from '../assets/vendor/flooring/az-tile-logo.png'
+import daltileLogo from '../assets/vendor/flooring/DAL_Logo_H_Black.png'
+import emserLogo from '../assets/vendor/flooring/Emser.png'
+import keystoneLogo from '../assets/vendor/flooring/Keystone_Logo.png'
+import marazziLogo from '../assets/vendor/flooring/Marazzi.jpg'
+import msiLogo from '../assets/vendor/flooring/MSI.png'
+import rocaLogo from '../assets/vendor/flooring/logo.png'
+import renovoSurfacesLogo from '../assets/vendor/countertops/SURFACES.png'
+import daltileCountertopsLogo from '../assets/vendor/countertops/DAL_Logo_H_Black.png'
+import earthstoneLogo from '../assets/vendor/countertops/Earthstone.png'
+import msiCountertopsLogo from '../assets/vendor/countertops/MSI.png'
+import omniSurfacesLogo from '../assets/vendor/countertops/logo-omni-final.png'
 
-const vendors = [
-  { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com/stile/porcelain-slabs/', category: 'Tile & Stone', desc: 'Porcelain slabs and large-format surfaces.', logo: 'MS' },
-  { name: 'Earthstone (12mm Porc)', url: 'https://earthstonetexas.com/collections/12mm-porc', category: 'Tile & Stone', desc: '12mm porcelain collections.', logo: 'ET' },
-  { name: 'Atlas Plan', url: 'https://www.atlasplan.com/en/', category: 'Materials', desc: 'Architectural surface solutions and porcelain slabs.', logo: 'AP' },
-  { name: 'Earthstone (Quartz Slab)', url: 'https://earthstonetexas.com/collections/quartz-slab', category: 'Countertops', desc: 'Quartz slab collections.', logo: 'ET' },
-  { name: 'BPI Prestige (Countertops)', url: 'https://bpiprestige.com/collections/countertops', category: 'Countertops', desc: 'Quartz & surface collections.', logo: 'BP' },
-  { name: 'FirmFit Floor', url: 'https://www.firmfitfloor.com/collections/', category: 'Flooring', desc: 'Rigid core and LVT collections.', logo: 'FF' },
-  { name: 'Bruce (Rigid Core)', url: 'https://www.bruce.com/en-us/products/rigid-core.html?size=24', category: 'Flooring', desc: 'Rigid core flooring products.', logo: 'BR' },
-  { name: 'BPI Prestige (Luxury Vinyl)', url: 'https://bpiprestige.com/collections/luxury-vinyl', category: 'Flooring', desc: 'Luxury vinyl collections.', logo: 'BP' },
-  { name: 'NovoCore', url: 'https://www.novocorefloor.com/', category: 'Flooring', desc: 'Luxury vinyl and rigid core flooring.', logo: 'NC' },
-  { name: 'AHF' , url: 'https://www.ahfcontract.com/en-us/products.html?size=24', category: 'Flooring', desc: 'Luxury vinyl and rigid core flooring.', logo: 'AH' },
-  { name: 'BPI Prestige', url: 'https://bpiprestige.com/collections/carpet', category: 'Carpet', desc: 'Laminate flooring collections.', logo: 'BP' },
-  { name: 'KeyStone', url: 'https://www.keystonetile.com/', category: 'Tile & Stone', desc: 'Tile and stone collections.', logo: 'KS' },
+// Picks up every jpg dropped into this folder automatically — no manual imports needed.
+// Not eager: each photo is only fetched once the gallery is actually opened.
+const renovoFlooringModules = import.meta.glob('../assets/vendor/flooring/renovo flooring/*.jpg') as Record<string, () => Promise<{ default: string }>>
 
+const renovoFlooringFiles = Object.keys(renovoFlooringModules)
+  .sort((a, b) => a.localeCompare(b))
+  .map(path => {
+    const filename = path.split('/').pop() ?? ''
+    return { path, label: filename.replace(/\.jpg$/i, '').replace(/^SP\d+-/, '') }
+  })
 
+const CATEGORIES = [
+  'Flooring & Backsplash',
+  'Countertops',
+  'Doors',
+  'Accessories',
+  'Roofing',
+] as const
 
+type VendorCategory = typeof CATEGORIES[number]
 
+type Vendor = { name: string; url: string; category: VendorCategory; img: string; imgBg?: string; galleryFiles?: { path: string; label: string }[] }
+
+// TODO: replace the '#' placeholders with each vendor's real website URL
+const vendors: Vendor[] = [
+  { name: 'Renovo Flooring', url: '#', category: 'Flooring & Backsplash', img: renflo, galleryFiles: renovoFlooringFiles },
+  { name: 'Arizona Tile', url: 'https://www.arizonatile.com/', category: 'Flooring & Backsplash', img: arizonaTileLogo, imgBg: '#0b2545' },
+  { name: 'Daltile', url: 'https://www.daltile.com/tile-product-category', category: 'Flooring & Backsplash', img: daltileLogo },
+  { name: 'Emser Tile', url: 'https://www.emser.com/', category: 'Flooring & Backsplash', img: emserLogo },
+  { name: 'Keystone Tile', url: 'https://www.keystonetile.com/', category: 'Flooring & Backsplash', img: keystoneLogo },
+  { name: 'Marazzi', url: 'https://www.marazziusa.com ', category: 'Flooring & Backsplash', img: marazziLogo },
+  { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com', category: 'Flooring & Backsplash', img: msiLogo },
+  { name: 'Roca', url: 'https://rocatileusa.com/', category: 'Flooring & Backsplash', img: rocaLogo, imgBg: '#0b2545' },
+
+  { name: 'Renovo Surfaces', url: '#', category: 'Countertops', img: renovoSurfacesLogo },
+  { name: 'Daltile', url: 'https://www.daltile.com/tile-product-category', category: 'Countertops', img: daltileCountertopsLogo },
+  { name: 'Earthstone Colours', url: 'https://earthstonetexas.com/', category: 'Countertops', img: earthstoneLogo },
+  { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com/countertops/', category: 'Countertops', img: msiCountertopsLogo },
+  { name: 'Omni Surfaces', url: 'https://omnisurfaces.com/', category: 'Countertops', img: omniSurfacesLogo },
 ]
 
 const benefits = [
@@ -29,6 +65,42 @@ const benefits = [
 ]
 
 export default function Vendors() {
+  const [openGallery, setOpenGallery] = useState<Vendor | null>(null)
+  const [galleryImages, setGalleryImages] = useState<{ src: string; label: string }[]>([])
+  const [galleryLoading, setGalleryLoading] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const openVendorGallery = (vendor: Vendor) => {
+    setOpenGallery(vendor)
+    setActiveIndex(0)
+    setGalleryImages([])
+    if (!vendor.galleryFiles) return
+    setGalleryLoading(true)
+    Promise.all(
+      vendor.galleryFiles.map(async file => ({
+        label: file.label,
+        src: (await renovoFlooringModules[file.path]()).default,
+      }))
+    ).then(resolved => {
+      setGalleryImages(resolved)
+      setGalleryLoading(false)
+    })
+  }
+
+  const showPrev = () => setActiveIndex(i => (i - 1 + galleryImages.length) % galleryImages.length)
+  const showNext = () => setActiveIndex(i => (i + 1) % galleryImages.length)
+
+  useEffect(() => {
+    if (!openGallery) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpenGallery(null)
+      if (e.key === 'ArrowLeft') showPrev()
+      if (e.key === 'ArrowRight') showNext()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [openGallery, galleryImages.length])
+
   return (
     <>
       <PageHero
@@ -52,34 +124,66 @@ export default function Vendors() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {vendors.map(vendor => (
-              <a
-                key={vendor.name}
-                href={vendor.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={vendor.name}
-                className="testimonial-card p-7 block"
-                style={{ textDecoration: 'none' }}
-              >
-                <div className="flex items-center gap-4 mb-4">
-                  <div
-                    className="flex items-center justify-center font-display font-bold text-sm flex-shrink-0"
-                    style={{ width: 52, height: 52, background: '#eaf2ff', color: '#0b2545', letterSpacing: '0.05em' }}
-                  >
-                    {vendor.logo}
+          {CATEGORIES.map(category => {
+            const items = vendors.filter(v => v.category === category)
+            return (
+              <div key={category} className="mb-16 last:mb-0">
+                <h3 className="font-display font-semibold mb-5" style={{ color: '#0b2545', fontSize: '1.375rem' }}>
+                  {category}
+                </h3>
+                <div className="gold-line mb-8" />
+                {items.length === 0 ? (
+                  <p className="text-sm text-gray-400 italic">Vendors coming soon.</p>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                    {items.map(vendor => {
+                      const logoBox = (
+                        <div
+                          className="flex items-center justify-center"
+                          style={{ height: 72, background: vendor.imgBg ?? '#ffffff', border: '1px solid #eef1f6', borderRadius: 4, padding: '0.75rem 1.25rem' }}
+                        >
+                          <img
+                            src={vendor.img}
+                            alt={vendor.name}
+                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+                          />
+                        </div>
+                      )
+
+                      if (vendor.galleryFiles) {
+                        return (
+                          <button
+                            key={vendor.name}
+                            type="button"
+                            aria-label={vendor.name}
+                            className="testimonial-card p-7 block w-full text-left"
+                            style={{ textDecoration: 'none', cursor: 'pointer' }}
+                            onClick={() => openVendorGallery(vendor)}
+                          >
+                            {logoBox}
+                          </button>
+                        )
+                      }
+
+                      return (
+                        <a
+                          key={vendor.name}
+                          href={vendor.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={vendor.name}
+                          className="testimonial-card p-7 block"
+                          style={{ textDecoration: 'none' }}
+                        >
+                          {logoBox}
+                        </a>
+                      )
+                    })}
                   </div>
-                  <div>
-                    <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.0625rem' }}>{vendor.name}</h3>
-                    <div className="text-xs tracking-widest uppercase mt-0.5" style={{ color: '#c9a84c', fontWeight: 600 }}>{vendor.category}</div>
-                  </div>
-                </div>
-                <div className="gold-line mb-4" />
-                <p className="text-sm leading-relaxed text-gray-500">{vendor.desc}</p>
-              </a>
-            ))}
-          </div>
+                )}
+              </div>
+            )
+          })}
         </div>
       </section>
 
@@ -130,6 +234,97 @@ export default function Vendors() {
           </div>
         </div>
       </section>
+
+      {openGallery && (
+        <div
+          className="fixed inset-0 flex items-center justify-center p-6"
+          style={{ background: 'rgba(11,37,69,0.85)', zIndex: 100 }}
+          onClick={() => setOpenGallery(null)}
+        >
+          <div
+            className="w-full overflow-y-auto"
+            style={{ background: '#ffffff', maxWidth: 960, maxHeight: '85vh', borderRadius: 4, padding: '2rem' }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.375rem' }}>
+                {openGallery.name}
+              </h3>
+              <button
+                type="button"
+                aria-label="Close gallery"
+                onClick={() => setOpenGallery(null)}
+                style={{ background: 'none', border: 'none', fontSize: '1.5rem', lineHeight: 1, color: '#0b2545', cursor: 'pointer' }}
+              >
+                ×
+              </button>
+            </div>
+            <div className="gold-line mb-6" />
+
+            {galleryLoading ? (
+              <p className="text-sm text-gray-400 italic text-center py-12">Loading photos…</p>
+            ) : (
+              <>
+                <div className="relative flex items-center justify-center" style={{ background: '#f8faff', borderRadius: 4 }}>
+                  <button
+                    type="button"
+                    aria-label="Previous image"
+                    onClick={showPrev}
+                    className="absolute flex items-center justify-center"
+                    style={{ left: 12, width: 40, height: 40, borderRadius: '50%', background: 'rgba(11,37,69,0.85)', color: '#ffffff', border: 'none', fontSize: '1.25rem', cursor: 'pointer', zIndex: 1 }}
+                  >
+                    ‹
+                  </button>
+                  <img
+                    src={galleryImages[activeIndex]?.src}
+                    alt={galleryImages[activeIndex]?.label}
+                    style={{ maxWidth: '100%', maxHeight: '50vh', objectFit: 'contain' }}
+                  />
+                  <button
+                    type="button"
+                    aria-label="Next image"
+                    onClick={showNext}
+                    className="absolute flex items-center justify-center"
+                    style={{ right: 12, width: 40, height: 40, borderRadius: '50%', background: 'rgba(11,37,69,0.85)', color: '#ffffff', border: 'none', fontSize: '1.25rem', cursor: 'pointer', zIndex: 1 }}
+                  >
+                    ›
+                  </button>
+                </div>
+
+                <div className="text-center mt-4 mb-6">
+                  <div className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.0625rem' }}>{galleryImages[activeIndex]?.label}</div>
+                  <div className="text-xs text-gray-400 mt-1">{activeIndex + 1} / {galleryImages.length}</div>
+                </div>
+
+                <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
+                  {galleryImages.map((item, i) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      aria-label={item.label}
+                      onClick={() => setActiveIndex(i)}
+                      style={{
+                        padding: 0,
+                        border: i === activeIndex ? '2px solid #c9a84c' : '2px solid transparent',
+                        borderRadius: 4,
+                        cursor: 'pointer',
+                        lineHeight: 0,
+                      }}
+                    >
+                      <img
+                        src={item.src}
+                        alt={item.label}
+                        className="w-full object-cover"
+                        style={{ height: 60, borderRadius: 2, opacity: i === activeIndex ? 1 : 0.7 }}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </>
   )
 }
