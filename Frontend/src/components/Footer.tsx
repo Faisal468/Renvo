@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
-import Logo from '../assets/logo1.png';
+import Logo from '../assets/image-removebg-preview.png';
 
 const socialIcons: Record<string, ReactNode> = {
   f: (
@@ -38,19 +38,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-3 mb-5">
-              <div
-                className="flex items-center justify-center flex-shrink-0"
-            style={{ width: 44, height: 44, background: '#ddd9d9ee', borderRadius: 2 }}
-          >
-            <img src={Logo} alt="Renovvo Logo" className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <div className="font-display text-white font-semibold text-base leading-none">RENOVVO</div>
-                <div style={{ fontSize: '0.55rem', letterSpacing: '0.18em', color: '#c9a84c', textTransform: 'uppercase', fontWeight: 600 }}>
-                  
-                </div>
-              </div>
+            <Link to="/" className="inline-flex items-center mb-5" style={{ background: '#f4f5f6', borderRadius: 8, padding: '10px 16px' }}>
+              <img src={Logo} alt="Renovvo Logo" style={{ height: 40, width: 'auto' }} />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
               Premium remodeling services across the United States. Licensed, insured, and dedicated to excellence since 2009.
