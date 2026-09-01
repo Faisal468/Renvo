@@ -122,11 +122,11 @@ export default function Portfolio() {
               </button>
             </div>
 
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {viewAllCategory.images.map((img, i) => (
                 <div
                   key={i}
-                  className="portfolio-item break-inside-avoid mb-3 cursor-pointer"
+                  className="portfolio-item cursor-pointer"
                   onClick={() => setLightbox({ slug: viewAllCategory.slug, index: i })}
                 >
                   <img src={img} alt={`${viewAllCategory.label} project ${i + 1}`} className="w-full h-auto object-cover" />

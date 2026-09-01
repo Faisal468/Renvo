@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router'
 import useCMSContent from '../hooks/useCMSContent'
 import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults'
@@ -14,7 +14,7 @@ function Hero({ slides }: { slides: HeroSlide[] }) {
 
   useEffect(() => {
     if (slides.length <= 1) return
-    const interval = window.setInterval(() => setSlide(current => (current + 1) % slides.length), 6000)
+    const interval = window.setInterval(() => setSlide(current => (current + 1) % slides.length), 4500)
     return () => window.clearInterval(interval)
   }, [slides.length])
 
@@ -37,7 +37,7 @@ function Hero({ slides }: { slides: HeroSlide[] }) {
 
       <div className="relative z-10 h-full flex flex-col justify-center px-8 lg:px-20 max-w-7xl mx-auto">
         <div className="max-w-2xl">
-          <div className="section-label mb-5">Design + Shop + Build</div>
+          <div className="section-label mb-5">Design +  Build</div>
           <h1
             className="font-display text-white mb-6"
             style={{ fontSize: 'clamp(2.4rem, 5vw, 4rem)', lineHeight: 1.1, fontWeight: 600 }}
@@ -101,12 +101,37 @@ function TrustBar({ items }: { items: Array<{ icon: string; text: string }> }) {
   )
 }
 
-function ServicesPreview({ services }: { services: Array<{ title: string; img: string }> }) {
+function ServicesPreview({ services }: { services: Array<{ title: string; img: string; link?: string }> }) {
   const [index, setIndex] = useState(0)
   const total = services.length
   const prev = () => setIndex(i => (i - 1 + total) % total)
   const next = () => setIndex(i => (i + 1) % total)
   const at = (offset: number) => services[(index + offset + total) % total]
+
+  const wheelLock = useRef(false)
+  const touchStartX = useRef<number | null>(null)
+
+  const handleWheel = (e: React.WheelEvent) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 20) return
+    if (wheelLock.current) return
+    wheelLock.current = true
+    if (e.deltaX > 0) next()
+    else prev()
+    window.setTimeout(() => { wheelLock.current = false }, 500)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const diff = touchStartX.current - e.changedTouches[0].clientX
+    touchStartX.current = null
+    if (Math.abs(diff) < 40) return
+    if (diff > 0) next()
+    else prev()
+  }
 
   const panels = [
     { item: at(-1), role: 'prev' as const, onClick: prev },
@@ -124,31 +149,13 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
         <div className="gold-line mx-auto mt-6" />
       </div>
 
-      <div className="relative">
-        <div className="absolute flex items-center gap-3" style={{ right: 24, bottom: '100%', marginBottom: 16 }}>
-          <button
-            type="button"
-            onClick={prev}
-            aria-label="Previous service"
-            className="flex items-center justify-center"
-            style={{ width: 36, height: 36, background: 'transparent', border: 'none', cursor: 'pointer' }}
-          >
-            <svg width="20" height="12" viewBox="0 0 28 16" fill="none">
-              <path d="M27 8H1M1 8L8 1M1 8L8 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-          <button
-            type="button"
-            onClick={next}
-            aria-label="Next service"
-            className="flex items-center justify-center"
-            style={{ width: 36, height: 36, background: 'transparent', border: 'none', cursor: 'pointer' }}
-          >
-            <svg width="20" height="12" viewBox="0 0 28 16" fill="none">
-              <path d="M1 8H27M27 8L20 1M27 8L20 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
+      <div
+        className="relative"
+        onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        style={{ touchAction: 'pan-y' }}
+      >
         <div className="flex" style={{ height: 620, gap: 4, background: '#e8edf2' }}>
           {panels.map(({ item, role, onClick }) => (
             <button
@@ -176,11 +183,54 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
             </button>
           ))}
         </div>
+
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous service"
+          className="absolute z-10 flex items-center justify-center transition-transform hover:scale-105"
+          style={{
+            left: 16,
+            bottom: 16,
+            width: 44,
+            height: 44,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.92)',
+            boxShadow: '0 2px 10px rgba(7,24,48,0.25)',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          <svg width="18" height="11" viewBox="0 0 28 16" fill="none">
+            <path d="M27 8H1M1 8L8 1M1 8L8 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next service"
+          className="absolute z-10 flex items-center justify-center transition-transform hover:scale-105"
+          style={{
+            right: 16,
+            bottom: 16,
+            width: 44,
+            height: 44,
+            borderRadius: '50%',
+            background: 'rgba(255,255,255,0.92)',
+            boxShadow: '0 2px 10px rgba(7,24,48,0.25)',
+            border: 'none',
+            cursor: 'pointer',
+          }}
+        >
+          <svg width="18" height="11" viewBox="0 0 28 16" fill="none">
+            <path d="M1 8H27M27 8L20 1M27 8L20 15" stroke="#0b2545" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
 
-      <div className="px-6 mt-6">
+      <div className="px-6 mt-6 text-center w-full md:w-[52%] md:mx-auto">
         <Link
-          to="/services"
+          to={panels[1].item.link || '/services'}
           className="inline-block font-semibold uppercase"
           style={{ color: '#0b2545', letterSpacing: '0.12em', fontSize: '0.85rem', borderBottom: '2px solid #c9a84c', paddingBottom: 4 }}
         >
@@ -191,7 +241,7 @@ function ServicesPreview({ services }: { services: Array<{ title: string; img: s
   )
 }
 
-function PortfolioPreview({ projects }: { projects: Array<{ title: string; cat: string; img: string; tall: boolean }> }) {
+function PortfolioPreview({ projects }: { projects: Array<{ title: string; cat: string; img: string; tall: boolean; link?: string }> }) {
   return (
     <section className="py-20" style={{ background: '#f8faff' }}>
       <div className="text-center max-w-2xl mx-auto mb-10 px-6">
@@ -205,7 +255,7 @@ function PortfolioPreview({ projects }: { projects: Array<{ title: string; cat: 
         {projects.map(project => (
           <Link
             key={project.title}
-            to="/services/full-house-renovation"
+            to={project.link || '/portfolio'}
             className={`group relative block overflow-hidden ${project.tall ? 'col-span-2 row-span-2' : ''}`}
           >
             <img

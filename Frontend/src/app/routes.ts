@@ -25,6 +25,8 @@ import SupportOurValue from "../pages/support/OurValue"
 import Shop from "../pages/Shop"
 import Login from "../pages/admin/Login"
 import Dashboard from "../pages/admin/Dashboard"
+import PrivacyPolicy from "../pages/PrivacyPolicy"
+import TermsOfService from "../pages/TermsOfService"
 
 export const router = createBrowserRouter([
   {
@@ -75,6 +77,8 @@ export const router = createBrowserRouter([
       { path: "flooring/tile", Component: Vendors },
       { path: "finances", Component: Finances },
       { path: "contact", Component: Contact },
+      { path: "privacy-policy", Component: PrivacyPolicy },
+      { path: "terms-of-service", Component: TermsOfService },
     ],
   },
 ])

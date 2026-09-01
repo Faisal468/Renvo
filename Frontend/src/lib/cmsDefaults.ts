@@ -1,5 +1,7 @@
 import { IMG } from '../components/shared'
 import homeHero1 from '../assets/home/1.jpg'
+import homeHero2 from '../assets/home/2.jpeg'
+import homeHero3 from '../assets/home/31.jpeg'
 import k1 from '../assets/service/modern-kitchen-remodeling-white-quartz-island.jpg';
 import b1 from '../assets/service/luxury-bathroom-remodel-freestanding-tub-double-vanity.jpeg';
 import h1 from '../assets/service/Full House Transformation & Exterior Makeover.jpeg';
@@ -8,11 +10,11 @@ import n1 from '../assets/service/The Ultimate Backyard Transformation.jpeg';
 import home from '../assets/service/1.jpg';
 
 import gold from '../assets/feat proj/golden forest.jpg';
-import bayou from '../assets/feat proj/bayou bridge.jpeg';
-import cand from '../assets/feat proj/candlewood.jpeg';
-import holly from '../assets/feat proj/hollyspring.jpeg';
-import misty from '../assets/feat proj/mistyleaf.jpeg';
-import waymouth from '../assets/feat proj/weymouth dr.jpeg';
+import bayou from '../assets/feat proj/27.jpeg';
+import cand from '../assets/feat proj/5.jpg';
+import holly from '../assets/feat proj/2.jpeg';
+import misty from '../assets/feat proj/w1.jpeg';
+import waymouth from '../assets/feat proj/r1.png';
 
 import about from '../assets/new-construction/4.jpg';
 
@@ -25,38 +27,48 @@ export const CMS_DEFAULT_CONTENT = {
         {
           img: homeHero1,
           headline: 'From Vision to Reality — Every Detail Counts.',
-          sub: 'Trusted by homeowners nationwide to deliver beautiful, lasting transformations.',
+          sub: 'Trusted by homeowners all across Texas to deliver beautiful, lasting Transformations.',
+        },
+        {
+          img: homeHero2,
+          headline: 'From Vision to Reality — Every Detail Counts.',
+          sub: 'Trusted by homeowners all across Texas to deliver beautiful, lasting Transformations.',
+        },
+        {
+          img: homeHero3,
+          headline: 'From Vision to Reality — Every Detail Counts.',
+          sub: 'Trusted by homeowners all across Texas to deliver beautiful, lasting Transformations.',
         },
       ],
     },
     trustBar: [
-      { icon: '★', text: '4.9 / 5 Rating' },
-      { icon: '✓', text: '800+ Projects Completed' },
+      { icon: '★', text: ' 5  Rating' },
+      { icon: '✓', text: '800+ Client Served' },   
       { icon: '⌛', text: '15+ Years Experience' },
-      { icon: '🏆', text: 'Licensed & Insured' },
+      { icon: '🏆', text: '1200+ Projects Delivered' },
      
     ],
     services: [
-      { title: 'Kitchen Remodeling', img: k1 },
-      { title: 'Bathroom Remodeling', img: b1 },
-      { title: 'Room Additions', img: n1 },
-      { title: 'Patio & Outdoors', img: p1 },
-      { title: 'Full Home Renovation', img: h1 },
-      { title: 'New Construction', img: home },
+      { title: 'Kitchen Remodeling', img: k1, link: '/services/kitchen' },
+      { title: 'Bathroom Remodeling', img: b1, link: '/services/bathroom' },
+      { title: 'Room Additions', img: n1, link: '/services/addition' },
+      { title: 'Patio & Outdoors', img: p1, link: '/services/patio' },
+      { title: 'Full Home Renovation', img: h1, link: '/services/full-house-renovation' },
+      { title: 'New Construction', img: home, link: '/services/new-construction' },
     ],
     portfolioPreview: [
-      { title: 'Golden Forest', cat: '', img: gold, tall: true },
-      { title: 'Candlewood', cat: '', img: cand, tall: false },
-      { title: 'Hollyspring', cat: '', img: holly, tall: false },
-      { title: 'Bayou Bridge', cat: '', img: bayou, tall: true },
-      { title: 'Misty Leaf', cat: '', img: misty, tall: false },
-      { title: 'Waymouth Drive', cat: '', img: waymouth, tall: false },
+      { title: 'Golden Forest', cat: '', img: gold, tall: true, link: '/services/full-house-renovation' },
+      { title: 'Bathroom Remodel', cat: '', img: cand, tall: false, link: '/services/bathroom' },
+      { title: 'Flooring', cat: '', img: holly, tall: false, link: '/services/flooring' },
+      { title: 'Kitchen Remodel', cat: '', img: bayou, tall: true, link: '/services/kitchen' },
+      { title: 'Windows', cat: '', img: misty, tall: false, link: '/windows' },
+      { title: 'Roofing', cat: '', img: waymouth, tall: false, link: '/services/roofing' },
     ],
     stats: [
-      { value: '800+', label: 'Projects Completed' },
+      { value: '800+', label: 'Clients Served' },
+      { value: '1200+', label: 'Projects Delivered' },
       { value: '15+', label: 'Years of Experience' },
       { value: '100%', label: 'Client Satisfaction' },
-      { value: '$2M+', label: 'In Projects Delivered' },
     ],
     aboutSnippet: {
       image: about,
@@ -174,7 +186,7 @@ export const CMS_DEFAULT_CONTENT = {
       { icon: '📞', label: 'Phone / Text', value: '(281) 222-9491', href: 'tel:+2812229491' },
       { icon: '✉', label: 'Email', value: 'hello@rewisebuilders.com', href: 'mailto:hello@rewisebuilders.com' },
       { icon: '📍', label: 'Service Area', value: 'All 50 US States', href: '#' },
-      { icon: '⏰', label: 'Business Hours', value: 'Mon–Sat 8am–6pm EST', href: '#' },
+      { icon: '⏰', label: 'Business Hours', value: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm EST', href: '#' },
     ],
     promise: {
       title: 'Our Response Promise',

@@ -78,10 +78,20 @@ export default function Footer() {
           <div>
             <h4 className="font-display font-semibold text-white mb-5 text-sm tracking-widest uppercase">Services</h4>
             <div className="space-y-3">
-              {['Kitchen Remodeling', 'Bathroom Renovation', 'Home Additions', 'Flooring & Tile', 'Cabinet Installation', 'New Construction'].map(s => (
+              {[
+                { label: 'Kitchen Remodeling', to: '/services/kitchen' },
+                { label: 'Bathroom Remodeling', to: '/services/bathroom' },
+                { label: 'Home Additions', to: '/services/addition' },
+                { label: 'Patio & Outdoor', to: '/services/patio' },
+                { label: 'Full Home Renovation', to: '/services/full-house-renovation' },
+                { label: 'New Construction', to: '/services/new-construction' },
+                { label: 'Roofing', to: '/services/roofing' },
+                { label: 'windows', to: '/services/windows' },
+                { label: 'Cabinets', to: 'https://renovvocabinets.com/' },
+              ].map(({ label: s, to }) => (
                 <Link
                   key={s}
-                  to="/services"
+                  to={to}
                   className="block text-sm transition-colors"
                   style={{ color: 'rgba(255,255,255,0.5)' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#c9a84c')}
@@ -98,8 +108,9 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-white mb-5 text-sm tracking-widest uppercase">Company</h4>
             <div className="space-y-3">
               {[
-                { label: 'Gallery', to: '/portfolio' },
                 { label: 'About Us', to: '/about' },
+                { label: 'Gallery', to: '/portfolio' },
+                
                 { label: 'Partner Vendors', to: '/vendors' },
                 { label: 'Financing', to: '/finances' },
                 { label: 'Contact Us', to: '/contact' },
@@ -124,8 +135,8 @@ export default function Footer() {
             <div className="space-y-4">
               {[
                 { label: '281-222-9491', sub: 'Call or Text' },
-                { label: 'hello@rewisebuilders.com', sub: 'Email Us' },
-                { label: 'Mon–Sat 9am–6pm EST', sub: 'Business Hours' },
+                { label: 'support@renovvo.com', sub: 'Email Us' },
+                { label: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm EST', sub: 'Business Hours' },
               ].map(c => (
                 <div key={c.label}>
                   <div className="text-sm font-medium text-white">{c.label}</div>
@@ -141,13 +152,16 @@ export default function Footer() {
           style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
         >
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
-            &copy; {new Date().getFullYear()} Renovvo Builders. All rights reserved.
+            &copy; {new Date().getFullYear()} RENOVVO. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {['Privacy Policy', 'Terms of Service', 'Licensing'].map(l => (
+            {[
+              { label: 'Privacy Policy', to: '/privacy-policy' },
+              { label: 'Terms of Service', to: '/terms-of-service' },
+            ].map(({ label: l, to }) => (
               <Link
                 key={l}
-                to="/"
+                to={to}
                 className="text-xs transition-colors"
                 style={{ color: 'rgba(255,255,255,0.3)' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#c9a84c')}

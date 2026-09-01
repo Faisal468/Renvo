@@ -3,8 +3,8 @@
 import  k1 from '../assets/kitchen/33.jpeg'
 import b1 from '../assets/bathroom/1.jpeg'
 import p1 from '../assets/patio/5.jpg'
-import nc1 from '../assets/new-construction/1.jpg'
-import ra1 from '../assets/room-addition/1 (1).jpeg'
+import nc1 from '../assets/new-construction/3.jpg'
+import ra1 from '../assets/room-addition/23.jpeg'
 import fh1 from '../assets/full house/10910-wickersham/1.jpeg'
 
 
