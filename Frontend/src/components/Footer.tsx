@@ -42,7 +42,7 @@ export default function Footer() {
               <img src={Logo} alt="Renovvo Logo" style={{ height: 40, width: 'auto' }} />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Premium remodeling services across the United States. Licensed, insured, and dedicated to excellence since 2009.
+              Premium remodeling services across the Texas. Insured and dedicated to excellence since 2010.
             </p>
             <div className="flex gap-3">
               {[

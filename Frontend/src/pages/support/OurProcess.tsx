@@ -1,7 +1,9 @@
 import PageHero from '../../components/PageHero'
 import { IMG } from '../../components/shared'
- import mg from '../../assets/windows/7.jpg';
- import mg1 from '../../assets/windows/8.jpg';
+import mg from '../../assets/windows/7.jpg';
+import mg1 from '../../assets/windows/8.jpg';
+import p1 from '../../assets/process/1.avif';
+import p3 from '../../assets/process/3.jpg'
 
 export default function OurProcess() {
   return (
@@ -29,7 +31,7 @@ export default function OurProcess() {
                 title: 'Schedule',
                 subtitle: 'Schedule Your Free Estimate',
                 text: 'Booking a free estimate with POWER is transparent and easy[cite: 1]. Schedule an appointment online, or if you prefer, via phone call with one of our Scheduling Agents[cite: 1]. Already have an appointment? Great! We will call you day-of and confirm everything is good-to-go[cite: 1].',
-                image: IMG.hero2
+                image: p1
               },
               {
                 step: '02',
@@ -43,7 +45,7 @@ export default function OurProcess() {
                 title: 'Production',
                 subtitle: 'Production & Planning',
                 text: 'Once a project has been agreed to, we will work with you to set up an install date[cite: 1]. We will then confirm all measurements, project details, and order products[cite: 1]. You can stay up-to-date with the entire process via our exclusive project management app Project Pulse[cite: 1].',
-                image: IMG.hero2
+                image: p3
               },
               {
                 step: '04',

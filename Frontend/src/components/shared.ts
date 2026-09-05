@@ -110,7 +110,7 @@ export const NAV_ITEMS = [
       { label: 'Get Support', path: '/support/get-support' },
       { label: 'About Us', path: '/support/about-us' },
       { label: 'Our Process', path: '/support/our-process' },
-      { label: 'Our Value', path: '/support/our-value' },
+      { label: 'Our Values', path: '/support/our-value' },
     ],
   },
 

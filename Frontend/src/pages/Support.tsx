@@ -66,7 +66,7 @@ export default function Support() {
               </p>
             </div>
             <div id="our-value" style={{ background: '#ffffff', padding: '2rem', borderRadius: 16, border: '1px solid rgba(11,37,69,0.08)' }}>
-              <div className="section-label mb-4">Our Value</div>
+              <div className="section-label mb-4">Our Values</div>
               <h2 className="font-display mb-4" style={{ color: '#0b2545', fontSize: '1.5rem', fontWeight: 600 }}>
                 The values behind every support interaction
               </h2>

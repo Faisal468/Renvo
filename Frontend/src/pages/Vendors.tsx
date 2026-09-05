@@ -15,6 +15,16 @@ import daltileCountertopsLogo from '../assets/vendor/countertops/DAL_Logo_H_Blac
 import earthstoneLogo from '../assets/vendor/countertops/Earthstone.png'
 import msiCountertopsLogo from '../assets/vendor/countertops/MSI.png'
 import omniSurfacesLogo from '../assets/vendor/countertops/logo-omni-final.png'
+import renovoCabinetsLogo from '../assets/vendor/Cabinets/renovvo-cabinets-logo.png'
+import lampsPlusLogo from '../assets/vendor/Cabinets/lampsplus-logo-new.png'
+import modLightingLogo from '../assets/vendor/Cabinets/MOD.png'
+import certainteedLogo from '../assets/vendor/Roofing/Certainteed.png'
+import gafLogo from '../assets/vendor/Roofing/GAF.png'
+import owensCorningLogo from '../assets/vendor/Roofing/Owens Corning.png'
+import ironDoorCover from '../assets/vendor/Doors/Iron Doors/RI-D21.jpg'
+import interiorDoorCover from '../assets/vendor/Doors/Interior Doors/a-shaker-8-6p-ph.jpg'
+import { IRON_DOOR_CODES } from '../lib/ironDoorCodes'
+import { INTERIOR_DOOR_CODES } from '../lib/interiorDoorCodes'
 
 // Picks up every jpg dropped into this folder automatically — no manual imports needed.
 // Not eager: each photo is only fetched once the gallery is actually opened.
@@ -27,21 +37,54 @@ const renovoFlooringFiles = Object.keys(renovoFlooringModules)
     return { path, label: filename.replace(/\.jpg$/i, '').replace(/^SP\d+-/, '') }
   })
 
+// Drop new photos into src/assets/vendor/Doors/Iron Doors — add their filename + model
+// code to IRON_DOOR_CODES in src/lib/ironDoorCodes.ts and they'll show up automatically.
+const ironDoorModules = import.meta.glob('../assets/vendor/Doors/Iron Doors/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
+
+const ironDoorFiles = Object.keys(ironDoorModules)
+  .map(path => {
+    const filename = path.split('/').pop() ?? ''
+    return { path, label: IRON_DOOR_CODES[filename] ?? filename }
+  })
+  .sort((a, b) => a.label.localeCompare(b.label))
+
+// Drop new photos into src/assets/vendor/Doors/Interior Doors — add their filename + model
+// code to INTERIOR_DOOR_CODES in src/lib/interiorDoorCodes.ts and they'll show up automatically.
+const interiorDoorModules = import.meta.glob('../assets/vendor/Doors/Interior Doors/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
+
+const interiorDoorFiles = Object.keys(interiorDoorModules)
+  .map(path => {
+    const filename = path.split('/').pop() ?? ''
+    return { path, label: INTERIOR_DOOR_CODES[filename] ?? filename }
+  })
+  .sort((a, b) => a.label.localeCompare(b.label))
+
 const CATEGORIES = [
   'Flooring & Backsplash',
   'Countertops',
+  'Cabinets',
   'Doors',
-  'Accessories',
   'Roofing',
 ] as const
 
 type VendorCategory = typeof CATEGORIES[number]
 
-type Vendor = { name: string; url: string; category: VendorCategory; img: string; imgBg?: string; galleryFiles?: { path: string; label: string }[] }
+type GalleryFile = { path: string; label: string }
+type Vendor = {
+  name: string
+  url: string
+  category: VendorCategory
+  img: string
+  imgBg?: string
+  galleryFiles?: GalleryFile[]
+  galleryModules?: Record<string, () => Promise<{ default: string }>>
+  comingSoon?: boolean
+  showLabel?: boolean
+}
 
 // TODO: replace the '#' placeholders with each vendor's real website URL
 const vendors: Vendor[] = [
-  { name: 'Renovo Flooring', url: '#', category: 'Flooring & Backsplash', img: renflo, galleryFiles: renovoFlooringFiles },
+  { name: 'Renovo Flooring', url: '#', category: 'Flooring & Backsplash', img: renflo, galleryFiles: renovoFlooringFiles, galleryModules: renovoFlooringModules },
   { name: 'Arizona Tile', url: 'https://www.arizonatile.com/', category: 'Flooring & Backsplash', img: arizonaTileLogo, imgBg: '#0b2545' },
   { name: 'Daltile', url: 'https://www.daltile.com/tile-product-category', category: 'Flooring & Backsplash', img: daltileLogo },
   { name: 'Emser Tile', url: 'https://www.emser.com/', category: 'Flooring & Backsplash', img: emserLogo },
@@ -55,6 +98,17 @@ const vendors: Vendor[] = [
   { name: 'Earthstone Colours', url: 'https://earthstonetexas.com/', category: 'Countertops', img: earthstoneLogo },
   { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com/countertops/', category: 'Countertops', img: msiCountertopsLogo },
   { name: 'Omni Surfaces', url: 'https://omnisurfaces.com/', category: 'Countertops', img: omniSurfacesLogo },
+
+  { name: 'Renovo Cabinets', url: 'https://renovvocabinets.com/', category: 'Cabinets', img: renovoCabinetsLogo },
+  { name: 'Lamps Plus', url: 'https://www.lampsplus.com/', category: 'Cabinets', img: lampsPlusLogo },
+  { name: 'MOD Lighting', url: 'https://www.mod-lighting.com/', category: 'Cabinets', img: modLightingLogo, imgBg: '#0b2545' },
+
+  { name: 'Iron Door Images', url: '#', category: 'Doors', img: ironDoorCover, galleryFiles: ironDoorFiles, galleryModules: ironDoorModules, showLabel: true },
+  { name: 'Shaker Door Images', url: '#', category: 'Doors', img: interiorDoorCover, galleryFiles: interiorDoorFiles, galleryModules: interiorDoorModules, showLabel: true },
+
+  { name: 'CertainTeed', url: 'https://www.certainteed.com/', category: 'Roofing', img: certainteedLogo },
+  { name: 'GAF', url: 'https://www.gaf.com/en-us', category: 'Roofing', img: gafLogo },
+  { name: 'Owens Corning', url: 'https://www.owenscorning.com/en-us', category: 'Roofing', img: owensCorningLogo },
 ]
 
 const benefits = [
@@ -74,12 +128,13 @@ export default function Vendors() {
     setOpenGallery(vendor)
     setActiveIndex(0)
     setGalleryImages([])
-    if (!vendor.galleryFiles) return
+    if (!vendor.galleryFiles || !vendor.galleryModules) return
+    const modules = vendor.galleryModules
     setGalleryLoading(true)
     Promise.all(
       vendor.galleryFiles.map(async file => ({
         label: file.label,
-        src: (await renovoFlooringModules[file.path]()).default,
+        src: (await modules[file.path]()).default,
       }))
     ).then(resolved => {
       setGalleryImages(resolved)
@@ -137,18 +192,46 @@ export default function Vendors() {
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     {items.map(vendor => {
-                      const logoBox = (
+                      const boxHeight = vendor.showLabel ? 120 : 72
+                      const logoBox = vendor.img ? (
                         <div
                           className="flex items-center justify-center"
-                          style={{ height: 72, background: vendor.imgBg ?? '#ffffff', border: '1px solid #eef1f6', borderRadius: 4, padding: '0.75rem 1.25rem' }}
+                          style={{ height: boxHeight, background: vendor.imgBg ?? '#ffffff', border: '1px solid #eef1f6', borderRadius: 4, padding: vendor.showLabel ? 0 : '0.75rem 1.25rem', overflow: 'hidden' }}
                         >
                           <img
                             src={vendor.img}
                             alt={vendor.name}
-                            style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
+                            style={vendor.showLabel
+                              ? { width: '100%', height: '100%', objectFit: 'cover' }
+                              : { maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
                           />
                         </div>
+                      ) : (
+                        <div
+                          className="flex items-center justify-center"
+                          style={{ height: boxHeight, background: '#f1f4f9', border: '1px dashed #cbd5e1', borderRadius: 4 }}
+                        >
+                          <span className="text-xs uppercase tracking-widest text-gray-400">Coming Soon</span>
+                        </div>
                       )
+
+                      if (vendor.comingSoon) {
+                        return (
+                          <div
+                            key={vendor.name}
+                            aria-label={vendor.name}
+                            className="testimonial-card p-7 block w-full text-left"
+                            style={{ opacity: 0.6, cursor: 'not-allowed' }}
+                          >
+                            {logoBox}
+                            {vendor.showLabel && (
+                              <div className="mt-4 font-display font-semibold" style={{ color: '#0b2545', fontSize: '1rem' }}>
+                                {vendor.name}
+                              </div>
+                            )}
+                          </div>
+                        )
+                      }
 
                       if (vendor.galleryFiles) {
                         return (
@@ -161,6 +244,11 @@ export default function Vendors() {
                             onClick={() => openVendorGallery(vendor)}
                           >
                             {logoBox}
+                            {vendor.showLabel && (
+                              <div className="mt-4 font-display font-semibold" style={{ color: '#0b2545', fontSize: '1rem' }}>
+                                {vendor.name}
+                              </div>
+                            )}
                           </button>
                         )
                       }
@@ -195,7 +283,7 @@ export default function Vendors() {
               What This Means for You
             </div>
             <h2 className="font-display text-white mb-4" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)', fontWeight: 600 }}>
-              The ReWise Vendor Advantage
+              The Renovvo Vendor Advantage
             </h2>
             <div className="gold-line mx-auto" />
           </div>
