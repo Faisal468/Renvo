@@ -48,19 +48,19 @@ interface RenovationProject {
 // (e.g. overviewDriveImages[3]) to use a different photo as the cover. name is a plain string,
 // edit it directly.
 const renovationProjects: RenovationProject[] = [
-   { id: 'golden-forest', name: 'Golden Forest', coverImage: gold, images: goldenForestImages },
-   { id: 'mistyleaf', name: '6919 Mistyleaf', coverImage: misty, images: mistyleafImages },
-   { id: 'candlewood', name: 'Candlewood', coverImage: cand, images: candlewoodImages },
-   { id: 'hollyspring', name: 'Hollyspring', coverImage: holly, images: hollyspringImages },
-   { id: 'bayou-bridge', name: '6127 Bayou Bridge', coverImage: bayou, images: bayouBridgeImages },
-   { id: 'weymouth-dr', name: '9103 Weymouth Dr', coverImage: waymouth, images: weymouthDrImages },
+   { id: 'golden-forest', name: 'Golden Forest Drive', coverImage: gold, images: goldenForestImages },
+   { id: 'mistyleaf', name: 'Mistyleaf Lane', coverImage: misty, images: mistyleafImages },
+   { id: 'candlewood', name: 'Candlewood Drive', coverImage: cand, images: candlewoodImages },
+   { id: 'hollyspring', name: 'Hollyspring Drive', coverImage: holly, images: hollyspringImages },
+   { id: 'bayou-bridge', name: 'Bayou Bridge Drive', coverImage: bayou, images: bayouBridgeImages },
+   { id: 'weymouth-dr', name: 'Weymouth Drive', coverImage: waymouth, images: weymouthDrImages },
 
-  { id: 'overview-drive', name: '10423 Overview Drive', coverImage: drive, images: overviewDriveImages },
-  { id: 'wickersham', name: '10910 Wickersham', coverImage: wickershamImages[0], images: wickershamImages },
-  { id: 'pewter-knolls', name: '28507 Pewter Knolls', coverImage: pewter, images: pewterKnollsImages },
-  { id: 'rockrill-drive', name: '3303 Rockrill Drive', coverImage: rock, images: rockrillDriveImages },
-  { id: 'acorn-st', name: '5715 Acorn St', coverImage: acorn, images: acornStImages },
-  { id: 'spring-lks', name: '2803 Spring Lakes', coverImage: springLksImages[0], images: springLksImages },
+  { id: 'overview-drive', name: 'Overview Drive', coverImage: drive, images: overviewDriveImages },
+  { id: 'wickersham', name: 'Wickersham Lane', coverImage: wickershamImages[0], images: wickershamImages },
+  { id: 'pewter-knolls', name: 'Pewter Knolls Drive', coverImage: pewter, images: pewterKnollsImages },
+  { id: 'rockrill-drive', name: 'Rockrill Drive', coverImage: rock, images: rockrillDriveImages },
+  { id: 'acorn-st', name: 'Acorn Street', coverImage: acorn, images: acornStImages },
+  { id: 'spring-lks', name: 'Spring Lakes', coverImage: springLksImages[0], images: springLksImages },
 
 ].filter(p => p.coverImage)
 

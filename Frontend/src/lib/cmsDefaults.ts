@@ -57,7 +57,7 @@ export const CMS_DEFAULT_CONTENT = {
       { title: 'New Construction', img: home, link: '/services/new-construction' },
     ],
     portfolioPreview: [
-      { title: 'Golden Forest', cat: '', img: gold, tall: true, link: '/services/full-house-renovation' },
+      { title: 'Golden Forest Drive', cat: '', img: gold, tall: true, link: '/services/full-house-renovation' },
       { title: 'Bathroom Remodel', cat: '', img: cand, tall: false, link: '/services/bathroom' },
       { title: 'Flooring', cat: '', img: holly, tall: false, link: '/services/flooring' },
       { title: 'Kitchen Remodel', cat: '', img: bayou, tall: true, link: '/services/kitchen' },
