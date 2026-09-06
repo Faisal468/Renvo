@@ -1,6 +1,5 @@
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
-import { IMG } from '../components/shared'
 import s1 from '../assets/about/5.jpg'
 
 const faqs = [
