@@ -2,12 +2,13 @@ import PageHero from '../components/PageHero'
 import { IMG } from '../components/shared'
 import synchronyLogo from '../assets/financing/sycrony.svg'
 import acornLogo from '../assets/financing/Acron.svg'
+import f1 from '../assets/new-construction/5.jpg'
 
 export default function Finances() {
   return (
     <>
       <PageHero
-        image={IMG.finance}
+        image={f1}
         label="Financing"
         title="Financing for Your Home Remodeling and Roofing Needs in Houston, TX & Surrounding Areas"
         subtitle="Upgrade your home with a new bathroom, room addition, kitchen remodel, or roof with flexible financing options from our trusted financing partners."

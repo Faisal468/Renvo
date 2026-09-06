@@ -3,6 +3,21 @@ import PageHero from '../../components/PageHero'
 import useCMSContent from '../../hooks/useCMSContent'
 import { CMS_DEFAULT_CONTENT } from '../../lib/cmsDefaults'
 import { IMG, sortImagesByFilename } from '../../components/shared'
+import a1 from '../../assets/about/5.jpg'
+import approachLogo from '../../assets/about/logo.jpeg'
+
+// Row-major order fills a 3x3 grid as: 1 2 3 / 4 L 5 / 6 7 8
+const APPROACH_GRID = [
+  { type: 'card' as const, title: 'Customer First', description: 'From the moment we connect, we treat you as a valued customer whether you choose our services or not.' },
+  { type: 'card' as const, title: 'Ownership', description: 'Your home is your domain. We will enter only when invited and stay only as long as we’re welcome.' },
+  { type: 'card' as const, title: 'Safety', description: 'Your security matters. We send only individuals of integrity and honor to your home always courteous, professionally attired, and respectful of every homeowner.' },
+  { type: 'card' as const, title: 'Respect', description: 'We respect all homeowners and believe in full transparency. We never proceed without all relevant owners and parties present, ensuring everyone understands our services and expectations.' },
+  { type: 'logo' as const, img: approachLogo },
+  { type: 'card' as const, title: 'Punctuality', description: 'Your time is valuable. Appointments and installations will always be completed as promised. If challenges arise, we will coordinate with you promptly.' },
+  { type: 'card' as const, title: 'Fair Pricing', description: 'You deserve fair treatment. Our pricing remains consistent—never influenced by age, race, income, home value, or any other social factors.' },
+  { type: 'card' as const, title: 'Privacy Protection', description: 'Your personal information is yours alone. We employ top-tier security measures to safeguard your privacy and will never sell your data.' },
+  { type: 'card' as const, title: 'Lifetime Guarantee*', description: 'Your investment should bring peace of mind. If we make a mistake, we will make it right—not just today, but for the lifetime of your home.' },
+]
 
 // Drop photos into src/assets/about — they load automatically, sorted by filename number
 const aboutImageModules = import.meta.glob('../../assets/about/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>
@@ -11,12 +26,11 @@ const aboutImages = sortImagesByFilename(aboutImageModules)
 export default function About() {
   const { content } = useCMSContent('about', CMS_DEFAULT_CONTENT.about)
   const introImage = content.values.image ?? aboutImages[0] ?? IMG.about
-  const showroomImage = content.approach.image ?? aboutImages[1] ?? IMG.team
 
   return (
     <>
       <PageHero
-        image={content.hero.image}
+        image={a1}
         label={content.hero.label}
         title={content.hero.title}
         subtitle={content.hero.subtitle}
@@ -80,7 +94,7 @@ export default function About() {
       <section id="process" className="py-20" style={{ background: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-            <div className="order-2 lg:order-1">
+            <div>
               <div className="section-label mb-4">How We Work</div>
               <h2 className="font-display mb-5" style={{ fontSize: 'clamp(1.7rem, 3vw, 2.4rem)', color: '#0b2545', fontWeight: 600, lineHeight: 1.2 }}>
                 Our Client-Centered Approach
@@ -89,20 +103,46 @@ export default function About() {
               <p className="text-gray-500 mb-5" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
                 What truly sets RENOVVO apart is our commitment to a Client-Centered Design &amp; Build process. We simplify the complexities of construction with expert guidance and hands-on resources.
               </p>
-              <div className="mb-7" style={{ borderLeft: '3px solid #c9a84c', paddingLeft: '1.25rem' }}>
-                <h3 className="font-display font-semibold mb-2" style={{ color: '#0b2545', fontSize: '1.05rem' }}>Visit Our Showroom</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  Our state-of-the-art showroom is an invaluable resource. Here, you can easily touch, see, and choose every finish and material, ensuring your selections perfectly align with your design goals.
-                </p>
-              </div>
+             
               <p className="text-gray-500 mb-7" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
                 From the initial design sketch through the final build, our team is committed to ensuring your renovation is perfectly executed, helping you create the extraordinary home you&rsquo;ve always wanted.
               </p>
-              <Link to="/contact" className="btn-primary">Schedule a Showroom Visit</Link>
+              <Link to="/contact" className="btn-primary">Schedule a Visit for Free Estimate</Link>
             </div>
-            <div className="order-1 lg:order-2">
-              <div className="overflow-hidden" style={{ height: 480 }}>
-                <img src={showroomImage} alt="RENOVVO showroom" className="w-full h-full object-cover" />
+            <div>
+              <div className="grid grid-cols-3" style={{ gap: 'clamp(4px, 1vw, 8px)' }}>
+                {APPROACH_GRID.map((cell, i) =>
+                  cell.type === 'logo' ? (
+                    <div
+                      key="logo"
+                      className="flex items-center justify-center"
+                      style={{ aspectRatio: '1 / 1', background: '#ffffff', border: '1px solid rgba(11,37,69,0.08)' }}
+                    >
+                      <img src={cell.img} alt="RENOVVO" style={{ width: '55%', height: '55%', objectFit: 'contain' }} />
+                    </div>
+                  ) : (
+                    <div
+                      key={i}
+                      className="flex flex-col items-center justify-center text-center"
+                      style={{
+                        aspectRatio: '1 / 1',
+                        background: '#1b56b3',
+                        padding: 'clamp(0.375rem, 2vw, 0.75rem)',
+                        cursor: 'pointer',
+                        transition: 'transform 0.3s ease',
+                      }}
+                      onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.05)')}
+                      onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+                    >
+                      <h3 className="font-display" style={{ color: '#ffffff', fontSize: 'clamp(0.5625rem, 2vw, 0.8125rem)', marginBottom: '0.25rem' }}>
+                        {cell.title}
+                      </h3>
+                      <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 'clamp(0.4375rem, 1.5vw, 0.625rem)', lineHeight: 1.4 }}>
+                        {cell.description}
+                      </p>
+                    </div>
+                  )
+                )}
               </div>
             </div>
           </div>

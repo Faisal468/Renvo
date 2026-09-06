@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
+import g1 from '../assets/kitchen/1.jpeg';
 import { IMG, SERVICE_LINKS, sortImagesByFilename } from '../components/shared'
 
 // Loads every photo from every src/assets/<service> folder, grouped by folder name
@@ -24,7 +25,7 @@ export default function Portfolio() {
   return (
     <>
       <PageHero
-        image={IMG.portfolio_hero}
+        image={g1}
         label="Portfolio"
         title="Our Work Speaks for Itself"
         subtitle="Browse hundreds of completed projects across the United States — each one a story of transformation."

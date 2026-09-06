@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
-import { IMG } from '../components/shared'
+import door from '../assets/vendor/Doors/renovvo door.jpeg';
+import p1 from '../assets/kitchen/9.jpeg';
 import renflo from '../assets/vendor/flooring/FLOORING.png';
 import arizonaTileLogo from '../assets/vendor/flooring/az-tile-logo.png'
 import daltileLogo from '../assets/vendor/flooring/DAL_Logo_H_Black.png'
@@ -16,13 +17,9 @@ import earthstoneLogo from '../assets/vendor/countertops/Earthstone.png'
 import msiCountertopsLogo from '../assets/vendor/countertops/MSI.png'
 import omniSurfacesLogo from '../assets/vendor/countertops/logo-omni-final.png'
 import renovoCabinetsLogo from '../assets/vendor/Cabinets/renovvo-cabinets-logo.png'
-import lampsPlusLogo from '../assets/vendor/Cabinets/lampsplus-logo-new.png'
-import modLightingLogo from '../assets/vendor/Cabinets/MOD.png'
 import certainteedLogo from '../assets/vendor/Roofing/Certainteed.png'
 import gafLogo from '../assets/vendor/Roofing/GAF.png'
 import owensCorningLogo from '../assets/vendor/Roofing/Owens Corning.png'
-import ironDoorCover from '../assets/vendor/Doors/Iron Doors/RI-D21.jpg'
-import interiorDoorCover from '../assets/vendor/Doors/Interior Doors/a-shaker-8-6p-ph.jpg'
 import { IRON_DOOR_CODES } from '../lib/ironDoorCodes'
 import { INTERIOR_DOOR_CODES } from '../lib/interiorDoorCodes'
 
@@ -35,6 +32,32 @@ const renovoFlooringFiles = Object.keys(renovoFlooringModules)
   .map(path => {
     const filename = path.split('/').pop() ?? ''
     return { path, label: filename.replace(/\.jpg$/i, '').replace(/^SP\d+-/, '') }
+  })
+
+// Renovo Surfaces (countertops) product series — drop photos into the matching
+// folder and they show up automatically under that series' gallery.
+const quavanaModules = import.meta.glob('../assets/vendor/countertops/Quavana/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
+const quavanaFiles = Object.keys(quavanaModules)
+  .sort((a, b) => a.localeCompare(b))
+  .map(path => {
+    const filename = path.split('/').pop() ?? ''
+    return { path, label: filename.replace(/\.[^.]+$/, '') }
+  })
+
+const terraModules = import.meta.glob('../assets/vendor/countertops/Terra/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
+const terraFiles = Object.keys(terraModules)
+  .sort((a, b) => a.localeCompare(b))
+  .map(path => {
+    const filename = path.split('/').pop() ?? ''
+    return { path, label: filename.replace(/\.[^.]+$/, '') }
+  })
+
+const galaxyModules = import.meta.glob('../assets/vendor/countertops/Galaxy/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
+const galaxyFiles = Object.keys(galaxyModules)
+  .sort((a, b) => a.localeCompare(b))
+  .map(path => {
+    const filename = path.split('/').pop() ?? ''
+    return { path, label: filename.replace(/\.[^.]+$/, '') }
   })
 
 // Drop new photos into src/assets/vendor/Doors/Iron Doors — add their filename + model
@@ -70,6 +93,11 @@ const CATEGORIES = [
 type VendorCategory = typeof CATEGORIES[number]
 
 type GalleryFile = { path: string; label: string }
+type SubGallery = {
+  label: string
+  galleryFiles: GalleryFile[]
+  galleryModules: Record<string, () => Promise<{ default: string }>>
+}
 type Vendor = {
   name: string
   url: string
@@ -78,6 +106,7 @@ type Vendor = {
   imgBg?: string
   galleryFiles?: GalleryFile[]
   galleryModules?: Record<string, () => Promise<{ default: string }>>
+  subGalleries?: SubGallery[]
   comingSoon?: boolean
   showLabel?: boolean
 }
@@ -93,18 +122,35 @@ const vendors: Vendor[] = [
   { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com', category: 'Flooring & Backsplash', img: msiLogo },
   { name: 'Roca', url: 'https://rocatileusa.com/', category: 'Flooring & Backsplash', img: rocaLogo, imgBg: '#0b2545' },
 
-  { name: 'Renovo Surfaces', url: '#', category: 'Countertops', img: renovoSurfacesLogo },
+  {
+    name: 'Renovo Surfaces',
+    url: '#',
+    category: 'Countertops',
+    img: renovoSurfacesLogo,
+    subGalleries: [
+      { label: 'RENOVVO - Q SERIES', galleryFiles: quavanaFiles, galleryModules: quavanaModules },
+      { label: 'RENOVVO - T SERIES', galleryFiles: terraFiles, galleryModules: terraModules },
+      { label: 'RENOVVO - G SERIES', galleryFiles: galaxyFiles, galleryModules: galaxyModules },
+    ],
+  },
   { name: 'Daltile', url: 'https://www.daltile.com/tile-product-category', category: 'Countertops', img: daltileCountertopsLogo },
   { name: 'Earthstone Colours', url: 'https://earthstonetexas.com/', category: 'Countertops', img: earthstoneLogo },
   { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com/countertops/', category: 'Countertops', img: msiCountertopsLogo },
   { name: 'Omni Surfaces', url: 'https://omnisurfaces.com/', category: 'Countertops', img: omniSurfacesLogo },
 
   { name: 'Renovo Cabinets', url: 'https://renovvocabinets.com/', category: 'Cabinets', img: renovoCabinetsLogo },
-  { name: 'Lamps Plus', url: 'https://www.lampsplus.com/', category: 'Cabinets', img: lampsPlusLogo },
-  { name: 'MOD Lighting', url: 'https://www.mod-lighting.com/', category: 'Cabinets', img: modLightingLogo, imgBg: '#0b2545' },
+ 
 
-  { name: 'Iron Door Images', url: '#', category: 'Doors', img: ironDoorCover, galleryFiles: ironDoorFiles, galleryModules: ironDoorModules, showLabel: true },
-  { name: 'Shaker Door Images', url: '#', category: 'Doors', img: interiorDoorCover, galleryFiles: interiorDoorFiles, galleryModules: interiorDoorModules, showLabel: true },
+  {
+    name: 'Renovo Doors',
+    url: '#',
+    category: 'Doors',
+    img: door,
+    subGalleries: [
+      { label: 'Renovvo Exterior Doors', galleryFiles: ironDoorFiles, galleryModules: ironDoorModules },
+      { label: 'Renovvo Interior Doors', galleryFiles: interiorDoorFiles, galleryModules: interiorDoorModules },
+    ],
+  },
 
   { name: 'CertainTeed', url: 'https://www.certainteed.com/', category: 'Roofing', img: certainteedLogo },
   { name: 'GAF', url: 'https://www.gaf.com/en-us', category: 'Roofing', img: gafLogo },
@@ -118,21 +164,23 @@ const benefits = [
   { title: 'On-Time Delivery', desc: 'Coordinated directly with our vendors so materials arrive before your project starts — no delays.' },
 ]
 
+type GalleryTarget = { name: string; galleryFiles: GalleryFile[]; galleryModules: Record<string, () => Promise<{ default: string }>> }
+
 export default function Vendors() {
-  const [openGallery, setOpenGallery] = useState<Vendor | null>(null)
+  const [openGallery, setOpenGallery] = useState<GalleryTarget | null>(null)
   const [galleryImages, setGalleryImages] = useState<{ src: string; label: string }[]>([])
   const [galleryLoading, setGalleryLoading] = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [seriesPicker, setSeriesPicker] = useState<Vendor | null>(null)
 
-  const openVendorGallery = (vendor: Vendor) => {
-    setOpenGallery(vendor)
+  const openVendorGallery = (target: GalleryTarget) => {
+    setOpenGallery(target)
     setActiveIndex(0)
     setGalleryImages([])
-    if (!vendor.galleryFiles || !vendor.galleryModules) return
-    const modules = vendor.galleryModules
+    const modules = target.galleryModules
     setGalleryLoading(true)
     Promise.all(
-      vendor.galleryFiles.map(async file => ({
+      target.galleryFiles.map(async file => ({
         label: file.label,
         src: (await modules[file.path]()).default,
       }))
@@ -156,10 +204,19 @@ export default function Vendors() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [openGallery, galleryImages.length])
 
+  useEffect(() => {
+    if (!seriesPicker) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSeriesPicker(null)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [seriesPicker])
+
   return (
     <>
       <PageHero
-        image={IMG.kitchen1}
+        image={p1}
         label="Partner Vendors"
         title="We Work With the Best Brands in the Industry"
         subtitle="Our vendor partnerships give you access to premium materials at competitive prices, backed by full manufacturer warranties."
@@ -233,6 +290,21 @@ export default function Vendors() {
                         )
                       }
 
+                      if (vendor.subGalleries) {
+                        return (
+                          <button
+                            key={vendor.name}
+                            type="button"
+                            aria-label={vendor.name}
+                            className="testimonial-card p-7 block w-full text-left"
+                            style={{ textDecoration: 'none', cursor: 'pointer' }}
+                            onClick={() => setSeriesPicker(vendor)}
+                          >
+                            {logoBox}
+                          </button>
+                        )
+                      }
+
                       if (vendor.galleryFiles) {
                         return (
                           <button
@@ -241,7 +313,7 @@ export default function Vendors() {
                             aria-label={vendor.name}
                             className="testimonial-card p-7 block w-full text-left"
                             style={{ textDecoration: 'none', cursor: 'pointer' }}
-                            onClick={() => openVendorGallery(vendor)}
+                            onClick={() => openVendorGallery({ name: vendor.name, galleryFiles: vendor.galleryFiles!, galleryModules: vendor.galleryModules! })}
                           >
                             {logoBox}
                             {vendor.showLabel && (
@@ -305,7 +377,7 @@ export default function Vendors() {
             <div>
               <div className="section-label mb-5">Supplier Relations</div>
               <h2 className="font-display mb-6" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: '#0b2545', fontWeight: 600, lineHeight: 1.2 }}>
-                Become a ReWise Preferred Vendor
+                Become a Renovvo Preferred Vendor
               </h2>
               <div className="gold-line mb-6" />
               <p className="text-gray-500 mb-6" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
@@ -317,11 +389,56 @@ export default function Vendors() {
               <Link to="/contact" className="btn-primary">Submit a Vendor Inquiry</Link>
             </div>
             <div className="overflow-hidden" style={{ height: 400, background: '#e8edf2' }}>
-              <img src={IMG.team} alt="ReWise team reviewing materials" className="w-full h-full object-cover" />
+              <img src={p1} alt="Renovvo team reviewing materials" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
       </section>
+
+      {seriesPicker && (
+        <div
+          className="fixed inset-0 flex items-center justify-center p-6"
+          style={{ background: 'rgba(11,37,69,0.85)', zIndex: 100 }}
+          onClick={() => setSeriesPicker(null)}
+        >
+          <div
+            className="w-full"
+            style={{ background: '#ffffff', maxWidth: 420, borderRadius: 4, padding: '2rem' }}
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.375rem' }}>
+                {seriesPicker.name}
+              </h3>
+              <button
+                type="button"
+                aria-label="Close"
+                onClick={() => setSeriesPicker(null)}
+                style={{ background: 'none', border: 'none', fontSize: '1.5rem', lineHeight: 1, color: '#0b2545', cursor: 'pointer' }}
+              >
+                ×
+              </button>
+            </div>
+            <div className="gold-line mb-6" />
+            <div className="flex flex-col gap-3">
+              {seriesPicker.subGalleries!.map(sg => (
+                <button
+                  key={sg.label}
+                  type="button"
+                  className="btn-primary"
+                  style={{ width: '100%', textAlign: 'center' }}
+                  onClick={() => {
+                    openVendorGallery({ name: sg.label, galleryFiles: sg.galleryFiles, galleryModules: sg.galleryModules })
+                    setSeriesPicker(null)
+                  }}
+                >
+                  {sg.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {openGallery && (
         <div

@@ -1,4 +1,5 @@
 import { IMG } from '../components/shared'
+import a1 from '../assets/about/5.jpg';
 import homeHero1 from '../assets/home/1.jpg'
 import homeHero2 from '../assets/home/2.jpeg'
 import homeHero3 from '../assets/home/31.jpeg'
@@ -8,6 +9,7 @@ import h1 from '../assets/service/Full House Transformation & Exterior Makeover.
 import p1 from '../assets/service/Modern Poolside Patio & Deck.jpg';
 import n1 from '../assets/service/The Ultimate Backyard Transformation.jpeg';
 import home from '../assets/service/1.jpg';
+
 
 import gold from '../assets/feat proj/golden forest.jpg';
 import bayou from '../assets/feat proj/27.jpeg';
@@ -57,7 +59,7 @@ export const CMS_DEFAULT_CONTENT = {
       { title: 'New Construction', img: home, link: '/services/new-construction' },
     ],
     portfolioPreview: [
-      { title: 'Golden Forest Drive', cat: '', img: gold, tall: true, link: '/services/full-house-renovation' },
+      { title: 'Full Home Renovation', cat: '', img: gold, tall: true, link: '/services/full-house-renovation' },
       { title: 'Bathroom Remodel', cat: '', img: cand, tall: false, link: '/services/bathroom' },
       { title: 'Flooring', cat: '', img: holly, tall: false, link: '/services/flooring' },
       { title: 'Kitchen Remodel', cat: '', img: bayou, tall: true, link: '/services/kitchen' },
@@ -91,19 +93,21 @@ export const CMS_DEFAULT_CONTENT = {
       subtitle: 'Client-centered craftsmanship, from the first sketch to the final walkthrough.',
     },
     values: {
-      image: IMG.team,
+      image: a1,
       heading: 'Our Values',
       title: 'Who We Are',
       description: 'Our values define who we are and how we serve. They shape our actions, guide our decisions, and ensure we remain true to our mission no matter the challenges.',
       extra: 'At RENOVVO, we believe your home should perfectly reflect your vision and lifestyle. As a leading home improvement firm, we are dedicated to delivering exceptional results and unparalleled quality craftsmanship across all phases of residential construction and remodeling.',
       button: 'Start Your Project',
     },
+    servicesIntro: 'We serve as your premier partner for every scale of transformation, offering a complete suite of services designed to meet all your needs.',
     services: [
       { title: 'Complete Home Remodels', desc: 'Whole-house transformations expertly managed from start to finish.' },
       { title: 'New Construction & Additions', desc: 'Expanding your home’s footprint or building your dream residence from the ground up.' },
       { title: 'Specialized Renovations', desc: 'Stunning, quality-focused updates for kitchens, bathrooms, and outdoor living spaces.' },
     ],
     approach: {
+      image: IMG.about,
       heading: 'How We Work',
       title: 'Our Client-Centered Approach',
       description: 'What truly sets RENOVVO apart is our commitment to a Client-Centered Design & Build process. We simplify the complexities of construction with expert guidance and hands-on resources.',
@@ -184,13 +188,13 @@ export const CMS_DEFAULT_CONTENT = {
     },
     contacts: [
       { icon: '📞', label: 'Phone / Text', value: '(281) 222-9491', href: 'tel:+2812229491' },
-      { icon: '✉', label: 'Email', value: 'hello@rewisebuilders.com', href: 'mailto:hello@rewisebuilders.com' },
-      { icon: '📍', label: 'Service Area', value: 'All 50 US States', href: '#' },
-      { icon: '⏰', label: 'Business Hours', value: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm EST', href: '#' },
+      { icon: '✉', label: 'Email', value: 'support@renovvo.com', href: 'mailto:support@renovvo.com' },
+      { icon: '📍', label: 'Service Area', value: 'All across Texas', href: '#' },
+      { icon: '⏰', label: 'Business Hours', value: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm CST', href: '#' },
     ],
     promise: {
       title: 'Our Response Promise',
-      text: 'Every inquiry submitted before 5pm EST receives a personal response from our team within 24 hours — guaranteed.',
+      text: 'Every inquiry submitted before 5pm CST receives a personal response from our team within 24 hours — guaranteed.',
     },
     form: {
       serviceOptions: ['Kitchen Remodeling', 'Bathroom Renovation', 'Home Addition', 'Cabinet Installation', 'Flooring & Tile', 'Exterior Upgrade', 'Full-Home Renovation', 'Other'],

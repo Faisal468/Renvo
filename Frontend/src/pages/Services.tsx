@@ -1,48 +1,69 @@
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
-import { IMG } from '../components/shared'
+
+import k1 from '../assets/kitchen/1.jpeg'
+import k2 from '../assets/kitchen/2.jpeg'
+import k3 from '../assets/kitchen/3.jpeg'
+import b1 from '../assets/bathroom/1.jpeg'
+import b2 from '../assets/bathroom/2.jpeg'
+import b3 from '../assets/bathroom/3.jpeg'  
+import a1 from '../assets/room-addition/22.jpeg'
+import a2 from '../assets/room-addition/19.jpeg'
+import a3 from '../assets/room-addition/20.jpeg'
+import p1 from '../assets/patio/2.jpg'
+import p2 from '../assets/patio/3.jpg'
+import p3 from '../assets/patio/6.jpg'
+import f1 from '../assets/full house/golden-forest/1.jpg'
+import f2 from '../assets/full house/golden-forest/2.jpg'
+import f3 from '../assets/full house/golden-forest/3.jpg'
+import nc1 from '../assets/new-construction/3.jpg'
+import nc2 from '../assets/new-construction/4.jpg'
+import nc3 from '../assets/new-construction/6.jpg'
+
+
+
 
 const services = [
   {
-    title: 'Kitchen Remodeling',
+    title: 'Kitchen Remodel',
     desc: 'A kitchen remodel is one of the highest-return investments you can make in your home. We handle everything from layout redesign and custom cabinetry to countertop installation, appliance integration, and finishing details that turn an ordinary kitchen into the heart of your home.',
-    img: IMG.kitchen1,
-    gallery: [IMG.kitchen2, IMG.kitchen3],
+    img: k1,
+    gallery: [k2, k3],
     features: ['Custom cabinet design', 'Quartz & granite countertops', 'Island additions', 'Lighting design', 'Tile backsplash', 'Appliance installation'],
   },
   {
-    title: 'Bathroom Renovation',
+    title: 'Bathroom Remodel',
     desc: 'Transform your bathroom into a personal sanctuary. Our team specializes in master bath remodels, guest bath updates, and spa-inspired designs that blend luxury with function — complete with waterproofing, tile work, and premium fixtures.',
-    img: IMG.bathroom1,
-    gallery: [IMG.bathroom2, IMG.bathroom3],
+    img: b1,
+    gallery: [b2, b3],
     features: ['Walk-in shower conversions', 'Soaking tub installation', 'Heated tile floors', 'Custom vanities', 'Steam showers', 'Smart fixtures'],
   },
   {
     title: 'Home Additions',
     desc: 'Need more space without the cost of moving? Our home addition team designs and builds seamless expansions that feel like they were always part of the original structure — properly permitted and structurally engineered.',
-    img: IMG.addition,
-    gallery: [IMG.exterior1, IMG.living1],
+    img: a1,
+    gallery: [a2, a3],
     features: ['Room additions', 'Second-story additions', 'Garage conversions', 'Sunroom builds', 'ADU construction', 'Foundation work'],
   },
   {
-    title: 'Flooring & Tile',
+    title: 'Patio & Outdoor',
     desc: 'The right flooring sets the tone for every room. We install hardwood, luxury vinyl plank, ceramic and porcelain tile, natural stone, and carpet — with expert prep work that ensures your floors last decades.',
-    img: IMG.flooring,
-    gallery: [IMG.living2, IMG.kitchen1],
+    img: p1,
+    gallery: [p2, p3],
     features: ['Hardwood installation', 'Luxury vinyl plank', 'Porcelain & ceramic tile', 'Natural stone', 'Heated floor systems', 'Subfloor repair'],
   },
   {
-    title: 'Living Space Remodeling',
+    title: 'Full Home Renovation',
     desc: 'Open up your home with thoughtful living room and common area renovations. We remove walls, update trim and millwork, install built-in shelving, and redesign flow so your home works the way you live.',
-    img: IMG.living1,
-    gallery: [IMG.living2, IMG.living3],
+    img: f1,
+    gallery: [f2, f3],
     features: ['Open-concept conversions', 'Built-in shelving & bars', 'Fireplace surround', 'Crown molding & trim', 'Painting & finishes', 'Lighting upgrades'],
   },
   {
-    title: 'Exterior Upgrades',
+    title: 'New Construction',
     desc: 'Make a lasting first impression with a stunning exterior renovation. From siding replacement and window installation to full front-elevation redesigns, we boost your home\'s curb appeal and protect its value.',
-    img: IMG.exterior2,
-    gallery: [IMG.exterior1, IMG.exterior3],
+    img: nc1,
+    gallery: [nc2, nc3],
     features: ['Siding replacement', 'Window & door installation', 'Deck & patio builds', 'Front entry redesign', 'Roofing', 'Exterior painting'],
   },
 ]
@@ -51,7 +72,7 @@ export default function Services() {
   return (
     <>
       <PageHero
-        image={IMG.kitchen1}
+        image={k1}
         label="Our Services"
         title="Complete Home Remodeling Solutions"
         subtitle="Expert craftsmanship in every category — from kitchens and bathrooms to full-home transformations."

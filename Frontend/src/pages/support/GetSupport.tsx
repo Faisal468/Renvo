@@ -1,12 +1,12 @@
 import { Link } from 'react-router'
 import PageHero from '../../components/PageHero'
-import { IMG } from '../../components/shared'
+import s1 from '../../assets/new-construction/4.jpg'
 
 export default function GetSupport() {
   return (
     <>
       <PageHero
-        image={IMG.team}
+        image={s1}
         label="Get Support"
         title="Fast help for every project question"
         subtitle="Contact our support specialists for warranty, billing, or project updates. We’re here to make your renovation smoother."

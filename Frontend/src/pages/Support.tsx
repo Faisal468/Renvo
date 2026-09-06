@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
 import { IMG } from '../components/shared'
+import s1 from '../assets/about/5.jpg'
 
 const faqs = [
   {
@@ -24,7 +25,7 @@ export default function Support() {
   return (
     <>
       <PageHero
-        image={IMG.team}
+        image={s1}
         label="Support"
         title="We’re here to help with every question"
         subtitle="Access support resources for FAQs, licensing & insurance, and direct contact with our team."

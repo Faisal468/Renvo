@@ -12,7 +12,7 @@ export default function useCMSContent<T extends CMSContent>(page: string, defaul
     fetchCMSContent(page)
       .then(remote => {
         if (!mounted) return
-        setContent(mergeDeep(defaults, remote))
+        setContent(mergeDeep(defaults, remote as Partial<T>))
       })
       .catch(err => {
         if (!mounted) return

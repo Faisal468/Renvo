@@ -1,7 +1,7 @@
 import PageHero from '../../components/PageHero'
-import { IMG } from '../../components/shared'
+
 import mg from '../../assets/windows/7.jpg';
-import mg1 from '../../assets/windows/8.jpg';
+import mg1 from '../../assets/bathroom/24.jpeg';
 import p1 from '../../assets/process/1.avif';
 import p3 from '../../assets/process/3.jpg'
 
@@ -9,7 +9,7 @@ export default function OurProcess() {
   return (
     <>
       <PageHero
-        image={IMG.hero2}
+        image={p3}
         label="Our Process"
         title="Your Vision. Our Process."
         subtitle="For over 30 years, POWER has been committed to building trust throughout the renovation process. From 'one day' to 'day one,' this roadmap details every step of our partnership[cite: 1]."

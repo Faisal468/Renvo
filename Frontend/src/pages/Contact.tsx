@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react'
 import PageHero from '../components/PageHero'
 import useCMSContent from '../hooks/useCMSContent'
-import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults'
+import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults' 
+import c1 from '../assets/kitchen/9.jpeg'
 
 const ZOHO_IFRAME_NAME = 'zoho_lead_submit_frame'
 
@@ -44,7 +45,7 @@ export default function Contact() {
   return (
     <>
       <PageHero
-        image={content.hero.image}
+        image={c1}
         label={content.hero.label}
         title={content.hero.title}
         subtitle={content.hero.subtitle}
@@ -146,10 +147,12 @@ export default function Contact() {
                           <option>Kitchen Remodeling</option>
                           <option>Bathroom Renovation</option>
                           <option>Home Addition</option>
-                          <option>Cabinet Installation</option>
-                          <option>Flooring & Tile</option>
-                          <option>Exterior Upgrade</option>
-                          <option>Full-Home Renovation</option>
+                          <option>Patio & Outdoors</option>
+                          <option>Full Home Renovation</option>
+                          <option>New Construction</option>
+                          <option>Roofing</option>
+                          <option>Windows</option>
+                          <option>Cabinets</option>
                           <option>Other</option>
                         </select>
                       </div>

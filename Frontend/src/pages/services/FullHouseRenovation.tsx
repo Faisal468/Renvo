@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import PageHero from '../../components/PageHero'
-import { IMG } from '../../components/shared'
 
 import gold from '../../assets/feat proj/golden forest.jpg';
 import bayou from '../../assets/feat proj/bayou bridge.jpeg';
@@ -50,14 +49,15 @@ interface RenovationProject {
 const renovationProjects: RenovationProject[] = [
    { id: 'golden-forest', name: 'Golden Forest Drive', coverImage: gold, images: goldenForestImages },
    { id: 'mistyleaf', name: 'Mistyleaf Lane', coverImage: misty, images: mistyleafImages },
-   { id: 'candlewood', name: 'Candlewood Drive', coverImage: cand, images: candlewoodImages },
-   { id: 'hollyspring', name: 'Hollyspring Drive', coverImage: holly, images: hollyspringImages },
    { id: 'bayou-bridge', name: 'Bayou Bridge Drive', coverImage: bayou, images: bayouBridgeImages },
+   { id: 'pewter-knolls', name: 'Pewter Knolls Drive', coverImage: pewter, images: pewterKnollsImages },
+   { id: 'wickersham', name: 'Wickersham Lane', coverImage: wickershamImages[0], images: wickershamImages },
+
+   { id: 'hollyspring', name: 'Hollyspring Drive', coverImage: holly, images: hollyspringImages },
    { id: 'weymouth-dr', name: 'Weymouth Drive', coverImage: waymouth, images: weymouthDrImages },
+   { id: 'candlewood', name: 'Candlewood Drive', coverImage: cand, images: candlewoodImages },
 
   { id: 'overview-drive', name: 'Overview Drive', coverImage: drive, images: overviewDriveImages },
-  { id: 'wickersham', name: 'Wickersham Lane', coverImage: wickershamImages[0], images: wickershamImages },
-  { id: 'pewter-knolls', name: 'Pewter Knolls Drive', coverImage: pewter, images: pewterKnollsImages },
   { id: 'rockrill-drive', name: 'Rockrill Drive', coverImage: rock, images: rockrillDriveImages },
   { id: 'acorn-st', name: 'Acorn Street', coverImage: acorn, images: acornStImages },
   { id: 'spring-lks', name: 'Spring Lakes', coverImage: springLksImages[0], images: springLksImages },
@@ -92,7 +92,7 @@ export default function FullHouseRenovation() {
   return (
     <>
       <PageHero
-        image={IMG.portfolio_hero}
+        image={gold}
         label="Design + Build"
         title="Full Home Renovation Projects"
         subtitle="Browse our completed whole-home transformations — each project is its own gallery."
