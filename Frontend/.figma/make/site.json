@@ -1,10 +1,8 @@
 {
-  "description": "Showcases house remodeling projects with a clean, light-themed design to attract customers by highlighting past work and services offered.",
-  "robots": {
-    "index": false
-  },
-  "accessibility": {
-    "addBypassLinks": false,
-    "ignoreReducedMotion": false
+  "title": "Renovvo - House Remodeling",
+  "description": "Renovvo delivers quality home remodeling and renovation services, from kitchens and bathrooms to full home improvements.",
+  "language": "en",
+  "openGraph": {
+    "image": "https://renovvo.com/favicon.png"
   }
 }
