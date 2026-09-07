@@ -514,13 +514,16 @@ export default function Vendors() {
                         borderRadius: 4,
                         cursor: 'pointer',
                         lineHeight: 0,
+                        background: '#f8faff',
+                        aspectRatio: '3 / 4',
+                        overflow: 'hidden',
                       }}
                     >
                       <img
                         src={item.src}
                         alt={item.label}
-                        className="w-full object-cover"
-                        style={{ height: 60, borderRadius: 2, opacity: i === activeIndex ? 1 : 0.7 }}
+                        className="w-full h-full object-contain"
+                        style={{ borderRadius: 2, opacity: i === activeIndex ? 1 : 0.7 }}
                       />
                     </button>
                   ))}
