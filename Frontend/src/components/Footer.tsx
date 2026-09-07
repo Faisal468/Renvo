@@ -135,7 +135,7 @@ export default function Footer() {
               {[
                 { label: '281-222-9491', sub: 'Call or Text', href: 'tel:+12812229491' },
                 { label: 'support@renovvo.com', sub: 'Email Us', href: 'mailto:support@renovvo.com' },
-                { label: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm EST', sub: 'Business Hours' },
+                { label: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm CST', sub: 'Business Hours' },
               ].map(c =>
                 c.href ? (
                   <a key={c.label} href={c.href} className="block">

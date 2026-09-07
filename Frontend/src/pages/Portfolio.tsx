@@ -26,9 +26,9 @@ export default function Portfolio() {
     <>
       <PageHero
         image={g1}
-        label="Portfolio"
-        title="Our Work Speaks for Itself"
-        subtitle="Browse hundreds of completed projects across the United States — each one a story of transformation."
+        label="Gallery"
+        title="We take pride in our work "
+        subtitle="Ensuring quality, precision, and complete client satisfaction from start to finish. Browse dozens of completed projects across Texas, each one a story of transformation"
       />
 
       {/* Stats row */}
@@ -36,10 +36,10 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { v: '500+', l: 'Projects' },
-              { v: '12', l: 'States Served' },
-              { v: '98%', l: 'Satisfaction' },
-              { v: '15+', l: 'Years' },
+              { v: '800+', l: 'Client Served' },
+              { v: '1200+', l: 'Project Delivered' },
+              { v: '15+ ', l: 'Years of Experience' },
+              { v: '100+', l: 'Client Satisfaction' },
             ].map(s => (
               <div key={s.l}>
                 <div className="font-display font-bold" style={{ color: '#c9a84c', fontSize: '2rem' }}>{s.v}</div>

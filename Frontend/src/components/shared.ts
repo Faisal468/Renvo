@@ -54,7 +54,7 @@ export const SERVICE_LINKS: DropdownLink[] = [
   { label: 'Bathroom Remodel', path: '/services/bathroom', img: b1 },
   { label: 'Room Addition', path: '/services/addition', img: ra1 },
   { label: 'Patio & Outdoors', path: '/services/patio', img: p1 },
-  { label: 'Full House Renovation', path: '/services/full-house-renovation', img: fh1 },
+  { label: 'Full Home Renovation', path: '/services/full-house-renovation', img: fh1 },
   { label: 'New Construction', path: '/services/new-construction', img: nc1 },
   
 ]
