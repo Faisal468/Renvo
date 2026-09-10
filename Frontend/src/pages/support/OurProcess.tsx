@@ -1,7 +1,7 @@
 import PageHero from '../../components/PageHero'
 
-import mg from '../../assets/windows/7.jpg';
-import mg1 from '../../assets/bathroom/24.jpeg';
+import mg from '../../assets/7.jpg';
+import mg1 from '../../assets/bathroom/0.2.jpeg';
 import p1 from '../../assets/process/1.avif';
 import p3 from '../../assets/process/3.jpg'
 

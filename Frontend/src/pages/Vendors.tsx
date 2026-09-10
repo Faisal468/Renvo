@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
 import door from '../assets/vendor/Doors/renovvo door.jpeg';
-import p1 from '../assets/kitchen/9.jpeg';
+import p1 from '../assets/kitchen/28.9.jpeg';
 import renflo from '../assets/vendor/flooring/FLOORING.png';
 import arizonaTileLogo from '../assets/vendor/flooring/az-tile-logo.png'
 import daltileLogo from '../assets/vendor/flooring/DAL_Logo_H_Black.png'

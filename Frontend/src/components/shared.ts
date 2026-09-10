@@ -1,10 +1,10 @@
 // Shared image catalog and constants
 
-import  k1 from '../assets/kitchen/33.jpeg'
-import b1 from '../assets/bathroom/1.jpeg'
+import  k1 from '../assets/kitchen/29.2.jpg'
+import b1 from '../assets/bathroom/0.1.jpeg'
 import p1 from '../assets/patio/4.jpg'
 import nc1 from '../assets/new-construction/3.jpg'
-import ra1 from '../assets/room-addition/23.jpeg'
+import ra1 from '../assets/room-addition/22.jpeg'
 import fh1 from '../assets/full house/10910-wickersham/1.jpeg'
 
 
@@ -36,13 +36,25 @@ export const IMG = {
   portfolio_hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=700&fit=crop&auto=format',
 }
 
-// Sorts photos loaded via import.meta.glob numerically by filename (1.jpg, 2.jpeg, 10.jpeg, ...)
+// Extracts the dot-separated numeric parts of a filename, e.g. "29.1.jpeg" -> [29, 1]
+function filenameNumberParts(path: string): number[] {
+  const filename = path.split('/').pop() ?? ''
+  const base = filename.replace(/\.[^.]+$/, '')
+  return base.split('.').map(part => parseInt(part, 10)).filter(n => !isNaN(n))
+}
+
+// Sorts photos loaded via import.meta.glob numerically by filename, so 1, 2, ..., 29, 29.1, 29.2, 30, ... stay in order
 export function sortImagesByFilename(modules: Record<string, string>): string[] {
   return Object.entries(modules)
     .sort(([a], [b]) => {
-      const numA = parseInt(a.match(/(\d+)\.\w+$/)?.[1] ?? '0', 10)
-      const numB = parseInt(b.match(/(\d+)\.\w+$/)?.[1] ?? '0', 10)
-      return numA - numB
+      const partsA = filenameNumberParts(a)
+      const partsB = filenameNumberParts(b)
+      const len = Math.max(partsA.length, partsB.length)
+      for (let i = 0; i < len; i++) {
+        const diff = (partsA[i] ?? -1) - (partsB[i] ?? -1)
+        if (diff !== 0) return diff
+      }
+      return 0
     })
     .map(([, url]) => url)
 }

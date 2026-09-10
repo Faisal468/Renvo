@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
-import g1 from '../assets/kitchen/1.jpeg';
+import g1 from '../assets/kitchen/29.1.jpeg';
 import { IMG, SERVICE_LINKS, sortImagesByFilename } from '../components/shared'
 
 // Loads every photo from every src/assets/<service> folder, grouped by folder name
@@ -128,9 +128,10 @@ export default function Portfolio() {
                 <div
                   key={i}
                   className="portfolio-item cursor-pointer"
+                  style={{ aspectRatio: '4/3' }}
                   onClick={() => setLightbox({ slug: viewAllCategory.slug, index: i })}
                 >
-                  <img src={img} alt={`${viewAllCategory.label} project ${i + 1}`} className="w-full h-auto object-cover" />
+                  <img src={img} alt={`${viewAllCategory.label} project ${i + 1}`} className="w-full h-full object-cover" />
                   <div className="portfolio-overlay" />
                 </div>
               ))}

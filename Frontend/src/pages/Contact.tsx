@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import PageHero from '../components/PageHero'
 import useCMSContent from '../hooks/useCMSContent'
 import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults' 
-import c1 from '../assets/kitchen/9.jpeg'
+import c1 from '../assets/kitchen/28.9.jpeg'
 
 const ZOHO_IFRAME_NAME = 'zoho_lead_submit_frame'
 
