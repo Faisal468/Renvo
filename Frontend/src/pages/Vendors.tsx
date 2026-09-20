@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
+import useCMSContent from '../hooks/useCMSContent'
 import door from '../assets/vendor/Doors/renovvo door.jpeg';
 import p1 from '../assets/kitchen/28.9.jpeg';
 import renflo from '../assets/vendor/flooring/FLOORING.png';
@@ -166,7 +167,17 @@ const benefits = [
 
 type GalleryTarget = { name: string; galleryFiles: GalleryFile[]; galleryModules: Record<string, () => Promise<{ default: string }>> }
 
+export const VENDORS_CMS_DEFAULTS = {
+  hero: {
+    image: p1,
+    label: 'Partner Vendors',
+    title: 'We Work With the Best Brands in the Industry',
+    subtitle: 'Our vendor partnerships give you access to premium materials at competitive prices, backed by full manufacturer warranties.',
+  },
+}
+
 export default function Vendors() {
+  const { content } = useCMSContent('vendors', VENDORS_CMS_DEFAULTS)
   const [openGallery, setOpenGallery] = useState<GalleryTarget | null>(null)
   const [galleryImages, setGalleryImages] = useState<{ src: string; label: string }[]>([])
   const [galleryLoading, setGalleryLoading] = useState(false)
@@ -216,10 +227,10 @@ export default function Vendors() {
   return (
     <>
       <PageHero
-        image={p1}
-        label="Partner Vendors"
-        title="We Work With the Best Brands in the Industry"
-        subtitle="Our vendor partnerships give you access to premium materials at competitive prices, backed by full manufacturer warranties."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       {/* Vendor grid */}

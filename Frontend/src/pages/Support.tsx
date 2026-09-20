@@ -1,6 +1,16 @@
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
 import s1 from '../assets/about/5.jpg'
+import useCMSContent from '../hooks/useCMSContent'
+
+export const SUPPORT_CMS_DEFAULTS = {
+  hero: {
+    image: s1,
+    label: 'Support',
+    title: 'We’re here to help with every question',
+    subtitle: 'Access support resources for FAQs, licensing & insurance, and direct contact with our team.',
+  },
+}
 
 const faqs = [
   {
@@ -21,13 +31,14 @@ const faqs = [
 ]
 
 export default function Support() {
+  const { content } = useCMSContent('support', SUPPORT_CMS_DEFAULTS)
   return (
     <>
       <PageHero
-        image={s1}
-        label="Support"
-        title="We’re here to help with every question"
-        subtitle="Access support resources for FAQs, licensing & insurance, and direct contact with our team."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>

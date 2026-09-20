@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import PageHero from '../../components/PageHero'
+import useCMSContent from '../../hooks/useCMSContent'
 import v1 from '../../assets/windows/6.jpg'
 import integrityIcon from '../../assets/about/image.svg'
 import careIcon from '../../assets/about/image (1).svg'
@@ -29,7 +30,17 @@ const VALUES = [
 const GALLERY_PAGE_SIZE = 3
 const GALLERY_PAGE_COUNT = Math.ceil(GALLERY_VALUES.length / GALLERY_PAGE_SIZE)
 
+export const OUR_VALUE_CMS_DEFAULTS = {
+  hero: {
+    image: v1,
+    label: 'Our Values',
+    title: 'The values that guide every support interaction',
+    subtitle: 'We treat your project with respect, transparency, and accountability from day one.',
+  },
+}
+
 export default function OurValue() {
+  const { content } = useCMSContent('support-our-value', OUR_VALUE_CMS_DEFAULTS)
   const [galleryPage, setGalleryPage] = useState(0)
   const galleryVisible = GALLERY_VALUES.slice(
     galleryPage * GALLERY_PAGE_SIZE,
@@ -39,10 +50,10 @@ export default function OurValue() {
   return (
     <>
       <PageHero
-        image={v1}
-        label="Our Values"
-        title="The values that guide every support interaction"
-        subtitle="We treat your project with respect, transparency, and accountability from day one."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>

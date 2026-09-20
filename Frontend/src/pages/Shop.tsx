@@ -1,15 +1,26 @@
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
 import { IMG } from '../components/shared'
+import useCMSContent from '../hooks/useCMSContent'
+
+export const SHOP_CMS_DEFAULTS = {
+  hero: {
+    image: IMG.kitchen1,
+    label: 'Shop',
+    title: 'Explore Our Cabinets and Vendor Partners',
+    subtitle: 'Browse custom cabinetry and trusted manufacturers for every renovation project.',
+  },
+}
 
 export default function Shop() {
+  const { content } = useCMSContent('shop', SHOP_CMS_DEFAULTS)
   return (
     <>
       <PageHero
-        image={IMG.kitchen1}
-        label="Shop"
-        title="Explore Our Cabinets and Vendor Partners"
-        subtitle="Browse custom cabinetry and trusted manufacturers for every renovation project."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
 import g1 from '../assets/kitchen/29.1.jpeg';
 import { IMG, SERVICE_LINKS, sortImagesByFilename } from '../components/shared'
+import useCMSContent from '../hooks/useCMSContent'
 
 // Loads every photo from every src/assets/<service> folder, grouped by folder name
 const allImageModules = import.meta.glob('../assets/*/*.{jpg,jpeg,png}', { eager: true, import: 'default' }) as Record<string, string>
@@ -15,32 +16,49 @@ const categories = SERVICE_LINKS.map(s => {
   return { slug, label: s.label, images: sortImagesByFilename(modules) }
 }).filter(c => c.images.length > 0)
 
+export const PORTFOLIO_CMS_DEFAULTS = {
+  hero: {
+    image: g1,
+    label: 'Gallery',
+    title: 'We take pride in our work ',
+    subtitle: 'Ensuring quality, precision, and complete client satisfaction from start to finish. Browse dozens of completed projects across Texas, each one a story of transformation',
+  },
+  stats: [
+    { v: '800+', l: 'Client Served' },
+    { v: '1200+', l: 'Project Delivered' },
+    { v: '15+ ', l: 'Years of Experience' },
+    { v: '100+', l: 'Client Satisfaction' },
+  ],
+  categoryImages: Object.fromEntries(categories.map(c => [c.slug, c.images])) as Record<string, string[]>,
+}
+
 export default function Portfolio() {
+  const { content } = useCMSContent('portfolio', PORTFOLIO_CMS_DEFAULTS)
   const [viewAllSlug, setViewAllSlug] = useState<string | null>(null)
   const [lightbox, setLightbox] = useState<{ slug: string; index: number } | null>(null)
 
-  const viewAllCategory = categories.find(c => c.slug === viewAllSlug) ?? null
-  const lightboxCategory = lightbox ? categories.find(c => c.slug === lightbox.slug) ?? null : null
+  const displayCategories = categories.map(cat => {
+    const override = content.categoryImages[cat.slug]
+    return { ...cat, images: override && override.length > 0 ? override : cat.images }
+  })
+
+  const viewAllCategory = displayCategories.find(c => c.slug === viewAllSlug) ?? null
+  const lightboxCategory = lightbox ? displayCategories.find(c => c.slug === lightbox.slug) ?? null : null
 
   return (
     <>
       <PageHero
-        image={g1}
-        label="Gallery"
-        title="We take pride in our work "
-        subtitle="Ensuring quality, precision, and complete client satisfaction from start to finish. Browse dozens of completed projects across Texas, each one a story of transformation"
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       {/* Stats row */}
       <div style={{ background: '#0b2545', padding: '2rem 0' }}>
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { v: '800+', l: 'Client Served' },
-              { v: '1200+', l: 'Project Delivered' },
-              { v: '15+ ', l: 'Years of Experience' },
-              { v: '100+', l: 'Client Satisfaction' },
-            ].map(s => (
+            {content.stats.map(s => (
               <div key={s.l}>
                 <div className="font-display font-bold" style={{ color: '#c9a84c', fontSize: '2rem' }}>{s.v}</div>
                 <div className="text-white text-xs tracking-widest uppercase mt-1 opacity-70">{s.l}</div>
@@ -53,7 +71,7 @@ export default function Portfolio() {
       {/* Category rows */}
       <section className="py-16" style={{ background: '#f8faff' }}>
         <div className="max-w-7xl mx-auto px-6 space-y-12">
-          {categories.map(cat => (
+          {displayCategories.map(cat => (
             <div key={cat.slug}>
               <div className="flex items-center justify-between mb-4">
                 <h2 className="font-display font-bold tracking-wide uppercase" style={{ color: '#0b2545', fontSize: '1.05rem' }}>

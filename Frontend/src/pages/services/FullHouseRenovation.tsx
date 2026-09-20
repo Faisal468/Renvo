@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import PageHero from '../../components/PageHero'
+import useCMSContent from '../../hooks/useCMSContent'
 
 import gold from '../../assets/feat proj/golden forest.jpg';
 import bayou from '../../assets/feat proj/bayou bridge.jpeg';
@@ -64,11 +65,22 @@ const renovationProjects: RenovationProject[] = [
 
 ].filter(p => p.coverImage)
 
+export const FULL_HOUSE_CMS_DEFAULTS = {
+  hero: { image: gold },
+  projects: renovationProjects.map(p => ({ id: p.id, name: p.name, coverImage: p.coverImage })),
+}
+
 export default function FullHouseRenovation() {
+  const { content } = useCMSContent('service-full-house-renovation', FULL_HOUSE_CMS_DEFAULTS)
+  const displayProjects: RenovationProject[] = renovationProjects.map(p => {
+    const override = content.projects.find(cp => cp.id === p.id)
+    return { ...p, name: override?.name ?? p.name, coverImage: override?.coverImage ?? p.coverImage }
+  })
+
   const [openProjectId, setOpenProjectId] = useState<string | null>(null)
   const [lightboxIndex, setLightboxIndex] = useState(0)
 
-  const activeProject = renovationProjects.find(p => p.id === openProjectId) ?? null
+  const activeProject = displayProjects.find(p => p.id === openProjectId) ?? null
 
   const openGallery = (id: string) => {
     setOpenProjectId(id)
@@ -92,7 +104,7 @@ export default function FullHouseRenovation() {
   return (
     <>
       <PageHero
-        image={gold}
+        image={content.hero.image}
         label="Design + Build"
         title="Full Home Renovation Projects"
         subtitle="Browse our completed whole-home transformations — each project is its own gallery."
@@ -109,7 +121,7 @@ export default function FullHouseRenovation() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {renovationProjects.map(project => (
+            {displayProjects.map(project => (
               <button
                 key={project.id}
                 type="button"

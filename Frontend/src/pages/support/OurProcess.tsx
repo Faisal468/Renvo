@@ -1,18 +1,29 @@
 import PageHero from '../../components/PageHero'
+import useCMSContent from '../../hooks/useCMSContent'
 
 import mg from '../../assets/7.jpg';
 import mg1 from '../../assets/bathroom/0.2.jpeg';
 import p1 from '../../assets/process/1.avif';
 import p3 from '../../assets/process/3.jpg'
 
+export const OUR_PROCESS_CMS_DEFAULTS = {
+  hero: {
+    image: p3,
+    label: 'Our Process',
+    title: 'Your Vision. Our Process.',
+    subtitle: 'For over 30 years, POWER has been committed to building trust throughout the renovation process. From \'one day\' to \'day one,\' this roadmap details every step of our partnership[cite: 1].',
+  },
+}
+
 export default function OurProcess() {
+  const { content } = useCMSContent('support-our-process', OUR_PROCESS_CMS_DEFAULTS)
   return (
     <>
       <PageHero
-        image={p3}
-        label="Our Process"
-        title="Your Vision. Our Process."
-        subtitle="For over 30 years, POWER has been committed to building trust throughout the renovation process. From 'one day' to 'day one,' this roadmap details every step of our partnership[cite: 1]."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>

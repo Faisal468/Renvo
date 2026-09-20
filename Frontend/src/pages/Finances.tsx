@@ -1,17 +1,28 @@
 import PageHero from '../components/PageHero'
 import { IMG } from '../components/shared'
+import useCMSContent from '../hooks/useCMSContent'
 import synchronyLogo from '../assets/financing/sycrony.svg'
 import acornLogo from '../assets/financing/Acron.svg'
 import f1 from '../assets/new-construction/5.jpg'
 
+export const FINANCES_CMS_DEFAULTS = {
+  hero: {
+    image: f1,
+    label: 'Financing',
+    title: 'Financing for Your Home Remodeling and Roofing Needs in Houston, TX & Surrounding Areas',
+    subtitle: 'Upgrade your home with a new bathroom, room addition, kitchen remodel, or roof with flexible financing options from our trusted financing partners.',
+  },
+}
+
 export default function Finances() {
+  const { content } = useCMSContent('finances', FINANCES_CMS_DEFAULTS)
   return (
     <>
       <PageHero
-        image={f1}
-        label="Financing"
-        title="Financing for Your Home Remodeling and Roofing Needs in Houston, TX & Surrounding Areas"
-        subtitle="Upgrade your home with a new bathroom, room addition, kitchen remodel, or roof with flexible financing options from our trusted financing partners."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>
