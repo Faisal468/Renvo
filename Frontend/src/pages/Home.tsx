@@ -382,7 +382,7 @@ function Testimonials() {
           <h2 className="font-display mb-5" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)', color: '#0b2545', fontWeight: 600 }}>What Homeowners Say</h2>
           <div className="gold-line mx-auto" />
         </div>
-        <div className="elfsight-app-c6720390-401e-455e-92fe-9f1b2b623f83" data-elfsight-app-lazy />
+        <div className="elfsight-app-f328e735-30af-44d3-9755-341bb2e7fb70" data-elfsight-app-lazy />
       </div>
     </section>
   )

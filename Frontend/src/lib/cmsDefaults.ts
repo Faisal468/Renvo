@@ -190,7 +190,7 @@ export const CMS_DEFAULT_CONTENT = {
       { icon: '📞', label: 'Phone / Text', value: '(281) 222-9491', href: 'tel:+2812229491' },
       { icon: '✉', label: 'Email', value: 'support@renovvo.com', href: 'mailto:support@renovvo.com' },
       { icon: '📍', label: 'Service Area', value: 'All across Texas', href: '#' },
-      { icon: '⏰', label: 'Business Hours', value: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm CST', href: '#' },
+      { icon: '⏰', label: 'Business Hours', value: 'Mon–Fri 9am–6pm CST\nSat 9am–12pm CST', href: '#' },
     ],
     promise: {
       title: 'Our Response Promise',

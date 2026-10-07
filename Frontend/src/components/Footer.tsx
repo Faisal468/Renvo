@@ -135,7 +135,7 @@ export default function Footer() {
               {[
                 { label: '281-222-9491', sub: 'Call or Text', href: 'tel:+12812229491' },
                 { label: 'support@renovvo.com', sub: 'Email Us', href: 'mailto:support@renovvo.com' },
-                { label: 'Mon–Fri 9am–6pm CST, Sat 9am–12pm CST', sub: 'Business Hours' },
+                { label: 'Mon–Fri 9am–6pm CST\nSat 9am–12pm CST', sub: 'Business Hours' },
               ].map(c =>
                 c.href ? (
                   <a key={c.label} href={c.href} className="block">
@@ -144,7 +144,7 @@ export default function Footer() {
                   </a>
                 ) : (
                   <div key={c.label}>
-                    <div className="text-sm font-medium text-white">{c.label}</div>
+                    <div className="text-sm font-medium text-white whitespace-pre-line">{c.label}</div>
                     <div className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.38)' }}>{c.sub}</div>
                   </div>
                 )

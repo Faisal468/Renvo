@@ -50,9 +50,9 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
       <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3 lg:py-5 text-slate-900" style={{ minHeight: 64 }}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-1 lg:px-6 lg:py-5 text-slate-900" style={{ minHeight: 64 }}>
           <Link to="/" className="flex items-center flex-shrink-0">
-            <img src={Logo} alt="Renovvo Logo" style={{ height: 'clamp(40px, 9vw, 108px)', width: 'auto' }} />
+            <img src={Logo} alt="Renovvo Logo" style={{ height: 'clamp(64px, 9vw, 108px)', width: 'auto' }} />
           </Link>
 
           <Link
@@ -106,7 +106,7 @@ export default function Navbar() {
       </div>
 
       <nav className="border-t border-white/10 bg-[#0b2545]">
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between lg:justify-center h-16">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 flex items-center justify-between lg:justify-center h-8 lg:h-16">
           <div className="hidden lg:flex items-center gap-8">
             {NAV_ITEMS.map(item =>
               item.dropdown ? (
@@ -305,7 +305,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 lg:absolute lg:right-6 lg:top-1/2 lg:transform lg:-translate-y-1/2">
            
             <button
-              className="text-white p-2"
+              className="text-white p-1 lg:p-2"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
             >
@@ -328,7 +328,7 @@ export default function Navbar() {
         <div
           className="lg:hidden transition-all duration-300"
           style={{
-            maxHeight: mobileOpen ? 'calc(100vh - 64px)' : 0,
+            maxHeight: mobileOpen ? 'calc(100vh - 32px)' : 0,
             overflowY: mobileOpen ? 'auto' : 'hidden',
             overflowX: 'hidden',
             background: '#0c3b6d',
