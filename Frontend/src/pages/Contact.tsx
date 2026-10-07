@@ -77,7 +77,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: '#c9a84c' }}>{c.label}</div>
-                      <a href={c.href} className="font-medium transition-colors" style={{ color: '#0b2545' }}
+                      <a href={c.href} className="font-medium transition-colors whitespace-pre-line" style={{ color: '#0b2545' }}
                         onMouseEnter={e => (e.currentTarget.style.color = '#2a6fc1')}
                         onMouseLeave={e => (e.currentTarget.style.color = '#0b2545')}
                       >
