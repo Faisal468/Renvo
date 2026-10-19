@@ -45,9 +45,9 @@ export const CMS_DEFAULT_CONTENT = {
     },
     trustBar: [
       { icon: '★', text: ' 5  Rating' },
-      { icon: '✓', text: '800+ Client Served' },   
+      { icon: '✓', text: '450+ Client Served' },   
       { icon: '⌛', text: '15+ Years Experience' },
-      { icon: '🏆', text: '1200+ Projects Delivered' },
+      { icon: '🏆', text: '550+ Projects Delivered' },
      
     ],
     services: [
@@ -67,8 +67,8 @@ export const CMS_DEFAULT_CONTENT = {
       { title: 'Roofing', cat: '', img: waymouth, tall: false, link: '/services/roofing' },
     ],
     stats: [
-      { value: '800+', label: 'Clients Served' },
-      { value: '1200+', label: 'Projects Delivered' },
+      { value: '450+', label: 'Clients Served' },
+      { value: '550+', label: 'Projects Delivered' },
       { value: '15+', label: 'Years of Experience' },
       { value: '100%', label: 'Client Satisfaction' },
     ],

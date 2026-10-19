@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import PageHero from '../components/PageHero'
 import useCMSContent from '../hooks/useCMSContent'
 import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults' 
@@ -5,6 +6,15 @@ import c1 from '../assets/kitchen/28.9.jpeg'
 
 export default function Contact() {
   const { content } = useCMSContent('contact', CMS_DEFAULT_CONTENT.contact)
+
+  useEffect(() => {
+    const src = 'https://link.msgsndr.com/js/form_embed.js'
+    if (document.querySelector(`script[src="${src}"]`)) return
+    const script = document.createElement('script')
+    script.src = src
+    script.async = true
+    document.body.appendChild(script)
+  }, [])
 
   return (
     <>
@@ -67,9 +77,9 @@ export default function Contact() {
               style={{ background: '#f8faff', padding: '1.5rem', boxShadow: '0 4px 30px rgba(11,37,69,0.06)' }}
             >
               <iframe
-                src="https://api.leadconnectorhq.com/widget/form/Fbu2cPmpZjzP9k0WmEfa"
-                style={{ width: '100%', height: 945, border: 'none', borderRadius: 8 }}
-                id="inline-Fbu2cPmpZjzP9k0WmEfa"
+                src="https://api.leadconnectorhq.com/widget/form/JB7U0d9kMXOuuhLeHkA1"
+                style={{ width: '100%', height: 1423, border: 'none', borderRadius: 8 }}
+                id="inline-JB7U0d9kMXOuuhLeHkA1"
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
                 data-trigger-value=""
@@ -77,13 +87,13 @@ export default function Contact() {
                 data-activation-value=""
                 data-deactivation-type="neverDeactivate"
                 data-deactivation-value=""
-                data-form-name="Form 6"
-                data-height="945"
-                data-layout-iframe-id="inline-Fbu2cPmpZjzP9k0WmEfa"
-                data-form-id="Fbu2cPmpZjzP9k0WmEfa"
+                data-form-name="Final Web lead capture"
+                data-height="1423"
+                data-layout-iframe-id="inline-JB7U0d9kMXOuuhLeHkA1"
+                data-form-id="JB7U0d9kMXOuuhLeHkA1"
                 data-cookie-consent="true"
                 data-cookie-consent-provider="auto"
-                title="Form 6"
+                title="Final Web lead capture"
               />
             </div>
           </div>

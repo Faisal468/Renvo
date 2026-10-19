@@ -24,8 +24,8 @@ export const PORTFOLIO_CMS_DEFAULTS = {
     subtitle: 'Ensuring quality, precision, and complete client satisfaction from start to finish. Browse dozens of completed projects across Texas, each one a story of transformation',
   },
   stats: [
-    { v: '800+', l: 'Client Served' },
-    { v: '1200+', l: 'Project Delivered' },
+    { v: '450+', l: 'Client Served' },
+    { v: '550+', l: 'Project Delivered' },
     { v: '15+ ', l: 'Years of Experience' },
     { v: '100+', l: 'Client Satisfaction' },
   ],
