@@ -1,3 +1,30 @@
+import type { ReactNode } from 'react'
+
+const SITE_URL = 'https://renovvo.com'
+
+function Section({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section className="space-y-3">
+      <h2 className="font-display" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
+        {title}
+      </h2>
+      {children}
+    </section>
+  )
+}
+
+function List({ items }: { items: string[] }) {
+  return (
+    <ul className="list-disc pl-6 space-y-1">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  )
+}
+
+const strong = { color: '#0b2545', fontWeight: 600 } as const
+
 export default function TermsOfService() {
   return (
     <div style={{ paddingTop: 140, paddingBottom: 80, background: '#ffffff' }}>
@@ -7,108 +34,117 @@ export default function TermsOfService() {
           className="font-display mb-2"
           style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: '#0b2545', fontWeight: 600, lineHeight: 1.25 }}
         >
-          Terms of Service
+          Terms of Service &amp; SMS Terms and Conditions
         </h1>
+        <p className="mb-1" style={{ color: '#0b2545', fontSize: '0.95rem', fontWeight: 600 }}>
+          RENOVVO OUTLETS OF AMERICA LLC
+        </p>
         <p className="mb-8" style={{ color: 'rgba(11,37,69,0.5)', fontSize: '0.9rem' }}>
-          Last updated: August 31, 2026
+          Website: {SITE_URL} &nbsp;·&nbsp; Effective Date: October 22, 2026
         </p>
         <div className="gold-line mb-10" />
 
         <div className="space-y-8" style={{ color: '#4b5563', fontSize: '1rem', lineHeight: 1.9 }}>
-          <p>
-            These Terms of Service ("Terms") govern your access to and use of the RENOVVO website and services.
-            By accessing our website or requesting our services, you agree to be bound by these Terms. If you do
-            not agree, please do not use our website or services.
-          </p>
-
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Use of Our Website
-            </h2>
+          <Section title="1. Introduction">
+            <p>Welcome to RENOVVO.</p>
             <p>
-              You agree to use our website only for lawful purposes and in a manner that does not infringe the
-              rights of, restrict, or inhibit anyone else's use of the website. Content on this website is
-              provided for general informational purposes and is subject to change without notice.
+              These Terms of Service govern your use of the website operated by RENOVVO OUTLETS OF AMERICA LLC
+              ("RENOVVO," "we," "us," or "our"), including inquiries, consultation requests, estimates, and
+              electronic communications.
             </p>
-          </section>
-
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Estimates and Services
-            </h2>
             <p>
-              Any estimates, quotes, or project timelines provided through our website or by our team are
-              preliminary and subject to change based on an in-person assessment, material availability, permits,
-              and other factors. Final pricing and scope of work will be outlined in a separate written agreement
-              or contract prior to the start of any project.
+              RENOVVO provides home improvement, remodeling, roofing, window installation, cabinetry, design-build,
+              and construction services.
             </p>
-          </section>
-
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Intellectual Property
-            </h2>
             <p>
-              All content on this website, including text, images, logos, and graphics, is the property of
-              RENOVVO or its licensors and is protected by applicable intellectual property laws. You may not
-              reproduce, distribute, or use our content without prior written permission.
+              By accessing our website or using our services, you agree to these Terms of Service, as applicable.
             </p>
-          </section>
+          </Section>
 
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Third-Party Links and Partners
-            </h2>
+          <Section title="2. Website and Services">
             <p>
-              Our website may contain links to third-party websites, including financing partners, which are not
-              owned or controlled by us. We are not responsible for the content, policies, or practices of any
-              third-party sites.
+              Our website allows visitors to learn about our services, submit inquiries, request estimates,
+              schedule consultations, and communicate with our team.
             </p>
-          </section>
+            <p>
+              Information provided on our website is intended for general informational purposes. Project pricing,
+              schedules, materials, warranties, and construction specifications are subject to individual written
+              proposals and agreements.
+            </p>
+            <p>Submitting an inquiry or requesting an estimate does not establish a construction contract.</p>
+          </Section>
 
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Limitation of Liability
-            </h2>
+          <Section title="3. SMS Messaging Program">
             <p>
-              To the fullest extent permitted by law, RENOVVO shall not be liable for any indirect, incidental,
-              or consequential damages arising from your use of our website or services. Our total liability for
-              any claim arising from our services shall not exceed the amount paid for the services in question.
+              <span style={strong}>Program Name:</span> RENOVVO Customer Communications
             </p>
-          </section>
+            <p>
+              <span style={strong}>Operated By:</span> RENOVVO OUTLETS OF AMERICA LLC
+            </p>
+            <p>
+              By voluntarily opting into our SMS messaging program, you agree to receive text messages from
+              RENOVVO at the mobile phone number you provide.
+            </p>
+            <p>Depending on your consent preferences, messages may include:</p>
+            <p style={strong}>Transactional and Informational Messages</p>
+            <List
+              items={[
+                'Responses to customer inquiries',
+                'Appointment confirmations and reminders',
+                'Consultation scheduling updates',
+                'Estimate and proposal notifications',
+                'Project scheduling and progress updates',
+                'Customer support communications',
+                'Invoice and payment notifications',
+              ]}
+            />
+            <p style={strong}>Marketing and Promotional Messages</p>
+            <List
+              items={[
+                'Home remodeling promotions',
+                'Special offers and seasonal discounts',
+                'Information about RENOVVO services',
+                'Promotional announcements and marketing campaigns',
+              ]}
+            />
+            <p>Marketing and non-marketing SMS consent are collected separately.</p>
+            <p>
+              Consent to receive marketing text messages is not required to purchase products or services from
+              RENOVVO.
+            </p>
+          </Section>
 
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Governing Law
-            </h2>
+          <Section title="4. SMS Consent and Enrollment">
             <p>
-              These Terms are governed by the laws of the state in which RENOVVO operates, without regard to
-              conflict of law principles.
+              Customers may voluntarily enroll in our SMS messaging program through website forms or other
+              authorized consent methods offered by RENOVVO.
             </p>
-          </section>
+            <p>
+              Where applicable, customers must actively select an optional SMS consent checkbox before receiving
+              messages under the corresponding messaging program.
+            </p>
+            <p>
+              Providing a mobile phone number alone does not constitute consent to receive promotional SMS
+              messages.
+            </p>
+            <p>
+              RENOVVO maintains consent records as appropriate and sends messages consistent with the permissions
+              provided.
+            </p>
+          </Section>
 
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Changes to These Terms
-            </h2>
+          <Section title="5. Message Frequency">
             <p>
-              We may revise these Terms from time to time. Continued use of our website after changes are posted
-              constitutes your acceptance of the updated Terms.
+              <span style={strong}>Message frequency varies</span> depending on the type of communication,
+              customer inquiries, appointment schedules, project activity, and promotional campaigns for which
+              consent has been provided.
             </p>
-          </section>
-
-          <section>
-            <h2 className="font-display mb-3" style={{ color: '#0b2545', fontSize: '1.25rem', fontWeight: 600 }}>
-              Contact Us
-            </h2>
+            <p>Messages may be recurring.</p>
             <p>
-              If you have any questions about these Terms, please contact us at{' '}
-              <a href="mailto:hello@rewisebuilders.com" style={{ color: '#0b2545', fontWeight: 600 }}>
-                hello@rewisebuilders.com
-              </a>{' '}
-              or (281) 222-9491.
+              <span style={strong}>Message and data rates may apply.</span> Charges depend on your mobile carrier
+              and wireless service plan.
             </p>
-          </section>
+          </Section>
         </div>
       </div>
     </div>
