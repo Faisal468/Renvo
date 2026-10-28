@@ -1,161 +1,24 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
-import useCMSContent from '../hooks/useCMSContent'
-import door from '../assets/vendor/Doors/renovvo door.jpeg';
-import p1 from '../assets/kitchen/28.9.jpeg';
-import renflo from '../assets/vendor/flooring/FLOORING.png';
-import arizonaTileLogo from '../assets/vendor/flooring/az-tile-logo.png'
-import daltileLogo from '../assets/vendor/flooring/DAL_Logo_H_Black.png'
-import emserLogo from '../assets/vendor/flooring/Emser.png'
-import keystoneLogo from '../assets/vendor/flooring/Keystone_Logo.png'
-import marazziLogo from '../assets/vendor/flooring/Marazzi.jpg'
-import msiLogo from '../assets/vendor/flooring/MSI.png'
-import rocaLogo from '../assets/vendor/flooring/logo.png'
-import renovoSurfacesLogo from '../assets/vendor/countertops/SURFACES.png'
-import daltileCountertopsLogo from '../assets/vendor/countertops/DAL_Logo_H_Black.png'
-import earthstoneLogo from '../assets/vendor/countertops/Earthstone.png'
-import msiCountertopsLogo from '../assets/vendor/countertops/MSI.png'
-import omniSurfacesLogo from '../assets/vendor/countertops/logo-omni-final.png'
-import renovoCabinetsLogo from '../assets/vendor/Cabinets/renovvo-cabinets-logo.png'
-import certainteedLogo from '../assets/vendor/Roofing/Certainteed.png'
-import gafLogo from '../assets/vendor/Roofing/GAF.png'
-import owensCorningLogo from '../assets/vendor/Roofing/Owens Corning.png'
-import { IRON_DOOR_CODES } from '../lib/ironDoorCodes'
-import { INTERIOR_DOOR_CODES } from '../lib/interiorDoorCodes'
+import { IMG } from '../components/shared'
 
-// Picks up every jpg dropped into this folder automatically — no manual imports needed.
-// Not eager: each photo is only fetched once the gallery is actually opened.
-const renovoFlooringModules = import.meta.glob('../assets/vendor/flooring/renovo flooring/*.jpg') as Record<string, () => Promise<{ default: string }>>
+const vendors = [
+  { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com/stile/porcelain-slabs/', category: 'Tile & Stone', desc: 'Porcelain slabs and large-format surfaces.', logo: 'MS' },
+  { name: 'Earthstone (12mm Porc)', url: 'https://earthstonetexas.com/collections/12mm-porc', category: 'Tile & Stone', desc: '12mm porcelain collections.', logo: 'ET' },
+  { name: 'Atlas Plan', url: 'https://www.atlasplan.com/en/', category: 'Materials', desc: 'Architectural surface solutions and porcelain slabs.', logo: 'AP' },
+  { name: 'Earthstone (Quartz Slab)', url: 'https://earthstonetexas.com/collections/quartz-slab', category: 'Countertops', desc: 'Quartz slab collections.', logo: 'ET' },
+  { name: 'BPI Prestige (Countertops)', url: 'https://bpiprestige.com/collections/countertops', category: 'Countertops', desc: 'Quartz & surface collections.', logo: 'BP' },
+  { name: 'FirmFit Floor', url: 'https://www.firmfitfloor.com/collections/', category: 'Flooring', desc: 'Rigid core and LVT collections.', logo: 'FF' },
+  { name: 'Bruce (Rigid Core)', url: 'https://www.bruce.com/en-us/products/rigid-core.html?size=24', category: 'Flooring', desc: 'Rigid core flooring products.', logo: 'BR' },
+  { name: 'BPI Prestige (Luxury Vinyl)', url: 'https://bpiprestige.com/collections/luxury-vinyl', category: 'Flooring', desc: 'Luxury vinyl collections.', logo: 'BP' },
+  { name: 'NovoCore', url: 'https://www.novocorefloor.com/', category: 'Flooring', desc: 'Luxury vinyl and rigid core flooring.', logo: 'NC' },
+  { name: 'AHF' , url: 'https://www.ahfcontract.com/en-us/products.html?size=24', category: 'Flooring', desc: 'Luxury vinyl and rigid core flooring.', logo: 'AH' },
+  { name: 'BPI Prestige', url: 'https://bpiprestige.com/collections/carpet', category: 'Carpet', desc: 'Laminate flooring collections.', logo: 'BP' },
+  { name: 'KeyStone', url: 'https://www.keystonetile.com/', category: 'Tile & Stone', desc: 'Tile and stone collections.', logo: 'KS' },
 
-const renovoFlooringFiles = Object.keys(renovoFlooringModules)
-  .sort((a, b) => a.localeCompare(b))
-  .map(path => {
-    const filename = path.split('/').pop() ?? ''
-    return { path, label: filename.replace(/\.jpg$/i, '').replace(/^SP\d+-/, '') }
-  })
 
-// Renovo Surfaces (countertops) product series — drop photos into the matching
-// folder and they show up automatically under that series' gallery.
-const quavanaModules = import.meta.glob('../assets/vendor/countertops/Quavana/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
-const quavanaFiles = Object.keys(quavanaModules)
-  .sort((a, b) => a.localeCompare(b))
-  .map(path => {
-    const filename = path.split('/').pop() ?? ''
-    return { path, label: filename.replace(/\.[^.]+$/, '') }
-  })
 
-const terraModules = import.meta.glob('../assets/vendor/countertops/Terra/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
-const terraFiles = Object.keys(terraModules)
-  .sort((a, b) => a.localeCompare(b))
-  .map(path => {
-    const filename = path.split('/').pop() ?? ''
-    return { path, label: filename.replace(/\.[^.]+$/, '') }
-  })
 
-const galaxyModules = import.meta.glob('../assets/vendor/countertops/Galaxy/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
-const galaxyFiles = Object.keys(galaxyModules)
-  .sort((a, b) => a.localeCompare(b))
-  .map(path => {
-    const filename = path.split('/').pop() ?? ''
-    return { path, label: filename.replace(/\.[^.]+$/, '') }
-  })
-
-// Drop new photos into src/assets/vendor/Doors/Iron Doors — add their filename + model
-// code to IRON_DOOR_CODES in src/lib/ironDoorCodes.ts and they'll show up automatically.
-const ironDoorModules = import.meta.glob('../assets/vendor/Doors/Iron Doors/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
-
-const ironDoorFiles = Object.keys(ironDoorModules)
-  .map(path => {
-    const filename = path.split('/').pop() ?? ''
-    return { path, label: IRON_DOOR_CODES[filename] ?? filename }
-  })
-  .sort((a, b) => a.label.localeCompare(b.label))
-
-// Drop new photos into src/assets/vendor/Doors/Interior Doors — add their filename + model
-// code to INTERIOR_DOOR_CODES in src/lib/interiorDoorCodes.ts and they'll show up automatically.
-const interiorDoorModules = import.meta.glob('../assets/vendor/Doors/Interior Doors/*.{jpg,jpeg,png,webp}') as Record<string, () => Promise<{ default: string }>>
-
-const interiorDoorFiles = Object.keys(interiorDoorModules)
-  .map(path => {
-    const filename = path.split('/').pop() ?? ''
-    return { path, label: INTERIOR_DOOR_CODES[filename] ?? filename }
-  })
-  .sort((a, b) => a.label.localeCompare(b.label))
-
-const CATEGORIES = [
-  'Flooring & Backsplash',
-  'Countertops',
-  'Cabinets',
-  'Doors',
-  'Roofing',
-] as const
-
-type VendorCategory = typeof CATEGORIES[number]
-
-type GalleryFile = { path: string; label: string }
-type SubGallery = {
-  label: string
-  galleryFiles: GalleryFile[]
-  galleryModules: Record<string, () => Promise<{ default: string }>>
-}
-type Vendor = {
-  name: string
-  url: string
-  category: VendorCategory
-  img: string
-  imgBg?: string
-  galleryFiles?: GalleryFile[]
-  galleryModules?: Record<string, () => Promise<{ default: string }>>
-  subGalleries?: SubGallery[]
-  comingSoon?: boolean
-  showLabel?: boolean
-}
-
-// TODO: replace the '#' placeholders with each vendor's real website URL
-const vendors: Vendor[] = [
-  { name: 'Renovo Flooring', url: '#', category: 'Flooring & Backsplash', img: renflo, galleryFiles: renovoFlooringFiles, galleryModules: renovoFlooringModules },
-  { name: 'Arizona Tile', url: 'https://www.arizonatile.com/', category: 'Flooring & Backsplash', img: arizonaTileLogo, imgBg: '#0b2545' },
-  { name: 'Daltile', url: 'https://www.daltile.com/tile-product-category', category: 'Flooring & Backsplash', img: daltileLogo },
-  { name: 'Emser Tile', url: 'https://www.emser.com/', category: 'Flooring & Backsplash', img: emserLogo },
-  { name: 'Keystone Tile', url: 'https://www.keystonetile.com/', category: 'Flooring & Backsplash', img: keystoneLogo },
-  { name: 'Marazzi', url: 'https://www.marazziusa.com ', category: 'Flooring & Backsplash', img: marazziLogo },
-  { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com', category: 'Flooring & Backsplash', img: msiLogo },
-  { name: 'Roca', url: 'https://rocatileusa.com/', category: 'Flooring & Backsplash', img: rocaLogo, imgBg: '#0b2545' },
-
-  {
-    name: 'Renovo Surfaces',
-    url: '#',
-    category: 'Countertops',
-    img: renovoSurfacesLogo,
-    subGalleries: [
-      { label: 'RENOVVO - Q SERIES', galleryFiles: quavanaFiles, galleryModules: quavanaModules },
-      { label: 'RENOVVO - T SERIES', galleryFiles: terraFiles, galleryModules: terraModules },
-      { label: 'RENOVVO - G SERIES', galleryFiles: galaxyFiles, galleryModules: galaxyModules },
-    ],
-  },
-  { name: 'Daltile', url: 'https://www.daltile.com/tile-product-category', category: 'Countertops', img: daltileCountertopsLogo },
-  { name: 'Earthstone Colours', url: 'https://earthstonetexas.com/', category: 'Countertops', img: earthstoneLogo },
-  { name: 'MSI Surfaces', url: 'https://www.msisurfaces.com/countertops/', category: 'Countertops', img: msiCountertopsLogo },
-  { name: 'Omni Surfaces', url: 'https://omnisurfaces.com/', category: 'Countertops', img: omniSurfacesLogo },
-
-  { name: 'Renovo Cabinets', url: 'https://renovvocabinets.com/', category: 'Cabinets', img: renovoCabinetsLogo },
- 
-
-  {
-    name: 'Renovo Doors',
-    url: '#',
-    category: 'Doors',
-    img: door,
-    subGalleries: [
-      { label: 'Renovvo Exterior Doors', galleryFiles: ironDoorFiles, galleryModules: ironDoorModules },
-      { label: 'Renovvo Interior Doors', galleryFiles: interiorDoorFiles, galleryModules: interiorDoorModules },
-    ],
-  },
-
-  { name: 'CertainTeed', url: 'https://www.certainteed.com/', category: 'Roofing', img: certainteedLogo },
-  { name: 'GAF', url: 'https://www.gaf.com/en-us', category: 'Roofing', img: gafLogo },
-  { name: 'Owens Corning', url: 'https://www.owenscorning.com/en-us', category: 'Roofing', img: owensCorningLogo },
 ]
 
 const benefits = [
@@ -165,72 +28,14 @@ const benefits = [
   { title: 'On-Time Delivery', desc: 'Coordinated directly with our vendors so materials arrive before your project starts — no delays.' },
 ]
 
-type GalleryTarget = { name: string; galleryFiles: GalleryFile[]; galleryModules: Record<string, () => Promise<{ default: string }>> }
-
-export const VENDORS_CMS_DEFAULTS = {
-  hero: {
-    image: p1,
-    label: 'Partner Vendors',
-    title: 'We Work With the Best Brands in the Industry',
-    subtitle: 'Our vendor partnerships give you access to premium materials at competitive prices, backed by full manufacturer warranties.',
-  },
-}
-
 export default function Vendors() {
-  const { content } = useCMSContent('vendors', VENDORS_CMS_DEFAULTS)
-  const [openGallery, setOpenGallery] = useState<GalleryTarget | null>(null)
-  const [galleryImages, setGalleryImages] = useState<{ src: string; label: string }[]>([])
-  const [galleryLoading, setGalleryLoading] = useState(false)
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [seriesPicker, setSeriesPicker] = useState<Vendor | null>(null)
-
-  const openVendorGallery = (target: GalleryTarget) => {
-    setOpenGallery(target)
-    setActiveIndex(0)
-    setGalleryImages([])
-    const modules = target.galleryModules
-    setGalleryLoading(true)
-    Promise.all(
-      target.galleryFiles.map(async file => ({
-        label: file.label,
-        src: (await modules[file.path]()).default,
-      }))
-    ).then(resolved => {
-      setGalleryImages(resolved)
-      setGalleryLoading(false)
-    })
-  }
-
-  const showPrev = () => setActiveIndex(i => (i - 1 + galleryImages.length) % galleryImages.length)
-  const showNext = () => setActiveIndex(i => (i + 1) % galleryImages.length)
-
-  useEffect(() => {
-    if (!openGallery) return
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpenGallery(null)
-      if (e.key === 'ArrowLeft') showPrev()
-      if (e.key === 'ArrowRight') showNext()
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [openGallery, galleryImages.length])
-
-  useEffect(() => {
-    if (!seriesPicker) return
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSeriesPicker(null)
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => window.removeEventListener('keydown', onKeyDown)
-  }, [seriesPicker])
-
   return (
     <>
       <PageHero
-        image={content.hero.image}
-        label={content.hero.label}
-        title={content.hero.title}
-        subtitle={content.hero.subtitle}
+        image={IMG.kitchen1}
+        label="Partner Vendors"
+        title="We Work With the Best Brands in the Industry"
+        subtitle="Our vendor partnerships give you access to premium materials at competitive prices, backed by full manufacturer warranties."
       />
 
       {/* Vendor grid */}
@@ -247,114 +52,34 @@ export default function Vendors() {
             </p>
           </div>
 
-          {CATEGORIES.map(category => {
-            const items = vendors.filter(v => v.category === category)
-            return (
-              <div key={category} className="mb-16 last:mb-0">
-                <h3 className="font-display font-semibold mb-5" style={{ color: '#0b2545', fontSize: '1.375rem' }}>
-                  {category}
-                </h3>
-                <div className="gold-line mb-8" />
-                {items.length === 0 ? (
-                  <p className="text-sm text-gray-400 italic">Vendors coming soon.</p>
-                ) : (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    {items.map(vendor => {
-                      const boxHeight = vendor.showLabel ? 120 : 72
-                      const logoBox = vendor.img ? (
-                        <div
-                          className="flex items-center justify-center"
-                          style={{ height: boxHeight, background: vendor.imgBg ?? '#ffffff', border: '1px solid #eef1f6', borderRadius: 4, padding: vendor.showLabel ? 0 : '0.75rem 1.25rem', overflow: 'hidden' }}
-                        >
-                          <img
-                            src={vendor.img}
-                            alt={vendor.name}
-                            style={vendor.showLabel
-                              ? { width: '100%', height: '100%', objectFit: 'cover' }
-                              : { maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }}
-                          />
-                        </div>
-                      ) : (
-                        <div
-                          className="flex items-center justify-center"
-                          style={{ height: boxHeight, background: '#f1f4f9', border: '1px dashed #cbd5e1', borderRadius: 4 }}
-                        >
-                          <span className="text-xs uppercase tracking-widest text-gray-400">Coming Soon</span>
-                        </div>
-                      )
-
-                      if (vendor.comingSoon) {
-                        return (
-                          <div
-                            key={vendor.name}
-                            aria-label={vendor.name}
-                            className="testimonial-card p-7 block w-full text-left"
-                            style={{ opacity: 0.6, cursor: 'not-allowed' }}
-                          >
-                            {logoBox}
-                            {vendor.showLabel && (
-                              <div className="mt-4 font-display font-semibold" style={{ color: '#0b2545', fontSize: '1rem' }}>
-                                {vendor.name}
-                              </div>
-                            )}
-                          </div>
-                        )
-                      }
-
-                      if (vendor.subGalleries) {
-                        return (
-                          <button
-                            key={vendor.name}
-                            type="button"
-                            aria-label={vendor.name}
-                            className="testimonial-card p-7 block w-full text-left"
-                            style={{ textDecoration: 'none', cursor: 'pointer' }}
-                            onClick={() => setSeriesPicker(vendor)}
-                          >
-                            {logoBox}
-                          </button>
-                        )
-                      }
-
-                      if (vendor.galleryFiles) {
-                        return (
-                          <button
-                            key={vendor.name}
-                            type="button"
-                            aria-label={vendor.name}
-                            className="testimonial-card p-7 block w-full text-left"
-                            style={{ textDecoration: 'none', cursor: 'pointer' }}
-                            onClick={() => openVendorGallery({ name: vendor.name, galleryFiles: vendor.galleryFiles!, galleryModules: vendor.galleryModules! })}
-                          >
-                            {logoBox}
-                            {vendor.showLabel && (
-                              <div className="mt-4 font-display font-semibold" style={{ color: '#0b2545', fontSize: '1rem' }}>
-                                {vendor.name}
-                              </div>
-                            )}
-                          </button>
-                        )
-                      }
-
-                      return (
-                        <a
-                          key={vendor.name}
-                          href={vendor.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={vendor.name}
-                          className="testimonial-card p-7 block"
-                          style={{ textDecoration: 'none' }}
-                        >
-                          {logoBox}
-                        </a>
-                      )
-                    })}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {vendors.map(vendor => (
+              <a
+                key={vendor.name}
+                href={vendor.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={vendor.name}
+                className="testimonial-card p-7 block"
+                style={{ textDecoration: 'none' }}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div
+                    className="flex items-center justify-center font-display font-bold text-sm flex-shrink-0"
+                    style={{ width: 52, height: 52, background: '#eaf2ff', color: '#0b2545', letterSpacing: '0.05em' }}
+                  >
+                    {vendor.logo}
                   </div>
-                )}
-              </div>
-            )
-          })}
+                  <div>
+                    <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.0625rem' }}>{vendor.name}</h3>
+                    <div className="text-xs tracking-widest uppercase mt-0.5" style={{ color: '#c9a84c', fontWeight: 600 }}>{vendor.category}</div>
+                  </div>
+                </div>
+                <div className="gold-line mb-4" />
+                <p className="text-sm leading-relaxed text-gray-500">{vendor.desc}</p>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -366,7 +91,7 @@ export default function Vendors() {
               What This Means for You
             </div>
             <h2 className="font-display text-white mb-4" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.75rem)', fontWeight: 600 }}>
-              The Renovvo Vendor Advantage
+              The ReWise Vendor Advantage
             </h2>
             <div className="gold-line mx-auto" />
           </div>
@@ -388,7 +113,7 @@ export default function Vendors() {
             <div>
               <div className="section-label mb-5">Supplier Relations</div>
               <h2 className="font-display mb-6" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.5rem)', color: '#0b2545', fontWeight: 600, lineHeight: 1.2 }}>
-                Become a Renovvo Preferred Vendor
+                Become a ReWise Preferred Vendor
               </h2>
               <div className="gold-line mb-6" />
               <p className="text-gray-500 mb-6" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
@@ -400,150 +125,11 @@ export default function Vendors() {
               <Link to="/contact" className="btn-primary">Submit a Vendor Inquiry</Link>
             </div>
             <div className="overflow-hidden" style={{ height: 400, background: '#e8edf2' }}>
-              <img src={p1} alt="Renovvo team reviewing materials" className="w-full h-full object-cover" />
+              <img src={IMG.team} alt="ReWise team reviewing materials" className="w-full h-full object-cover" />
             </div>
           </div>
         </div>
       </section>
-
-      {seriesPicker && (
-        <div
-          className="fixed inset-0 flex items-center justify-center p-6"
-          style={{ background: 'rgba(11,37,69,0.85)', zIndex: 100 }}
-          onClick={() => setSeriesPicker(null)}
-        >
-          <div
-            className="w-full"
-            style={{ background: '#ffffff', maxWidth: 420, borderRadius: 4, padding: '2rem' }}
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.375rem' }}>
-                {seriesPicker.name}
-              </h3>
-              <button
-                type="button"
-                aria-label="Close"
-                onClick={() => setSeriesPicker(null)}
-                style={{ background: 'none', border: 'none', fontSize: '1.5rem', lineHeight: 1, color: '#0b2545', cursor: 'pointer' }}
-              >
-                ×
-              </button>
-            </div>
-            <div className="gold-line mb-6" />
-            <div className="flex flex-col gap-3">
-              {seriesPicker.subGalleries!.map(sg => (
-                <button
-                  key={sg.label}
-                  type="button"
-                  className="btn-primary"
-                  style={{ width: '100%', textAlign: 'center' }}
-                  onClick={() => {
-                    openVendorGallery({ name: sg.label, galleryFiles: sg.galleryFiles, galleryModules: sg.galleryModules })
-                    setSeriesPicker(null)
-                  }}
-                >
-                  {sg.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {openGallery && (
-        <div
-          className="fixed inset-0 flex items-center justify-center p-6"
-          style={{ background: 'rgba(11,37,69,0.85)', zIndex: 100 }}
-          onClick={() => setOpenGallery(null)}
-        >
-          <div
-            className="w-full overflow-y-auto"
-            style={{ background: '#ffffff', maxWidth: 960, maxHeight: '85vh', borderRadius: 4, padding: '2rem' }}
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.375rem' }}>
-                {openGallery.name}
-              </h3>
-              <button
-                type="button"
-                aria-label="Close gallery"
-                onClick={() => setOpenGallery(null)}
-                style={{ background: 'none', border: 'none', fontSize: '1.5rem', lineHeight: 1, color: '#0b2545', cursor: 'pointer' }}
-              >
-                ×
-              </button>
-            </div>
-            <div className="gold-line mb-6" />
-
-            {galleryLoading ? (
-              <p className="text-sm text-gray-400 italic text-center py-12">Loading photos…</p>
-            ) : (
-              <>
-                <div className="relative flex items-center justify-center" style={{ background: '#f8faff', borderRadius: 4 }}>
-                  <button
-                    type="button"
-                    aria-label="Previous image"
-                    onClick={showPrev}
-                    className="absolute flex items-center justify-center"
-                    style={{ left: 12, width: 40, height: 40, borderRadius: '50%', background: 'rgba(11,37,69,0.85)', color: '#ffffff', border: 'none', fontSize: '1.25rem', cursor: 'pointer', zIndex: 1 }}
-                  >
-                    ‹
-                  </button>
-                  <img
-                    src={galleryImages[activeIndex]?.src}
-                    alt={galleryImages[activeIndex]?.label}
-                    style={{ maxWidth: '100%', maxHeight: '50vh', objectFit: 'contain' }}
-                  />
-                  <button
-                    type="button"
-                    aria-label="Next image"
-                    onClick={showNext}
-                    className="absolute flex items-center justify-center"
-                    style={{ right: 12, width: 40, height: 40, borderRadius: '50%', background: 'rgba(11,37,69,0.85)', color: '#ffffff', border: 'none', fontSize: '1.25rem', cursor: 'pointer', zIndex: 1 }}
-                  >
-                    ›
-                  </button>
-                </div>
-
-                <div className="text-center mt-4 mb-6">
-                  <div className="font-display font-semibold" style={{ color: '#0b2545', fontSize: '1.0625rem' }}>{galleryImages[activeIndex]?.label}</div>
-                  <div className="text-xs text-gray-400 mt-1">{activeIndex + 1} / {galleryImages.length}</div>
-                </div>
-
-                <div className="grid grid-cols-4 md:grid-cols-6 gap-3">
-                  {galleryImages.map((item, i) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      aria-label={item.label}
-                      onClick={() => setActiveIndex(i)}
-                      style={{
-                        padding: 0,
-                        border: i === activeIndex ? '2px solid #c9a84c' : '2px solid transparent',
-                        borderRadius: 4,
-                        cursor: 'pointer',
-                        lineHeight: 0,
-                        background: '#f8faff',
-                        aspectRatio: '3 / 4',
-                        overflow: 'hidden',
-                      }}
-                    >
-                      <img
-                        src={item.src}
-                        alt={item.label}
-                        className="w-full h-full object-contain"
-                        style={{ borderRadius: 2, opacity: i === activeIndex ? 1 : 0.7 }}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-      )}
     </>
   )
 }

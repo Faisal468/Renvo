@@ -1,26 +1,15 @@
 import { Link } from 'react-router'
 import PageHero from '../../components/PageHero'
-import s1 from '../../assets/new-construction/4.jpg'
-import useCMSContent from '../../hooks/useCMSContent'
-
-export const GET_SUPPORT_CMS_DEFAULTS = {
-  hero: {
-    image: s1,
-    label: 'Get Support',
-    title: 'Fast help for every project question',
-    subtitle: 'Contact our support specialists for warranty, billing, or project updates. We’re here to make your renovation smoother.',
-  },
-}
+import { IMG } from '../../components/shared'
 
 export default function GetSupport() {
-  const { content } = useCMSContent('support-get-support', GET_SUPPORT_CMS_DEFAULTS)
   return (
     <>
       <PageHero
-        image={content.hero.image}
-        label={content.hero.label}
-        title={content.hero.title}
-        subtitle={content.hero.subtitle}
+        image={IMG.team}
+        label="Get Support"
+        title="Fast help for every project question"
+        subtitle="Contact our support specialists for warranty, billing, or project updates. We’re here to make your renovation smoother."
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>

@@ -1,25 +1,41 @@
-import { useEffect } from 'react'
+import { useState } from 'react'
 import PageHero from '../components/PageHero'
 import useCMSContent from '../hooks/useCMSContent'
-import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults' 
-import c1 from '../assets/kitchen/28.9.jpeg'
+import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults'
 
 export default function Contact() {
   const { content } = useCMSContent('contact', CMS_DEFAULT_CONTENT.contact)
+  const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', budget: '', message: '' })
+  const [sent, setSent] = useState(false)
 
-  useEffect(() => {
-    const src = 'https://link.msgsndr.com/js/form_embed.js'
-    if (document.querySelector(`script[src="${src}"]`)) return
-    const script = document.createElement('script')
-    script.src = src
-    script.async = true
-    document.body.appendChild(script)
-  }, [])
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setSent(true)
+  }
+
+  const update = (key: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setForm(prev => ({ ...prev, [key]: e.target.value }))
+
+  const fieldStyle = {
+    border: '1.5px solid rgba(11,37,69,0.15)',
+    color: '#0b2545',
+    background: '#fff',
+    width: '100%',
+    padding: '0.875rem 1rem',
+    fontSize: '0.9375rem',
+    outline: 'none',
+    fontFamily: 'Inter, sans-serif',
+  }
+
+  const onFocus = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    (e.target.style.borderColor = '#0b2545')
+  const onBlur = (e: React.FocusEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    (e.target.style.borderColor = 'rgba(11,37,69,0.15)')
 
   return (
     <>
       <PageHero
-        image={c1}
+        image={content.hero.image}
         label={content.hero.label}
         title={content.hero.title}
         subtitle={content.hero.subtitle}
@@ -51,7 +67,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <div className="text-xs font-semibold tracking-widest uppercase mb-1" style={{ color: '#c9a84c' }}>{c.label}</div>
-                      <a href={c.href} className="font-medium transition-colors whitespace-pre-line" style={{ color: '#0b2545' }}
+                      <a href={c.href} className="font-medium transition-colors" style={{ color: '#0b2545' }}
                         onMouseEnter={e => (e.currentTarget.style.color = '#2a6fc1')}
                         onMouseLeave={e => (e.currentTarget.style.color = '#0b2545')}
                       >
@@ -74,27 +90,97 @@ export default function Contact() {
             {/* Form */}
             <div
               className="lg:col-span-3"
-              style={{ background: '#f8faff', padding: '1.5rem', boxShadow: '0 4px 30px rgba(11,37,69,0.06)' }}
+              style={{ background: '#f8faff', padding: '3rem', boxShadow: '0 4px 30px rgba(11,37,69,0.06)' }}
             >
-              <iframe
-                src="https://api.leadconnectorhq.com/widget/form/JB7U0d9kMXOuuhLeHkA1"
-                style={{ width: '100%', height: 1423, border: 'none', borderRadius: 8 }}
-                id="inline-JB7U0d9kMXOuuhLeHkA1"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="Final Web lead capture"
-                data-height="1423"
-                data-layout-iframe-id="inline-JB7U0d9kMXOuuhLeHkA1"
-                data-form-id="JB7U0d9kMXOuuhLeHkA1"
-                data-cookie-consent="true"
-                data-cookie-consent-provider="auto"
-                title="Final Web lead capture"
-              />
+              {sent ? (
+                <div className="h-full flex flex-col items-center justify-center text-center py-20">
+                  <div
+                    className="flex items-center justify-center mb-6"
+                    style={{ width: 72, height: 72, background: '#0b2545', borderRadius: '50%' }}
+                  >
+                    <span className="text-3xl" style={{ color: '#c9a84c' }}>✓</span>
+                  </div>
+                  <h3 className="font-display text-2xl font-semibold mb-3" style={{ color: '#0b2545' }}>
+                    Message Received!
+                  </h3>
+                  <p className="text-gray-500 max-w-sm">
+                    Thank you for reaching out. A member of our team will be in touch within 24 hours to schedule your free consultation.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="font-display font-semibold mb-7" style={{ color: '#0b2545', fontSize: '1.3rem' }}>
+                    Request a Free Estimate
+                  </h3>
+                  <form onSubmit={submit} className="space-y-5">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0b2545' }}>Full Name *</label>
+                        <input type="text" placeholder="John Smith" value={form.name} onChange={update('name')} style={fieldStyle} onFocus={onFocus} onBlur={onBlur} required />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0b2545' }}>Phone *</label>
+                        <input type="tel" placeholder="(555) 000-0000" value={form.phone} onChange={update('phone')} style={fieldStyle} onFocus={onFocus} onBlur={onBlur} required />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0b2545' }}>Email Address *</label>
+                      <input type="email" placeholder="john@example.com" value={form.email} onChange={update('email')} style={fieldStyle} onFocus={onFocus} onBlur={onBlur} required />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      <div>
+                        <label className="block text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0b2545' }}>Service Needed</label>
+                        <select value={form.service} onChange={update('service')} style={{ ...fieldStyle, color: form.service ? '#0b2545' : '#9ca3af' }} onFocus={onFocus} onBlur={onBlur}>
+                          <option value="" disabled>Select a service...</option>
+                          <option>Kitchen Remodeling</option>
+                          <option>Bathroom Renovation</option>
+                          <option>Home Addition</option>
+                          <option>Cabinet Installation</option>
+                          <option>Flooring & Tile</option>
+                          <option>Exterior Upgrade</option>
+                          <option>Full-Home Renovation</option>
+                          <option>Other</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0b2545' }}>Estimated Budget</label>
+                        <select value={form.budget} onChange={update('budget')} style={{ ...fieldStyle, color: form.budget ? '#0b2545' : '#9ca3af' }} onFocus={onFocus} onBlur={onBlur}>
+                          <option value="" disabled>Select range...</option>
+                          <option>Under $10,000</option>
+                          <option>$10,000 – $25,000</option>
+                          <option>$25,000 – $50,000</option>
+                          <option>$50,000 – $100,000</option>
+                          <option>$100,000+</option>
+                          <option>Not Sure Yet</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-semibold tracking-widest uppercase mb-2" style={{ color: '#0b2545' }}>Tell Us About Your Project</label>
+                      <textarea
+                        rows={5}
+                        placeholder="Describe your project, current space, ideal timeline, or anything else that helps us understand what you're looking for..."
+                        value={form.message}
+                        onChange={update('message')}
+                        style={{ ...fieldStyle, resize: 'none' }}
+                        onFocus={onFocus}
+                        onBlur={onBlur}
+                      />
+                    </div>
+
+                    <button type="submit" className="btn-primary w-full text-center" style={{ padding: '1rem' }}>
+                      Send My Request — It's Free
+                    </button>
+
+                    <p className="text-xs text-center text-gray-400">
+                      By submitting you agree to be contacted by ReWise Builders. We never sell your information.
+                    </p>
+                  </form>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -123,7 +209,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-
     </>
   )
 }

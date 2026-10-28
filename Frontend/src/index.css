@@ -24,18 +24,16 @@ body {
   color: #1a1a2e;
 }
 
-/* Scrollbar */
+/* Hide scrollbar */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
   background: #0b2545;
-  border-radius: 6px;
-  border: 3px solid transparent;
-  background-clip: padding-box;
+  border-radius: 3px;
 }
 
 .font-display {

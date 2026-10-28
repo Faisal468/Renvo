@@ -1,29 +1,16 @@
 import PageHero from '../../components/PageHero'
-import useCMSContent from '../../hooks/useCMSContent'
-
-import mg from '../../assets/7.jpg';
-import mg1 from '../../assets/bathroom/0.2.jpeg';
-import p1 from '../../assets/process/1.avif';
-import p3 from '../../assets/process/3.jpg'
-
-export const OUR_PROCESS_CMS_DEFAULTS = {
-  hero: {
-    image: p3,
-    label: 'Our Process',
-    title: 'Your Vision. Our Process.',
-    subtitle: 'For over 30 years, POWER has been committed to building trust throughout the renovation process. From \'one day\' to \'day one,\' this roadmap details every step of our partnership[cite: 1].',
-  },
-}
+import { IMG } from '../../components/shared'
+import mg from '../../assets/windows/7.jpg';
+import mg1 from '../../assets/windows/8.jpg';
 
 export default function OurProcess() {
-  const { content } = useCMSContent('support-our-process', OUR_PROCESS_CMS_DEFAULTS)
   return (
     <>
       <PageHero
-        image={content.hero.image}
-        label={content.hero.label}
-        title={content.hero.title}
-        subtitle={content.hero.subtitle}
+        image={IMG.hero2}
+        label="Our Process"
+        title="Your Vision. Our Process."
+        subtitle="For over 30 years, POWER has been committed to building trust throughout the renovation process. From 'one day' to 'day one,' this roadmap details every step of our partnership[cite: 1]."
       />
 
       <section className="py-20" style={{ background: '#ffffff' }}>
@@ -42,7 +29,7 @@ export default function OurProcess() {
                 title: 'Schedule',
                 subtitle: 'Schedule Your Free Estimate',
                 text: 'Booking a free estimate with POWER is transparent and easy[cite: 1]. Schedule an appointment online, or if you prefer, via phone call with one of our Scheduling Agents[cite: 1]. Already have an appointment? Great! We will call you day-of and confirm everything is good-to-go[cite: 1].',
-                image: p1
+                image: IMG.hero2
               },
               {
                 step: '02',
@@ -56,7 +43,7 @@ export default function OurProcess() {
                 title: 'Production',
                 subtitle: 'Production & Planning',
                 text: 'Once a project has been agreed to, we will work with you to set up an install date[cite: 1]. We will then confirm all measurements, project details, and order products[cite: 1]. You can stay up-to-date with the entire process via our exclusive project management app Project Pulse[cite: 1].',
-                image: p3
+                image: IMG.hero2
               },
               {
                 step: '04',
