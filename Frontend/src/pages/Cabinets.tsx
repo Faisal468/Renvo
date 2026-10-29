@@ -1,71 +1,23 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import PageHero from '../components/PageHero'
-import { IMG } from '../components/shared'
-
-const styles = [
-  {
-    name: 'Shaker White',
-    finish: 'Semi-gloss white',
-    material: 'Solid maple',
-    desc: 'The most versatile cabinet style in America. Clean lines and recessed panels work in traditional, transitional, and contemporary kitchens alike.',
-    img: IMG.cabinets1,
-  },
-  {
-    name: 'Modern Matte Black',
-    finish: 'Flat matte',
-    material: 'MDF with wood veneer',
-    desc: 'Bold and dramatic. Matte black cabinetry creates stunning contrast, especially paired with light countertops and brass hardware.',
-    img: IMG.kitchen2,
-  },
-  {
-    name: 'Natural Walnut',
-    finish: 'Satin oil',
-    material: 'American black walnut',
-    desc: 'Warm, rich grain patterns make every run of walnut cabinetry completely unique. The premium choice for luxury kitchen renovations.',
-    img: IMG.cabinets2,
-  },
-  {
-    name: 'Two-Tone Finish',
-    finish: 'Custom combination',
-    material: 'Solid wood + MDF',
-    desc: 'Mix upper and lower cabinet colors for a modern, curated look. Navy and white, sage and cream, or any custom pairing we design together.',
-    img: IMG.kitchen1,
-  },
-  {
-    name: 'Slab Front Modern',
-    finish: 'Lacquer or veneer',
-    material: 'Plywood box + MDF doors',
-    desc: 'No rails, no stiles, no visible frames. Pure flat-front doors deliver the clean, handleless aesthetic of European kitchen design.',
-    img: IMG.cabinets3,
-  },
-  {
-    name: 'Raised Panel Traditional',
-    finish: 'Painted or stained',
-    material: 'Solid cherry or oak',
-    desc: 'Classic raised-panel construction for a timeless, formal look. Perfect for colonial, farmhouse, and traditionally styled homes.',
-    img: IMG.cabinets4,
-  },
-]
-
-const faqs = [
-  { q: 'How long does a cabinet installation take?', a: 'Typical kitchen cabinet installations take 3–5 days once all materials are on-site. Larger or custom projects may run 7–10 days.' },
-  { q: 'Do you offer semi-custom vs fully custom?', a: 'Yes — we offer stock, semi-custom, and fully custom cabinetry to fit every budget. We will recommend the best option after seeing your space.' },
-  { q: 'Can you match existing cabinets?', a: 'In most cases yes — especially with painted finishes. We will bring samples to your home to ensure an exact match.' },
-  { q: 'What is included in cabinet installation?', a: 'Everything: demo of existing cabinets, delivery coordination, installation, hardware mounting, and final alignment and adjustment.' },
-]
+import useCMSContent from '../hooks/useCMSContent'
+import { CMS_DEFAULT_CONTENT } from '../lib/cmsDefaults'
 
 export default function Cabinets() {
+  const { content } = useCMSContent('cabinets', CMS_DEFAULT_CONTENT.cabinets)
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const [selected, setSelected] = useState(0)
+  const styles = content.styles
+  const faqs = content.faqs
 
   return (
     <>
       <PageHero
-        image={IMG.cabinets1}
-        label="Cabinets"
-        title="Custom Cabinet Solutions for Every Style"
-        subtitle="From shaker white to modern slab, we source and install premium cabinetry that defines your kitchen."
+        image={content.hero.image}
+        label={content.hero.label}
+        title={content.hero.title}
+        subtitle={content.hero.subtitle}
       />
 
       {/* Intro */}
@@ -79,10 +31,10 @@ export default function Cabinets() {
               </h2>
               <div className="gold-line mb-7" />
               <p className="text-gray-500 mb-6" style={{ fontSize: '1.0625rem', lineHeight: 1.8 }}>
-                Our cabinet division partners with the top US manufacturers to deliver fully custom and semi-custom cabinetry for kitchens, bathrooms, laundry rooms, and beyond. Every cabinet system is designed in 3D before a single piece is ordered.
+                {content.intro.description}
               </p>
               <div className="grid grid-cols-2 gap-4">
-                {['Free 3D Design', 'Lifetime Warranty on Hardware', 'Soft-Close Standard', 'In-House Installation', 'Custom Sizes Available', 'All Wood Interiors'].map(f => (
+                {content.intro.items.map((f: string) => (
                   <div key={f} className="flex items-center gap-2 text-sm" style={{ color: '#374151' }}>
                     <span style={{ color: '#c9a84c' }}>✦</span> {f}
                   </div>
@@ -177,12 +129,12 @@ export default function Cabinets() {
       <section className="py-16" style={{ background: '#0b2545' }}>
         <div className="max-w-3xl mx-auto px-6 text-center">
           <h2 className="font-display text-white mb-4" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 600 }}>
-            Ready to Design Your Dream Cabinets?
+            {content.cta.title}
           </h2>
           <p className="mb-7" style={{ color: 'rgba(255,255,255,0.65)', fontSize: '1rem', lineHeight: 1.7 }}>
-            Book a free in-home measurement and design consultation today.
+            {content.cta.text}
           </p>
-          <Link to="/contact" className="btn-primary">Book a Free Design Consult</Link>
+          <Link to="/contact" className="btn-primary">{content.cta.button}</Link>
         </div>
       </section>
     </>

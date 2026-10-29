@@ -1,57 +1,79 @@
 import { IMG } from '../components/shared'
+import a1 from '../assets/about/5.jpg';
+import homeHero1 from '../assets/home/1.jpg'
+import homeHero2 from '../assets/home/2.jpeg'
+import homeHero3 from '../assets/home/31.jpeg'
+import k1 from '../assets/service/modern-kitchen-remodeling-white-quartz-island.jpg';
+import b1 from '../assets/service/luxury-bathroom-remodel-freestanding-tub-double-vanity.jpeg';
+import h1 from '../assets/service/Full House Transformation & Exterior Makeover.jpeg';
+import p1 from '../assets/service/Modern Poolside Patio & Deck.jpg';
+import n1 from '../assets/service/The Ultimate Backyard Transformation.jpeg';
+import home from '../assets/service/1.jpg';
+
+
+import gold from '../assets/feat proj/golden forest.jpg';
+import bayou from '../assets/feat proj/27.jpeg';
+import cand from '../assets/feat proj/5.jpg';
+import holly from '../assets/feat proj/2.jpeg';
+import misty from '../assets/feat proj/w1.jpeg';
+import waymouth from '../assets/feat proj/r1.png';
+
+import about from '../assets/new-construction/4.jpg';
+
+
 
 export const CMS_DEFAULT_CONTENT = {
   home: {
     hero: {
       slides: [
         {
-          img: IMG.hero,
-          headline: 'Transforming Houses Into Dream Homes',
-          sub: 'Premium remodeling across the United States — kitchens, bathrooms, additions, and beyond.',
-        },
-        {
-          img: IMG.hero2,
-          headline: 'Craftsmanship You Can See. Quality You Can Feel.',
-          sub: 'Over 500 successful remodels completed with precision, care, and unmatched attention to detail.',
-        },
-        {
-          img: IMG.hero3,
+          img: homeHero1,
           headline: 'From Vision to Reality — Every Detail Counts.',
-          sub: 'Trusted by homeowners nationwide to deliver beautiful, lasting transformations.',
+          sub: 'Trusted by homeowners all across Texas to deliver beautiful, lasting Transformations.',
+        },
+        {
+          img: homeHero2,
+          headline: 'From Vision to Reality — Every Detail Counts.',
+          sub: 'Trusted by homeowners all across Texas to deliver beautiful, lasting Transformations.',
+        },
+        {
+          img: homeHero3,
+          headline: 'From Vision to Reality — Every Detail Counts.',
+          sub: 'Trusted by homeowners all across Texas to deliver beautiful, lasting Transformations.',
         },
       ],
     },
     trustBar: [
-      { icon: '★', text: '4.9 / 5 Rating' },
-      { icon: '✓', text: '500+ Projects Completed' },
+      { icon: '★', text: ' 5  Rating' },
+      { icon: '✓', text: '450+ Client Served' },   
       { icon: '⌛', text: '15+ Years Experience' },
-      { icon: '🏆', text: 'Licensed & Insured' },
-      { icon: '📍', text: 'Serving All 50 States' },
+      { icon: '🏆', text: '550+ Projects Delivered' },
+     
     ],
     services: [
-      { title: 'Kitchen Remodeling', img: IMG.kitchen1 },
-      { title: 'Bathroom Renovation', img: IMG.bathroom1 },
-      { title: 'Home Additions', img: IMG.addition },
-      { title: 'Flooring & Tile', img: IMG.flooring },
-      { title: 'Living Spaces', img: IMG.living1 },
-      { title: 'Exterior Upgrades', img: IMG.exterior2 },
+      { title: 'Kitchen Remodeling', img: k1, link: '/services/kitchen' },
+      { title: 'Bathroom Remodeling', img: b1, link: '/services/bathroom' },
+      { title: 'Room Additions', img: n1, link: '/services/addition' },
+      { title: 'Patio & Outdoors', img: p1, link: '/services/patio' },
+      { title: 'Full Home Renovation', img: h1, link: '/services/full-house-renovation' },
+      { title: 'New Construction', img: home, link: '/services/new-construction' },
     ],
     portfolioPreview: [
-      { title: 'Modern White Kitchen', cat: 'Kitchen', img: IMG.kitchen2, tall: true },
-      { title: 'Luxury Master Bath', cat: 'Bathroom', img: IMG.bathroom2, tall: false },
-      { title: 'Open-Concept Living', cat: 'Living Room', img: IMG.living2, tall: false },
-      { title: 'Colonial Exterior', cat: 'Exterior', img: IMG.exterior1, tall: true },
-      { title: 'Chef Kitchen Remodel', cat: 'Kitchen', img: IMG.kitchen3, tall: false },
-      { title: 'Spa Bathroom Suite', cat: 'Bathroom', img: IMG.bathroom3, tall: false },
+      { title: 'Full Home Renovation', cat: '', img: gold, tall: true, link: '/services/full-house-renovation' },
+      { title: 'Bathroom Remodel', cat: '', img: cand, tall: false, link: '/services/bathroom' },
+      { title: 'Flooring', cat: '', img: holly, tall: false, link: '/services/flooring' },
+      { title: 'Kitchen Remodel', cat: '', img: bayou, tall: true, link: '/services/kitchen' },
+      { title: 'Windows', cat: '', img: misty, tall: false, link: '/windows' },
+      { title: 'Roofing', cat: '', img: waymouth, tall: false, link: '/services/roofing' },
     ],
     stats: [
-      { value: '500+', label: 'Projects Completed' },
+      { value: '450+', label: 'Clients Served' },
+      { value: '550+', label: 'Projects Delivered' },
       { value: '15+', label: 'Years of Experience' },
-      { value: '98%', label: 'Client Satisfaction' },
-      { value: '$2M+', label: 'In Projects Delivered' },
+      { value: '100%', label: 'Client Satisfaction' },
     ],
     aboutSnippet: {
-      image: IMG.team,
+      image: about,
       title: 'Who We Are',
       description: 'Our values define who we are and how we serve. They shape our actions, guide our decisions, and ensure we remain true to our mission no matter the challenges.',
       extra: 'At RENOVVO, we believe your home should perfectly reflect your vision and lifestyle. As a leading home improvement firm, we are dedicated to delivering exceptional results and unparalleled quality craftsmanship across all phases of residential construction and remodeling.',
@@ -71,19 +93,21 @@ export const CMS_DEFAULT_CONTENT = {
       subtitle: 'Client-centered craftsmanship, from the first sketch to the final walkthrough.',
     },
     values: {
-      image: IMG.team,
+      image: a1,
       heading: 'Our Values',
       title: 'Who We Are',
       description: 'Our values define who we are and how we serve. They shape our actions, guide our decisions, and ensure we remain true to our mission no matter the challenges.',
       extra: 'At RENOVVO, we believe your home should perfectly reflect your vision and lifestyle. As a leading home improvement firm, we are dedicated to delivering exceptional results and unparalleled quality craftsmanship across all phases of residential construction and remodeling.',
       button: 'Start Your Project',
     },
+    servicesIntro: 'We serve as your premier partner for every scale of transformation, offering a complete suite of services designed to meet all your needs.',
     services: [
       { title: 'Complete Home Remodels', desc: 'Whole-house transformations expertly managed from start to finish.' },
       { title: 'New Construction & Additions', desc: 'Expanding your home’s footprint or building your dream residence from the ground up.' },
       { title: 'Specialized Renovations', desc: 'Stunning, quality-focused updates for kitchens, bathrooms, and outdoor living spaces.' },
     ],
     approach: {
+      image: IMG.about,
       heading: 'How We Work',
       title: 'Our Client-Centered Approach',
       description: 'What truly sets RENOVVO apart is our commitment to a Client-Centered Design & Build process. We simplify the complexities of construction with expert guidance and hands-on resources.',
@@ -163,14 +187,14 @@ export const CMS_DEFAULT_CONTENT = {
       description: 'Whether you have a clear vision or just a rough idea, our team is ready to listen, advise, and deliver. Reach out below to schedule your free in-home consultation.',
     },
     contacts: [
-      { icon: '📞', label: 'Phone / Text', value: '(800) 555-1234', href: 'tel:+18005551234' },
-      { icon: '✉', label: 'Email', value: 'hello@rewisebuilders.com', href: 'mailto:hello@rewisebuilders.com' },
-      { icon: '📍', label: 'Service Area', value: 'All 50 US States', href: '#' },
-      { icon: '⏰', label: 'Business Hours', value: 'Mon–Sat 8am–6pm EST', href: '#' },
+      { icon: '📞', label: 'Phone / Text', value: '(281) 222-9491', href: 'tel:+2812229491' },
+      { icon: '✉', label: 'Email', value: 'support@renovvo.com', href: 'mailto:support@renovvo.com' },
+      { icon: '📍', label: 'Service Area', value: 'All across Texas', href: '#' },
+      { icon: '⏰', label: 'Business Hours', value: 'Mon–Fri 9am–6pm CST\nSat 9am–12pm CST', href: '#' },
     ],
     promise: {
       title: 'Our Response Promise',
-      text: 'Every inquiry submitted before 5pm EST receives a personal response from our team within 24 hours — guaranteed.',
+      text: 'Every inquiry submitted before 5pm CST receives a personal response from our team within 24 hours — guaranteed.',
     },
     form: {
       serviceOptions: ['Kitchen Remodeling', 'Bathroom Renovation', 'Home Addition', 'Cabinet Installation', 'Flooring & Tile', 'Exterior Upgrade', 'Full-Home Renovation', 'Other'],

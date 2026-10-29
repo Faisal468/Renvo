@@ -8,6 +8,9 @@ import Bathroom from "../pages/services/Bathroom"
 import Flooring from "../pages/services/Flooring"
 import Roofing from "../pages/services/Roofing"
 import Patio from "../pages/services/Patio"
+import NewConstruction from "../pages/services/NewConstruction"
+import FullHouseRenovation from "../pages/services/FullHouseRenovation"
+import Addition from "../pages/services/Addition"
 import Portfolio from "../pages/Portfolio"
 import Cabinets from "../pages/Cabinets"
 import Window from "../pages/services/Window"
@@ -22,6 +25,8 @@ import SupportOurValue from "../pages/support/OurValue"
 import Shop from "../pages/Shop"
 import Login from "../pages/admin/Login"
 import Dashboard from "../pages/admin/Dashboard"
+import PrivacyPolicy from "../pages/PrivacyPolicy"
+import TermsOfService from "../pages/TermsOfService"
 
 export const router = createBrowserRouter([
   {
@@ -40,9 +45,12 @@ export const router = createBrowserRouter([
       { path: "services", Component: Services },
       { path: "services/kitchen", Component: Kitchen },
       { path: "services/bathroom", Component: Bathroom },
+      { path: "services/addition", Component: Addition },
       { path: "services/flooring", Component: Flooring },
       { path: "services/roofing", Component: Roofing },
       { path: "services/patio", Component: Patio },
+      { path: "services/new-construction", Component: NewConstruction },
+      { path: "services/full-house-renovation", Component: FullHouseRenovation },
       { path: "portfolio", Component: Portfolio },
       { path: "shop", Component: Shop },
       { path: "support", Component: Support },
@@ -54,9 +62,23 @@ export const router = createBrowserRouter([
       { path: "vendors", Component: Vendors },
       { path: "windows", Component: Window },
       { path: "doors", Component: Vendors },
+      { path: "doors/iron-door", Component: Vendors },
+      { path: "doors/shaker-interior", Component: Vendors },
       { path: "countertops", Component: Shop },
+      { path: "countertops/granite", Component: Vendors },
+      { path: "countertops/marble", Component: Vendors },
+      { path: "countertops/quartz", Component: Vendors },
+      { path: "countertops/quartzite", Component: Vendors },
+      { path: "flooring/backsplash", Component: Vendors },
+      { path: "flooring/carpet", Component: Vendors },
+      { path: "flooring/engineered-hardwood", Component: Vendors },
+      { path: "flooring/laminate", Component: Vendors },
+      { path: "flooring/luxury-vinyl", Component: Vendors },
+      { path: "flooring/tile", Component: Vendors },
       { path: "finances", Component: Finances },
       { path: "contact", Component: Contact },
+      { path: "privacy-policy", Component: PrivacyPolicy },
+      { path: "terms-of-service", Component: TermsOfService },
     ],
   },
 ])

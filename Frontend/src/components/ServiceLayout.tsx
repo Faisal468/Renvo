@@ -85,11 +85,11 @@ export default function ServiceLayout({ slug, label, title, subtitle, desc, img,
               <div className="gold-line mx-auto" />
             </div>
 
-            <div className="columns-1 sm:columns-2 lg:columns-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {fullGalleryImages.map((g, i) => (
                 <div
                   key={i}
-                  className="portfolio-item break-inside-avoid mb-3 cursor-pointer"
+                  className="portfolio-item cursor-pointer"
                   onClick={() => setLightboxIndex(i)}
                 >
                   <img src={g} alt={`${label} project ${i + 1}`} className="w-full h-auto object-cover" />
