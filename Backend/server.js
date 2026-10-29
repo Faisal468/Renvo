@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import multer from 'multer'
@@ -6,18 +7,24 @@ import path from 'node:path'
 import process from 'node:process'
 
 const PORT = process.env.PORT || 4000
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Renovvo123'
-const ADMIN_TOKEN = process.env.ADMIN_TOKEN || 'renovvo-admin-token'
-const ROOT = path.resolve('./')
-const DATA_FILE = path.join(ROOT, 'data.json')
-const UPLOAD_DIR = path.join(ROOT, 'uploads')
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN
+const CORS_ORIGINS = (process.env.CORS_ORIGIN || '').split(',').map(o => o.trim()).filter(Boolean)
+
+if (!ADMIN_PASSWORD || !ADMIN_TOKEN) {
+  console.error('Missing ADMIN_PASSWORD or ADMIN_TOKEN. Create Backend/.env (see .env.example).')
+  process.exit(1)
+}
+const DATA_DIR = path.resolve(process.env.DATA_DIR || './')
+const DATA_FILE = path.join(DATA_DIR, 'data.json')
+const UPLOAD_DIR = path.join(DATA_DIR, 'uploads')
 
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true })
 }
 
 const app = express()
-app.use(cors())
+app.use(cors(CORS_ORIGINS.length ? { origin: CORS_ORIGINS } : undefined))
 app.use(express.json({ limit: '20mb' }))
 app.use('/uploads', express.static(UPLOAD_DIR))
 

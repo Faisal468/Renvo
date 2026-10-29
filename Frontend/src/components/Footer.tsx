@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
-import Logo from '../assets/logo1.png';
+import Logo from '../assets/RENOVVO_white_text.png';
 
 const socialIcons: Record<string, ReactNode> = {
   f: (
@@ -15,13 +15,12 @@ const socialIcons: Record<string, ReactNode> = {
   ),
   tiktok: (
     <svg viewBox="0 0 448 512" width="16" height="16" fill="currentColor">
-      <path d="M448 209.2c-16.3 7.2-33.8 12-52.2 13.4v90.3c0 48.7-39.5 88.2-88.2 88.2-45.9 0-83.7-34.8-87.7-79.7-1.6.2-3.2.3-4.9.3-25.9 0-46.8-21-46.8-46.8s21-46.8 46.8-46.8c10.8 0 20.8 3.7 28.7 9.9 12.4 9.8 27.9 15.6 44.5 15.6 8.1 0 15.8-1.1 23.1-3.2v-79.5c-23.5-7.6-48.4-11.4-74.2-11.4-33.9 0-66.3 8.9-94.7 24.4-39.3 20.8-70.3 53.8-87.2 93.5-16.5 38.8-18.4 81.9-5 122.5 13.3 40.7 40.8 73.3 79.3 94.7 29.5 16.5 63 25.6 97.7 25.6 26.4 0 52.6-5.9 76.8-17.4 36.4-18.8 64.7-51 80-89.8 15.7-39.7 18.2-83.6 7.2-125.2V209.2z" />
-      <path d="M269.5 119.3c-16.4-8.2-36.9-13.1-58.8-13.1h-.5v165.4c0 21.6 11.7 35.5 25.8 35.5 15.5 0 26.8-12.3 26.8-31.5V166.4c10.9 3.6 22.7 5.5 34.8 5.5 2.3 0 4.7-.1 7-.3v-52.3c-12.2 1.2-24.2-.6-36.4-5.0z" />
+      <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0h88a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z" />
     </svg>
   ),
   "Google profile": (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-      <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18.2a8.2 8.2 0 118.2-8.2 8.2 8.2 0 01-8.2 8.2zm.6-13.8h-1.2v1.2H8.7v1.2h2.7v3.9h1.2V8.6h2.7V7.4h-2.7V6.4z" />
+    <svg viewBox="0 0 488 512" width="16" height="16" fill="currentColor">
+      <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
     </svg>
   ),
   yt: (
@@ -38,22 +37,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-16">
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-3 mb-5">
-              <div
-                className="flex items-center justify-center flex-shrink-0"
-            style={{ width: 44, height: 44, background: '#ddd9d9ee', borderRadius: 2 }}
-          >
-            <img src={Logo} alt="Renovvo Logo" className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <div className="font-display text-white font-semibold text-base leading-none">RENOVVO</div>
-                <div style={{ fontSize: '0.55rem', letterSpacing: '0.18em', color: '#c9a84c', textTransform: 'uppercase', fontWeight: 600 }}>
-                  
-                </div>
-              </div>
+            <Link to="/" className="inline-flex items-center mb-6">
+              <img src={Logo} alt="Renovvo Logo" style={{ height: 84, width: 'auto' }} />
             </Link>
             <p className="text-sm leading-relaxed mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
-              Premium remodeling services across the United States. Licensed, insured, and dedicated to excellence since 2009.
+              Premium remodeling services across the Texas. Insured and dedicated to excellence since 2010.
             </p>
             <div className="flex gap-3">
               {[
@@ -61,7 +49,7 @@ export default function Footer() {
                 { icon: 'ig', href: 'https://www.instagram.com/rewisebuilders?igsh=MWEwOGVneHU2N213OA==' },
                 { icon: 'tiktok', href: '#' },
                 { icon: 'yt', href: '#' },
-                { icon: "Google profile", href: "https://g.page/r/CZ0r7k1y6e4HEB0/review" },
+                { icon: "Google profile", href: "https://maps.app.goo.gl/bvKqa8xb1M86hHgB7" },
               ].map(({ icon, href }) => (
                 <a
                   key={icon}
@@ -89,10 +77,20 @@ export default function Footer() {
           <div>
             <h4 className="font-display font-semibold text-white mb-5 text-sm tracking-widest uppercase">Services</h4>
             <div className="space-y-3">
-              {['Kitchen Remodeling', 'Bathroom Renovation', 'Home Additions', 'Flooring & Tile', 'Cabinet Installation', 'New Construction'].map(s => (
+              {[
+                { label: 'Kitchen Remodeling', to: '/services/kitchen' },
+                { label: 'Bathroom Remodeling', to: '/services/bathroom' },
+                { label: 'Home Additions', to: '/services/addition' },
+                { label: 'Patio & Outdoor', to: '/services/patio' },
+                { label: 'Full Home Renovation', to: '/services/full-house-renovation' },
+                { label: 'New Construction', to: '/services/new-construction' },
+                { label: 'Roofing', to: '/services/roofing' },
+                { label: 'windows', to: '/services/windows' },
+                { label: 'Cabinets', to: 'https://renovvocabinets.com/' },
+              ].map(({ label: s, to }) => (
                 <Link
                   key={s}
-                  to="/services"
+                  to={to}
                   className="block text-sm transition-colors"
                   style={{ color: 'rgba(255,255,255,0.5)' }}
                   onMouseEnter={e => (e.currentTarget.style.color = '#c9a84c')}
@@ -109,8 +107,9 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-white mb-5 text-sm tracking-widest uppercase">Company</h4>
             <div className="space-y-3">
               {[
-                { label: 'Portfolio', to: '/portfolio' },
                 { label: 'About Us', to: '/about' },
+                { label: 'Gallery', to: '/portfolio' },
+
                 { label: 'Partner Vendors', to: '/vendors' },
                 { label: 'Financing', to: '/finances' },
                 { label: 'Contact Us', to: '/contact' },
@@ -134,15 +133,22 @@ export default function Footer() {
             <h4 className="font-display font-semibold text-white mb-5 text-sm tracking-widest uppercase">Contact</h4>
             <div className="space-y-4">
               {[
-                { label: '281-222-9491', sub: 'Call or Text' },
-                { label: 'hello@rewisebuilders.com', sub: 'Email Us' },
-                { label: 'Mon–Sat 9am–6pm EST', sub: 'Business Hours' },
-              ].map(c => (
-                <div key={c.label}>
-                  <div className="text-sm font-medium text-white">{c.label}</div>
-                  <div className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.38)' }}>{c.sub}</div>
-                </div>
-              ))}
+                { label: '281-222-9491', sub: 'Call or Text', href: 'tel:+12812229491' },
+                { label: 'support@renovvo.com', sub: 'Email Us', href: 'mailto:support@renovvo.com' },
+                { label: 'Mon–Fri 9am–6pm CST\nSat 9am–12pm CST', sub: 'Business Hours' },
+              ].map(c =>
+                c.href ? (
+                  <a key={c.label} href={c.href} className="block">
+                    <div className="text-sm font-medium text-white">{c.label}</div>
+                    <div className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.38)' }}>{c.sub}</div>
+                  </a>
+                ) : (
+                  <div key={c.label}>
+                    <div className="text-sm font-medium text-white whitespace-pre-line">{c.label}</div>
+                    <div className="text-xs mt-0.5" style={{ color: 'rgba(255,255,255,0.38)' }}>{c.sub}</div>
+                  </div>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -152,13 +158,16 @@ export default function Footer() {
           style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
         >
           <p className="text-xs" style={{ color: 'rgba(255,255,255,0.3)' }}>
-            &copy; {new Date().getFullYear()} Renovvo Builders. All rights reserved.
+            &copy; {new Date().getFullYear()} RENOVVO. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {['Privacy Policy', 'Terms of Service', 'Licensing'].map(l => (
+            {[
+              { label: 'Privacy Policy', to: '/privacy-policy' },
+              { label: 'Terms of Service', to: '/terms-of-service' },
+            ].map(({ label: l, to }) => (
               <Link
                 key={l}
-                to="/"
+                to={to}
                 className="text-xs transition-colors"
                 style={{ color: 'rgba(255,255,255,0.3)' }}
                 onMouseEnter={e => (e.currentTarget.style.color = '#c9a84c')}

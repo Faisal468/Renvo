@@ -1,4 +1,13 @@
 // Shared image catalog and constants
+
+import  k1 from '../assets/kitchen/29.2.jpg'
+import b1 from '../assets/bathroom/0.1.jpeg'
+import p1 from '../assets/patio/4.jpg'
+import nc1 from '../assets/new-construction/3.jpg'
+import ra1 from '../assets/room-addition/22.jpeg'
+import fh1 from '../assets/full house/10910-wickersham/1.jpeg'
+
+
 export const IMG = {
   hero: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1800&h=900&fit=crop&auto=format',
   hero2: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1800&h=900&fit=crop&auto=format',
@@ -27,23 +36,67 @@ export const IMG = {
   portfolio_hero: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&h=700&fit=crop&auto=format',
 }
 
-// Sorts photos loaded via import.meta.glob numerically by filename (1.jpg, 2.jpeg, 10.jpeg, ...)
+// Extracts the dot-separated numeric parts of a filename, e.g. "29.1.jpeg" -> [29, 1]
+function filenameNumberParts(path: string): number[] {
+  const filename = path.split('/').pop() ?? ''
+  const base = filename.replace(/\.[^.]+$/, '')
+  return base.split('.').map(part => parseInt(part, 10)).filter(n => !isNaN(n))
+}
+
+// Sorts photos loaded via import.meta.glob numerically by filename, so 1, 2, ..., 29, 29.1, 29.2, 30, ... stay in order
 export function sortImagesByFilename(modules: Record<string, string>): string[] {
   return Object.entries(modules)
     .sort(([a], [b]) => {
-      const numA = parseInt(a.match(/(\d+)\.\w+$/)?.[1] ?? '0', 10)
-      const numB = parseInt(b.match(/(\d+)\.\w+$/)?.[1] ?? '0', 10)
-      return numA - numB
+      const partsA = filenameNumberParts(a)
+      const partsB = filenameNumberParts(b)
+      const len = Math.max(partsA.length, partsB.length)
+      for (let i = 0; i < len; i++) {
+        const diff = (partsA[i] ?? -1) - (partsB[i] ?? -1)
+        if (diff !== 0) return diff
+      }
+      return 0
     })
     .map(([, url]) => url)
 }
 
-export const SERVICE_LINKS = [
-  { label: 'Kitchen', path: '/services/kitchen', img: IMG.kitchen1 },
-  { label: 'Flooring', path: '/services/flooring', img: IMG.flooring },
-  { label: 'Bathroom', path: '/services/bathroom', img: IMG.bathroom1 },
-  { label: 'Roofing', path: '/services/roofing', img: IMG.exterior1 },
-  { label: 'Patio', path: '/services/patio', img: IMG.living1 },
+type DropdownLink = { label: string; path: string; img?: string; external?: boolean; dropdown?: DropdownLink[] }
+
+export const SERVICE_LINKS: DropdownLink[] = [
+  { label: 'Kitchen Remodel', path: '/services/kitchen', img: k1 },
+  { label: 'Bathroom Remodel', path: '/services/bathroom', img: b1 },
+  { label: 'Room Addition', path: '/services/addition', img: ra1 },
+  { label: 'Patio & Outdoors', path: '/services/patio', img: p1 },
+  { label: 'Full Home Renovation', path: '/services/full-house-renovation', img: fh1 },
+  { label: 'New Construction', path: '/services/new-construction', img: nc1 },
+  
+]
+
+export const COUNTERTOP_LINKS: DropdownLink[] = [
+  { label: 'Granite', path: '/countertops/granite' },
+  { label: 'Marble', path: '/countertops/marble' },
+  { label: 'Quartz', path: '/countertops/quartz' },
+  { label: 'Quartzite', path: '/countertops/quartzite' },
+]
+
+export const FLOORING_LINKS: DropdownLink[] = [
+  { label: 'Backsplash', path: '/flooring/backsplash' },
+  { label: 'Carpet', path: '/flooring/carpet' },
+  { label: 'Engineered Hardwood', path: '/flooring/engineered-hardwood' },
+  { label: 'Laminate', path: '/flooring/laminate' },
+  { label: 'Luxury Vinyl', path: '/flooring/luxury-vinyl' },
+  { label: 'Tile', path: '/flooring/tile' },
+]
+
+export const DOOR_LINKS: DropdownLink[] = [
+  { label: 'Iron Door', path: '/doors/iron-door' },
+  { label: 'Shaker Interior', path: '/doors/shaker-interior' },
+]
+
+export const VENDOR_LINKS: DropdownLink[] = [
+  { label: 'Counter Tops', path: '/countertops', dropdown: COUNTERTOP_LINKS },
+  { label: 'Flooring', path: '/services/flooring', dropdown: FLOORING_LINKS },
+  { label: 'Doors', path: '/doors', dropdown: DOOR_LINKS },
+  { label: 'Accessories', path: '/vendors' },
 ]
 
 export const NAV_ITEMS = [
@@ -53,10 +106,15 @@ export const NAV_ITEMS = [
     dropdown: SERVICE_LINKS,
   },
   { label: 'Roofing', path: '/services/roofing' },
-  { label: 'Windows', path: '/services/window' },
+  { label: 'Windows', path: '/windows' },
   { label: 'Cabinets', path: 'https://renovvocabinets.com/', external: true },
   { label: 'Partner Vendors', path: '/vendors' },
   { label: 'Financing', path: '/finances' },
+  { label: 'Gallery', path: '/portfolio' },
+
+
+ 
+  
   {
     label: 'Support',
     path: '/support',
@@ -64,7 +122,10 @@ export const NAV_ITEMS = [
       { label: 'Get Support', path: '/support/get-support' },
       { label: 'About Us', path: '/support/about-us' },
       { label: 'Our Process', path: '/support/our-process' },
-      { label: 'Our Value', path: '/support/our-value' },
+      { label: 'Our Values', path: '/support/our-value' },
     ],
   },
+
+ 
+
 ]
