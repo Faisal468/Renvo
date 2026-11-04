@@ -113,6 +113,17 @@ export const NAV_ITEMS = [
   { label: 'Gallery', path: '/portfolio' },
 
 
+  {
+    label: 'Shop',  
+    path: '/shop',
+    dropdown: [
+      { label: 'Cabinets', path: '/shop/cabinets' },
+      { label: 'Countertops', path: '/shop/countertops' },
+      { label: 'Carpets', path: '/shop/carpets' },
+    ] as DropdownLink[],
+  },
+
+
  
   
   {
@@ -123,9 +134,11 @@ export const NAV_ITEMS = [
       { label: 'About Us', path: '/support/about-us' },
       { label: 'Our Process', path: '/support/our-process' },
       { label: 'Our Values', path: '/support/our-value' },
+      
     ],
   },
+  
 
- 
+
 
 ]

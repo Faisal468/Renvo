@@ -223,6 +223,7 @@ export default function Navbar() {
                                     <Link
                                       key={leaf.path}
                                       to={leaf.path}
+                                      {...(leaf.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                                       className="flex items-center gap-4 transition-colors"
                                       style={{
                                         padding: '0.6rem 1.25rem',
@@ -408,6 +409,7 @@ export default function Navbar() {
                               <Link
                                 key={leaf.path}
                                 to={leaf.path}
+                                {...(leaf.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                                 className="block px-14 py-3 text-sm font-medium uppercase tracking-widest transition-colors"
                                 style={{ color: location.pathname === leaf.path ? '#c9a84c' : 'rgba(255,255,255,0.6)' }}
                               >
