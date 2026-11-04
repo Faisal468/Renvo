@@ -23,6 +23,9 @@ import SupportGetSupport from "../pages/support/GetSupport"
 import SupportOurProcess from "../pages/support/OurProcess"
 import SupportOurValue from "../pages/support/OurValue"
 import Shop from "../pages/Shop"
+import ShopCabinets from "../pages/shop/ShopCabinets"
+import ShopCountertops from "../pages/shop/ShopCountertops"
+import ShopCarpets from "../pages/shop/ShopCarpets"
 import Login from "../pages/admin/Login"
 import Dashboard from "../pages/admin/Dashboard"
 import PrivacyPolicy from "../pages/PrivacyPolicy"
@@ -53,6 +56,9 @@ export const router = createBrowserRouter([
       { path: "services/full-house-renovation", Component: FullHouseRenovation },
       { path: "portfolio", Component: Portfolio },
       { path: "shop", Component: Shop },
+      { path: "shop/cabinets", Component: ShopCabinets },
+      { path: "shop/countertops", Component: ShopCountertops },
+      { path: "shop/carpets", Component: ShopCarpets },
       { path: "support", Component: Support },
       { path: "support/get-support", Component: SupportGetSupport },
       { path: "support/about-us", Component: SupportAboutUs },
