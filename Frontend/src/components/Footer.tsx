@@ -45,11 +45,11 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[
-                { icon: 'f', href: 'https://www.facebook.com/share/1Bd3eha5uH/?mibextid=wwXIfr' },
-                { icon: 'ig', href: 'https://www.instagram.com/rewisebuilders?igsh=MWEwOGVneHU2N213OA==' },
-                { icon: 'tiktok', href: '#' },
-                { icon: 'yt', href: '#' },
-                { icon: "Google profile", href: "https://maps.app.goo.gl/bvKqa8xb1M86hHgB7" },
+                { icon: 'f', href: 'https://www.facebook.com/Renovvo' },
+                { icon: 'ig', href: 'https://www.instagram.com/renovvo.official' },
+                { icon: 'tiktok', href: 'https://vm.tiktok.com/ZS9fjYmpdXnAX-8YwBA/' },
+                { icon: 'yt', href: 'https://www.youtube.com/@OfficialRenovvo' },
+                { icon: "Google profile", href: "https://share.google/1tsntvAgWXm46jKlm" },
               ].map(({ icon, href }) => (
                 <a
                   key={icon}
@@ -164,6 +164,7 @@ export default function Footer() {
             {[
               { label: 'Privacy Policy', to: '/privacy-policy' },
               { label: 'Terms of Service', to: '/terms-of-service' },
+              { label: 'Sitemap', to: '/sitemap' },
             ].map(({ label: l, to }) => (
               <Link
                 key={l}
